@@ -1,0 +1,424 @@
+{
+  "schema_version": "1.0",
+  "description": "RAG 检索准确性与元数据筛选准确性测试集。cases 中 retrieval 为不加筛选的检索准确性测试，metadata_filter 为加筛选后的准确性测试。",
+  "defaults": {
+    "top_k_expectation": 3,
+    "pass_rule": {
+      "top1_should_match_expected_sources": true,
+      "top3_should_not_contain_forbidden_sources": true,
+      "answer_should_contain_expected_keywords": true
+    }
+  },
+  "cases": [
+    {
+      "id": "R01",
+      "category": "retrieval",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "filters": {},
+      "expected_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "forbidden_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md"
+      ],
+      "expected_keywords": [
+        "512 路数字通道",
+        "2 GHz",
+        "±1 mV",
+        "-40°C ~ +175°C"
+      ],
+      "notes": "验证规格参数类问题是否优先命中机型规格书。"
+    },
+    {
+      "id": "R02",
+      "category": "retrieval",
+      "question": "WPS-3000 软件 V2.1 新增了哪些功能？",
+      "filters": {},
+      "expected_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+      ],
+      "forbidden_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [
+        "多 Site 并行测试",
+        "智能温度补偿",
+        "测试程序在线热更新"
+      ],
+      "notes": "验证版本说明类问题能否正确命中目标版本文档。"
+    },
+    {
+      "id": "R03",
+      "category": "retrieval",
+      "question": "开路/短路检测的判定标准是什么？",
+      "filters": {},
+      "expected_sources": [
+        "测试/测试项/晶圆CP测试项定义与规范.md"
+      ],
+      "forbidden_sources": [
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+      ],
+      "expected_keywords": [
+        "ELEC-001",
+        "±0.5 mA",
+        "-2V ~ -0.3V",
+        "0.3V ~ 2V"
+      ],
+      "notes": "验证测试项规范类问题的基础召回。"
+    },
+    {
+      "id": "R04",
+      "category": "retrieval",
+      "question": "VIS-1002 是什么意思？",
+      "filters": {},
+      "expected_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "forbidden_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "expected_keywords": [
+        "VIS-1002"
+      ],
+      "notes": "验证故障码定义是否优先于故障案例命中。"
+    },
+    {
+      "id": "R05",
+      "category": "retrieval",
+      "question": "Fiducial 识别失败怎么处理？",
+      "filters": {},
+      "expected_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "forbidden_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "expected_keywords": [
+        "光源",
+        "阈值",
+        "识别成功率"
+      ],
+      "notes": "验证故障处理类问题应优先命中案例库。"
+    },
+    {
+      "id": "R06",
+      "category": "retrieval",
+      "question": "WPS-3000Pro 项目的主要里程碑有哪些？",
+      "filters": {},
+      "expected_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "forbidden_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [
+        "M1",
+        "需求冻结",
+        "概念设计评审",
+        "详细设计完成"
+      ],
+      "notes": "验证项目类问题的主召回文档。"
+    },
+    {
+      "id": "R07",
+      "category": "retrieval",
+      "question": "XX 半导体苏州客户有哪些特殊需求？",
+      "filters": {},
+      "expected_sources": [
+        "项目管理/客户/XX半导体苏州客户档案.md"
+      ],
+      "forbidden_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "expected_keywords": [
+        "SEMI E10",
+        "私有云",
+        "500V"
+      ],
+      "notes": "验证客户档案类问题。"
+    },
+    {
+      "id": "R08",
+      "category": "retrieval",
+      "question": "QE-2025-0087 的根本原因是什么？",
+      "filters": {},
+      "expected_sources": [
+        "质量/质量事件/质量事件报告QE-2025-0087.md"
+      ],
+      "forbidden_sources": [
+        "质量/8D/8D报告-2025-0087.md"
+      ],
+      "expected_keywords": [
+        "探针卡",
+        "130 万次",
+        "接触电阻"
+      ],
+      "notes": "验证质量事件类问题与 8D 文档的区分。"
+    },
+    {
+      "id": "R09",
+      "category": "retrieval",
+      "question": "8D-2025-0087 采取了哪些永久纠正措施？",
+      "filters": {},
+      "expected_sources": [
+        "质量/8D/8D报告-2025-0087.md"
+      ],
+      "forbidden_sources": [
+        "质量/质量事件/质量事件报告QE-2025-0087.md"
+      ],
+      "expected_keywords": [
+        "使用次数实时监控",
+        "80 万次",
+        "100 万次"
+      ],
+      "notes": "验证 8D 问题的主召回文档。"
+    },
+    {
+      "id": "R10",
+      "category": "retrieval",
+      "question": "高压测试链路中 RPN 最高的风险是什么？",
+      "filters": {},
+      "expected_sources": [
+        "质量/FMEA/高压测试链路FMEA分析.md"
+      ],
+      "forbidden_sources": [
+        "质量/FMEA/WPS-3000视觉模块FMEA分析.md"
+      ],
+      "expected_keywords": [
+        "高压测点接错通道",
+        "252",
+        "黄金样品"
+      ],
+      "notes": "验证 FMEA 高风险项问题的召回准确性。"
+    },
+    {
+      "id": "M01",
+      "category": "metadata_filter",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "filters": {
+        "doc_type": "spec"
+      },
+      "expected_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "forbidden_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "expected_keywords": [
+        "512 路数字通道",
+        "2 GHz"
+      ],
+      "notes": "验证文档类型=规格书时是否稳定命中规格书。"
+    },
+    {
+      "id": "M02",
+      "category": "metadata_filter",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "filters": {
+        "doc_type": "project"
+      },
+      "expected_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "forbidden_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [
+        "1024",
+        "5 秒"
+      ],
+      "notes": "用同题对照验证文档类型筛选确实改变了召回范围。"
+    },
+    {
+      "id": "M03",
+      "category": "metadata_filter",
+      "question": "开路/短路检测的判定标准是什么？",
+      "filters": {
+        "department": "测试",
+        "doc_type": "test_spec"
+      },
+      "expected_sources": [
+        "测试/测试项/晶圆CP测试项定义与规范.md"
+      ],
+      "forbidden_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [
+        "ELEC-001",
+        "±0.5 mA"
+      ],
+      "notes": "验证部门=测试时是否优先返回测试规范。"
+    },
+    {
+      "id": "M04",
+      "category": "metadata_filter",
+      "question": "开路/短路检测的判定标准是什么？",
+      "filters": {
+        "department": "研发"
+      },
+      "expected_sources": [],
+      "forbidden_sources": [
+        "测试/测试项/晶圆CP测试项定义与规范.md"
+      ],
+      "expected_keywords": [],
+      "notes": "验证错误部门筛选不会仍然返回测试文档作为主结果。允许空结果。"
+    },
+    {
+      "id": "M05",
+      "category": "metadata_filter",
+      "question": "WPS-3000 当前发布版本有哪些重要功能？",
+      "filters": {
+        "version": "V2.1",
+        "doc_type": "release_note"
+      },
+      "expected_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+      ],
+      "forbidden_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+      ],
+      "expected_keywords": [
+        "多 Site 并行测试",
+        "智能温度补偿"
+      ],
+      "notes": "验证版本=V2.1 的筛选准确性。"
+    },
+    {
+      "id": "M06",
+      "category": "metadata_filter",
+      "question": "WPS-3000 当前发布版本有哪些重要功能？",
+      "filters": {
+        "version": "V2.3",
+        "doc_type": "release_note"
+      },
+      "expected_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+      ],
+      "forbidden_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+      ],
+      "expected_keywords": [
+        "高压测试安全联锁优化",
+        "并行报表导出",
+        "异常批次快速复测"
+      ],
+      "notes": "验证版本切换后，回答与来源都应变化。"
+    },
+    {
+      "id": "M07",
+      "category": "metadata_filter",
+      "question": "VIS-1002 相关信息是什么？",
+      "filters": {
+        "doc_type": "fault_code"
+      },
+      "expected_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "forbidden_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "expected_keywords": [
+        "VIS-1002"
+      ],
+      "notes": "验证故障码文档筛选。"
+    },
+    {
+      "id": "M08",
+      "category": "metadata_filter",
+      "question": "VIS-1002 相关信息是什么？",
+      "filters": {
+        "doc_type": "fault_case"
+      },
+      "expected_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "forbidden_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "expected_keywords": [
+        "光源",
+        "阈值"
+      ],
+      "notes": "验证故障案例筛选与故障码筛选的差异。"
+    },
+    {
+      "id": "M09",
+      "category": "metadata_filter",
+      "question": "客户有哪些特殊需求？",
+      "filters": {
+        "doc_type": "customer"
+      },
+      "expected_sources": [
+        "项目管理/客户/XX半导体苏州客户档案.md"
+      ],
+      "forbidden_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "expected_keywords": [
+        "SEMI E10",
+        "私有云"
+      ],
+      "notes": "验证客户档案筛选。"
+    },
+    {
+      "id": "M10",
+      "category": "metadata_filter",
+      "question": "2026届毕业生一次性求职补贴申报对象和标准是什么？",
+      "filters": {
+        "confidentiality": "公开"
+      },
+      "expected_sources": [
+        "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx"
+      ],
+      "forbidden_sources": [
+        "项目管理/客户/XX半导体苏州客户档案.md",
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [
+        "求职补贴"
+      ],
+      "notes": "验证公开资料的保密等级筛选。"
+    },
+    {
+      "id": "M11",
+      "category": "metadata_filter",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "filters": {
+        "product_line": "晶圆测试设备",
+        "version": "V2.1",
+        "department": "研发",
+        "doc_type": "spec"
+      },
+      "expected_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "forbidden_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+        "项目管理/项目/WPS-3000Pro项目立项报告.md"
+      ],
+      "expected_keywords": [
+        "WPS-3000",
+        "200 mm / 300 mm"
+      ],
+      "notes": "验证多条件组合筛选的准确性。"
+    },
+    {
+      "id": "M12",
+      "category": "metadata_filter",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "filters": {
+        "department": "人力资源"
+      },
+      "expected_sources": [],
+      "forbidden_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "expected_keywords": [],
+      "notes": "验证明显错误筛选条件时不应无视过滤逻辑。允许空结果。"
+    }
+  ]
+}

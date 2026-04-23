@@ -1,0 +1,888 @@
+{
+  "summary": {
+    "base_url": "http://127.0.0.1:8000",
+    "selected_cases": 22,
+    "passed_cases": 5,
+    "failed_cases": 17,
+    "pass_rate": 22.73
+  },
+  "results": [
+    {
+      "case_id": "R01",
+      "category": "retrieval",
+      "passed": false,
+      "score": 0,
+      "max_score": 4,
+      "top1_source": "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
+      "top3_sources": [
+        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "answer_preview": "WPS-3000的主要技术指标并未在提供的知识片段中直接列出。然而，我们可以从知识片段中推断出一些与WPS-3000相关的技术指标和特性：\n\n1. **产品定位与技术规格**：WPS-3000产品线定位与具体技术规格在模块一的产品认知部分有所提及，但具体的技术指标并未详细说明。[来源: 培训/培训主题/WPS-3000现场工程师认证培训大纲.md | 版本: V1.0 | 部门: 培训]\n\n2. ",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": false,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md",
+          "培训/培训主题/WPS-3000现场工程师认证培训大纲.md"
+        ],
+        "expected_keywords": [
+          "512 路数字通道",
+          "2 GHz",
+          "±1 mV",
+          "-40°C ~ +175°C"
+        ],
+        "missing_keywords": [
+          "512 路数字通道",
+          "2 GHz",
+          "±1 mV",
+          "-40°C ~ +175°C"
+        ],
+        "filters": {},
+        "question": "WPS-3000 的主要技术指标是什么？",
+        "notes": "验证规格参数类问题是否优先命中机型规格书。"
+      }
+    },
+    {
+      "case_id": "R02",
+      "category": "retrieval",
+      "passed": false,
+      "score": 1,
+      "max_score": 4,
+      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.2.md",
+      "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.2.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+      ],
+      "answer_preview": "很抱歉，我无法直接访问您提供的具体文档内容，因此无法根据《WPS-3000软件版本发布说明V2.1.md》来提供WPS-3000软件V2.1新增的功能。为了得到准确的信息，请直接查阅该文档或相关官方发布渠道获取详细的版本更新说明。如果您需要其他方面的帮助，请告知我，我会尽力协助。",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "多 Site 并行测试",
+          "智能温度补偿",
+          "测试程序在线热更新"
+        ],
+        "missing_keywords": [
+          "多 Site 并行测试",
+          "智能温度补偿",
+          "测试程序在线热更新"
+        ],
+        "filters": {},
+        "question": "WPS-3000 软件 V2.1 新增了哪些功能？",
+        "notes": "验证版本说明类问题能否正确命中目标版本文档。"
+      }
+    },
+    {
+      "case_id": "R03",
+      "category": "retrieval",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "测试/测试项/晶圆CP测试项定义与规范.md",
+      "top3_sources": [
+        "测试/测试项/晶圆CP测试项定义与规范.md",
+        "测试/测试用例/开路短路测试用例集.md",
+        "研发/知识库/接口测试基础知识.md"
+      ],
+      "answer_preview": "开路/短路检测的判定标准如下：\n\n1. **开路检测**：施加 ±0.5 mA 电流，测量电压响应。如果电压在 -2V ~ -0.3V 范围内，判定为开路（Fail）。\n   - 来源：测试/测试项/晶圆CP测试项定义与规范.md | 版本: V2.1 | 部门: 测试\n\n2. **短路检测**：施加 ±0.5 mA 电流，测量电压响应。如果电压在 0.3V ~ 2V 范围内，判定为短路（Fail",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md",
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+        ],
+        "expected_keywords": [
+          "ELEC-001",
+          "±0.5 mA",
+          "-2V ~ -0.3V",
+          "0.3V ~ 2V"
+        ],
+        "missing_keywords": [
+          "ELEC-001"
+        ],
+        "filters": {},
+        "question": "开路/短路检测的判定标准是什么？",
+        "notes": "验证测试项规范类问题的基础召回。"
+      }
+    },
+    {
+      "case_id": "R04",
+      "category": "retrieval",
+      "passed": false,
+      "score": 2,
+      "max_score": 4,
+      "top1_source": "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+      "top3_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+        "维护/故障码/WPS-3000故障码定义手册.md",
+        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md"
+      ],
+      "answer_preview": "VIS-1002 是一个故障码，它表示视觉模块的第1002号故障。这个故障码的具体含义可以在故障码定义手册《WPS-3000故障码定义手册》中找到详细解释。故障码的格式通常为 `[模块缩写]-[四位数字]`，如《WPS-3000故障码定义手册》所述。同时，在《WPS-3000现场工程师认证培训大纲》中提到的故障案例分析中，VIS-1002也是被讨论的一个案例。",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        ],
+        "expected_keywords": [
+          "VIS-1002"
+        ],
+        "missing_keywords": [],
+        "filters": {},
+        "question": "VIS-1002 是什么意思？",
+        "notes": "验证故障码定义是否优先于故障案例命中。"
+      }
+    },
+    {
+      "case_id": "R05",
+      "category": "retrieval",
+      "passed": false,
+      "score": 1,
+      "max_score": 4,
+      "top1_source": "维护/故障码/WPS-3000故障码定义手册.md",
+      "top3_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+        "测试/测试项/晶圆CP测试项定义与规范.md"
+      ],
+      "answer_preview": "Fiducial识别失败的处理方法如下：\n\n1. 检查照明情况，确保光源状态正常。如果使用的是环形光源，在低亮档位下晶圆表面反射不足可能导致Fiducial识别阈值不够（来源：维护/故障案例/VIS-1002-Fiducial识别失败案例.md）。\n\n2. 清洁镜头，确保镜头上没有灰尘或污渍，这可能会影响识别效果。\n\n3. 调整阈值，确保Fiducial标记的识别条件符合当前环境。\n\n4. 如果以",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "expected_keywords": [
+          "光源",
+          "阈值",
+          "识别成功率"
+        ],
+        "missing_keywords": [
+          "识别成功率"
+        ],
+        "filters": {},
+        "question": "Fiducial 识别失败怎么处理？",
+        "notes": "验证故障处理类问题应优先命中案例库。"
+      }
+    },
+    {
+      "case_id": "R06",
+      "category": "retrieval",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "项目管理/项目/WPS-3000Pro项目立项报告.md",
+      "top3_sources": [
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "answer_preview": "WPS-3000Pro项目的主要里程碑包括：\n\n1. 立项与需求分析：由于先进封装和3D IC需求的增长，以及对晶圆测试机在测试通道、换片速度和支持Bumped Wafer等方面的更高要求，现有WPS-3000在通道密度和视觉对准能力上存在瓶颈。因此，为了维持市场竞争力，项目启动了Pro版本的研发工作（来源：项目管理/项目/WPS-3000Pro项目立项报告.md）。\n\n2. 产品认知与培训：在产",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "M1",
+          "需求冻结",
+          "概念设计评审",
+          "详细设计完成"
+        ],
+        "missing_keywords": [
+          "M1",
+          "需求冻结",
+          "概念设计评审",
+          "详细设计完成"
+        ],
+        "filters": {},
+        "question": "WPS-3000Pro 项目的主要里程碑有哪些？",
+        "notes": "验证项目类问题的主召回文档。"
+      }
+    },
+    {
+      "case_id": "R07",
+      "category": "retrieval",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "项目管理/客户/XX半导体苏州客户档案.md",
+      "top3_sources": [
+        "项目管理/客户/XX半导体苏州客户档案.md",
+        "质量/质量事件/质量事件报告QE-2025-0087.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "answer_preview": "XX半导体（苏州）有限公司在合作过程中表现出以下特殊需求：\n\n1. 质量要求：根据质量事件报告QE-2025-0087，XX半导体（苏州）对WPS-3000（SN: WPS3K-2023-0031）的测试良率有严格要求。事件类型为客户投诉，严重等级为严重（S2），说明客户对产品质量有较高要求。（来源：质量/质量事件/质量事件报告QE-2025-0087.md）\n\n2. 故障处理：根据故障案例VIS",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/客户/XX半导体苏州客户档案.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "expected_keywords": [
+          "SEMI E10",
+          "私有云",
+          "500V"
+        ],
+        "missing_keywords": [
+          "SEMI E10",
+          "私有云",
+          "500V"
+        ],
+        "filters": {},
+        "question": "XX 半导体苏州客户有哪些特殊需求？",
+        "notes": "验证客户档案类问题。"
+      }
+    },
+    {
+      "case_id": "R08",
+      "category": "retrieval",
+      "passed": false,
+      "score": 2,
+      "max_score": 4,
+      "top1_source": "质量/质量事件/质量事件报告QE-2025-0087.md",
+      "top3_sources": [
+        "质量/质量事件/质量事件报告QE-2025-0087.md",
+        "质量/8D/8D报告-2025-0087.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "answer_preview": "QE-2025-0087的根本原因尚未在提供的信息中明确指出。为了找到根本原因，需要查阅相关的质量事件报告（QE-2025-0087.md）和8D报告（8D-2025-0087.md）。这两个文档可能包含了关于该事件深入分析的信息，包括根本原因的确定。由于这些具体文档的内容没有提供，无法直接回答根本原因是什么。建议查阅相关文档以获取详细信息。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0087.md"
+        ],
+        "forbidden_sources": [
+          "质量/8D/8D报告-2025-0087.md"
+        ],
+        "expected_keywords": [
+          "探针卡",
+          "130 万次",
+          "接触电阻"
+        ],
+        "missing_keywords": [
+          "探针卡",
+          "130 万次",
+          "接触电阻"
+        ],
+        "filters": {},
+        "question": "QE-2025-0087 的根本原因是什么？",
+        "notes": "验证质量事件类问题与 8D 文档的区分。"
+      }
+    },
+    {
+      "case_id": "R09",
+      "category": "retrieval",
+      "passed": false,
+      "score": 2,
+      "max_score": 4,
+      "top1_source": "质量/8D/8D报告-2025-0087.md",
+      "top3_sources": [
+        "质量/8D/8D报告-2025-0087.md",
+        "质量/质量事件/质量事件报告QE-2025-0087.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+      ],
+      "answer_preview": "根据提供的信息，8D-2025-0087事件中采取的永久纠正措施没有直接列出。不过，我们可以从事件报告中推断出一些可能的纠正措施。以下是可能采取的纠正措施，但请注意，这些并非直接引用自文档，而是基于文档内容的推断：\n\n1. **问题根源分析**：根据[8D报告：8D-2025-0087](来源: 质量/8D/8D报告-2025-0087.md | 版本: 1.0 | 部门: 质量)，可能已经进行了",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "质量/8D/8D报告-2025-0087.md"
+        ],
+        "forbidden_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0087.md"
+        ],
+        "expected_keywords": [
+          "使用次数实时监控",
+          "80 万次",
+          "100 万次"
+        ],
+        "missing_keywords": [
+          "使用次数实时监控",
+          "80 万次",
+          "100 万次"
+        ],
+        "filters": {},
+        "question": "8D-2025-0087 采取了哪些永久纠正措施？",
+        "notes": "验证 8D 问题的主召回文档。"
+      }
+    },
+    {
+      "case_id": "R10",
+      "category": "retrieval",
+      "passed": false,
+      "score": 0,
+      "max_score": 4,
+      "top1_source": "质量/FMEA/WPS-3000视觉模块FMEA分析.md",
+      "top3_sources": [
+        "质量/FMEA/WPS-3000视觉模块FMEA分析.md",
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "answer_preview": "高压测试链路中RPN最高的风险可能是1024路高密度板卡热设计风险，因为根据项目管理/项目/WPS-3000Pro项目立项报告.md（版本: 1.0 | 部门: 研发）中的信息，这一风险被标记为“高”。RPN（风险优先数）是评估风险严重性的一个指标，当RPN值达到或超过100时，通常被视为高风险，需要制定改善计划。在高压测试链路中，热设计问题可能导致设备性能下降或损坏，因此这是一个需要重点关注的风",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": false,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "质量/FMEA/高压测试链路FMEA分析.md"
+        ],
+        "forbidden_sources": [
+          "质量/FMEA/WPS-3000视觉模块FMEA分析.md"
+        ],
+        "expected_keywords": [
+          "高压测点接错通道",
+          "252",
+          "黄金样品"
+        ],
+        "missing_keywords": [
+          "高压测点接错通道",
+          "252",
+          "黄金样品"
+        ],
+        "filters": {},
+        "question": "高压测试链路中 RPN 最高的风险是什么？",
+        "notes": "验证 FMEA 高风险项问题的召回准确性。"
+      }
+    },
+    {
+      "case_id": "M01",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 2,
+      "max_score": 4,
+      "top1_source": "研发/机型/WPS-3100机型规格说明.md",
+      "top3_sources": [
+        "研发/机型/WPS-3100机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/机型/WPS-3200机型结构设计说明.md"
+      ],
+      "answer_preview": "WPS-3000的主要技术指标如下：\n\n- 测试通道数：768路数字通道 + 96路模拟通道\n- 最高测试频率：2.5 GHz\n- 换片时间：< 6.5 秒\n- 重复定位精度：±0.4 µm\n- 温控范围：-50°C ~ +180°C\n- 并行 Site 数：最多 4 Site\n- 平均可用率目标：≥ 98%\n\n这些信息来源于文档《WPS-3000机型规格说明.md》版本V2.1。",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "expected_keywords": [
+          "512 路数字通道",
+          "2 GHz"
+        ],
+        "missing_keywords": [
+          "512 路数字通道",
+          "2 GHz"
+        ],
+        "filters": {
+          "doc_type": "spec"
+        },
+        "question": "WPS-3000 的主要技术指标是什么？",
+        "notes": "验证文档类型=规格书时是否稳定命中规格书。"
+      }
+    },
+    {
+      "case_id": "M02",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 2,
+      "max_score": 4,
+      "top1_source": "项目管理/项目/WPS-3200开发项目立项报告.md",
+      "top3_sources": [
+        "项目管理/项目/WPS-3200开发项目立项报告.md",
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "项目管理/项目/ATE-Link平台改造项目建议书.md"
+      ],
+      "answer_preview": "WPS-3000的主要技术指标并没有在提供的信息中直接给出。根据文档“项目管理/项目/WPS-3200开发项目立项报告.md | 版本: V1.1 | 部门: 研发”，WPS-3000Pro虽满足了主流需求，但在超高密度引脚、混合信号并行测试以及液冷散热等技术领域仍存在差距，需要以全新平台加以解决。而根据“项目管理/项目/WPS-3000Pro项目立项报告.md | 版本: 1.0 | 部门: 研",
+      "checks": {
+        "top1_matches_expected": false,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "1024",
+          "5 秒"
+        ],
+        "missing_keywords": [
+          "1024",
+          "5 秒"
+        ],
+        "filters": {
+          "doc_type": "project"
+        },
+        "question": "WPS-3000 的主要技术指标是什么？",
+        "notes": "用同题对照验证文档类型筛选确实改变了召回范围。"
+      }
+    },
+    {
+      "case_id": "M03",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 4,
+      "max_score": 4,
+      "top1_source": "测试/测试项/晶圆CP测试项定义与规范.md",
+      "top3_sources": [
+        "测试/测试项/晶圆CP测试项定义与规范.md",
+        "测试/测试项/晶圆FT测试项定义与规范.md",
+        "测试/测试项/老化筛选测试项执行规范.md"
+      ],
+      "answer_preview": "开路/短路检测的判定标准如下：\n\n1. 对于晶圆CP测试项定义与规范（V2.1）中的ELEC-001：开路/短路检测（OS Test），目的是确认所有IO管脚连通性。判定标准为：施加±0.5 mA电流，测量电压响应。如果电压在-2V ~ -0.3V（开路）或0.3V ~ 2V（短路）范围内，判定为Fail。\n\n2. 对于晶圆FT测试项定义与规范（V1.1）中的PKG-001：引脚开路/短路检测（P",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "ELEC-001",
+          "±0.5 mA"
+        ],
+        "missing_keywords": [],
+        "filters": {
+          "department": "测试",
+          "doc_type": "test_spec"
+        },
+        "question": "开路/短路检测的判定标准是什么？",
+        "notes": "验证部门=测试时是否优先返回测试规范。"
+      }
+    },
+    {
+      "case_id": "M04",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 4,
+      "max_score": 4,
+      "top1_source": "研发/知识库/接口测试基础知识.md",
+      "top3_sources": [
+        "研发/知识库/接口测试基础知识.md",
+        "研发/知识库/测试基础知识.md",
+        "维护/故障码/WPS-3000故障码定义手册.md"
+      ],
+      "answer_preview": "开路/短路检测的判定标准通常涉及对电气系统或电路的状态进行评估。根据提供的知识片段，以下是对开路/短路检测判定标准的分析：\n\n1. **状态码分析**：在进行接口测试时，不能仅仅依赖于200这个状态码。需要结合更多的信息，如`status`、`upstream_status`和`latency`等参数进行综合判断。例如，如果`status=500`且`upstream_status=500`，并且",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [],
+        "forbidden_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md"
+        ],
+        "expected_keywords": [],
+        "missing_keywords": [],
+        "filters": {
+          "department": "研发"
+        },
+        "question": "开路/短路检测的判定标准是什么？",
+        "notes": "验证错误部门筛选不会仍然返回测试文档作为主结果。允许空结果。"
+      }
+    },
+    {
+      "case_id": "M05",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+      "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+      ],
+      "answer_preview": "WPS-3000 当前发布版本 V2.1 的重要功能信息如下（引用来源：WPS-3000 软件版本发布说明V2.1.md）：\n\n- 请根据文档内容，具体列出 V2.1 版本的 WPS-3000 软件的重要功能。由于知识片段中并未提供具体的功能信息，因此无法直接回答此问题。请您提供更详细的功能信息或相关文档，以便我为您准确解答。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        ],
+        "expected_keywords": [
+          "多 Site 并行测试",
+          "智能温度补偿"
+        ],
+        "missing_keywords": [
+          "多 Site 并行测试",
+          "智能温度补偿"
+        ],
+        "filters": {
+          "version": "V2.1",
+          "doc_type": "release_note"
+        },
+        "question": "WPS-3000 当前发布版本有哪些重要功能？",
+        "notes": "验证版本=V2.1 的筛选准确性。"
+      }
+    },
+    {
+      "case_id": "M06",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+      "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+      ],
+      "answer_preview": "根据您提供的信息，以下是WPS-3000软件V2.3版本的一些重要功能：\n\n由于提供的知识片段仅包含版本发布说明的标题，并未列出具体的功能点，因此无法提供具体的V2.3版本的功能列表。如果您需要详细的版本功能说明，请查阅文档《WPS-3000软件版本发布说明V2.3.md》。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md"
+        ],
+        "expected_keywords": [
+          "高压测试安全联锁优化",
+          "并行报表导出",
+          "异常批次快速复测"
+        ],
+        "missing_keywords": [
+          "高压测试安全联锁优化",
+          "并行报表导出",
+          "异常批次快速复测"
+        ],
+        "filters": {
+          "version": "V2.3",
+          "doc_type": "release_note"
+        },
+        "question": "WPS-3000 当前发布版本有哪些重要功能？",
+        "notes": "验证版本切换后，回答与来源都应变化。"
+      }
+    },
+    {
+      "case_id": "M07",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 4,
+      "max_score": 4,
+      "top1_source": "维护/故障码/WPS-3000故障码定义手册.md",
+      "top3_sources": [
+        "维护/故障码/WPS-3000故障码定义手册.md",
+        "维护/故障码/运动控制器故障码处理手册.md",
+        "维护/故障码/测试头板卡故障码映射表.md"
+      ],
+      "answer_preview": "VIS-1002 是一个故障码，其描述为“Fiducial Mark 识别失败”，属于严重等级。处理方法包括检查照明，清洁镜头，调整阈值。这一信息来源于《维护/故障码/WPS-3000故障码定义手册.md》（版本：V2.1，部门：研发）。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        ],
+        "expected_keywords": [
+          "VIS-1002"
+        ],
+        "missing_keywords": [],
+        "filters": {
+          "doc_type": "fault_code"
+        },
+        "question": "VIS-1002 相关信息是什么？",
+        "notes": "验证故障码文档筛选。"
+      }
+    },
+    {
+      "case_id": "M08",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+      "top3_sources": [
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+        "维护/故障案例/客户现场真空吸附异常案例.md",
+        "维护/故障案例/探针卡接触不良排查案例.md"
+      ],
+      "answer_preview": "VIS-1002 是一个故障案例编号，具体指代的是“Fiducial 识别失败”的问题。这个编号在文档《维护/故障案例/VIS-1002-Fiducial识别失败案例.md》中提到，该文档的版本为 V2.1，由服务部门编写。文档旨在为业务、研发、测试和服务团队提供统一的事实依据，并详细说明了故障的背景、关键对象、流程边界、输入输出以及风险控制要求，以确保信息的一致性和准确性，避免不同部门在口头沟通",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "expected_keywords": [
+          "光源",
+          "阈值"
+        ],
+        "missing_keywords": [
+          "光源",
+          "阈值"
+        ],
+        "filters": {
+          "doc_type": "fault_case"
+        },
+        "question": "VIS-1002 相关信息是什么？",
+        "notes": "验证故障案例筛选与故障码筛选的差异。"
+      }
+    },
+    {
+      "case_id": "M09",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "项目管理/客户/XX半导体苏州客户档案.md",
+      "top3_sources": [
+        "项目管理/客户/XX半导体苏州客户档案.md",
+        "项目管理/客户/华东先进封装客户档案.md",
+        "项目管理/客户/海外代工厂客户合作档案.md"
+      ],
+      "answer_preview": "客户的具体特殊需求并未在提供的信息中详细列出。根据知识片段来源，我们得知有以下客户档案中记录了特殊需求：\n\n1. XX半导体苏州客户档案（版本：1.0，部门：销售）\n2. 华东先进封装客户档案（版本：V1.1，部门：销售）\n3. 海外代工厂客户合作档案（版本：V1.4，部门：销售）\n\n若要了解客户的特殊需求，建议查阅上述文档中的详细记录。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/客户/XX半导体苏州客户档案.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "expected_keywords": [
+          "SEMI E10",
+          "私有云"
+        ],
+        "missing_keywords": [
+          "SEMI E10",
+          "私有云"
+        ],
+        "filters": {
+          "doc_type": "customer"
+        },
+        "question": "客户有哪些特殊需求？",
+        "notes": "验证客户档案筛选。"
+      }
+    },
+    {
+      "case_id": "M10",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 4,
+      "max_score": 4,
+      "top1_source": "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx",
+      "top3_sources": [
+        "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx",
+        "服务/工单/服务工单WO-2025-0312.md.meta.json",
+        "产品/方案/文档中心方案.docx.meta.json"
+      ],
+      "answer_preview": "2026届毕业生一次性求职补贴的申报对象和标准如下：\n\n申报对象：\n1. 低保家庭毕业生：来自城乡居民最低生活保障家庭，其家庭成员与毕业生有法定赡养、扶养、抚养关系（民政部门认定）。\n2. 残疾毕业生：毕业生本人持有《中华人民共和国残疾人证》（残联认定）。\n3. 已获得国家助学贷款毕业生：毕业生本人在校期间获得过国家助学贷款资助（教育部门认定）。\n4. 脱贫人口及防止返贫监测对象家庭毕业生：毕业生",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx"
+        ],
+        "forbidden_sources": [
+          "项目管理/客户/XX半导体苏州客户档案.md",
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "求职补贴"
+        ],
+        "missing_keywords": [],
+        "filters": {
+          "confidentiality": "公开"
+        },
+        "question": "2026届毕业生一次性求职补贴申报对象和标准是什么？",
+        "notes": "验证公开资料的保密等级筛选。"
+      }
+    },
+    {
+      "case_id": "M11",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 3,
+      "max_score": 4,
+      "top1_source": "研发/机型/WPS-3000机型规格说明.md",
+      "top3_sources": [
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "answer_preview": "WPS-3000 晶圆探针测试机的主要技术指标包括：机型名称为WPS-3000，属于晶圆测试设备（WPS）产品线，适用于200mm / 300mm的晶圆尺寸。以上信息来源于《研发/机型/WPS-3000机型规格说明.md | 版本: V2.1 | 部门: 研发》。",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "expected_keywords": [
+          "WPS-3000",
+          "200 mm / 300 mm"
+        ],
+        "missing_keywords": [
+          "200 mm / 300 mm"
+        ],
+        "filters": {
+          "product_line": "晶圆测试设备",
+          "version": "V2.1",
+          "department": "研发",
+          "doc_type": "spec"
+        },
+        "question": "WPS-3000 的主要技术指标是什么？",
+        "notes": "验证多条件组合筛选的准确性。"
+      }
+    },
+    {
+      "case_id": "M12",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 4,
+      "max_score": 4,
+      "top1_source": "培训/岗位/测试开发工程师岗位说明书.md",
+      "top3_sources": [
+        "培训/岗位/测试开发工程师岗位说明书.md",
+        "培训/岗位/售后服务工程师岗位说明书.md",
+        "培训/岗位/资料开发工程师岗位说明书.md"
+      ],
+      "answer_preview": "WPS-3000 的主要技术指标并未直接在提供的知识片段中列出。然而，根据片段中提到的相关信息，我们可以推断WPS-3000的一些技术特点：\n\n1. **测试能力**：WPS-3000 是一种基于 ATE 平台（自动测试设备）的 SoC 测试机，用于开发芯片 CP/FT（芯片级/封装级）测试程序（来源：培训/岗位/测试开发工程师岗位说明书.md）。\n\n2. **测试策略与优化**：WPS-3000",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true
+      },
+      "details": {
+        "expected_sources": [],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [],
+        "missing_keywords": [],
+        "filters": {
+          "department": "人力资源"
+        },
+        "question": "WPS-3000 的主要技术指标是什么？",
+        "notes": "验证明显错误筛选条件时不应无视过滤逻辑。允许空结果。"
+      }
+    }
+  ]
+}

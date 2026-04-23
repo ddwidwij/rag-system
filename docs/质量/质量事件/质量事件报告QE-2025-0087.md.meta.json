@@ -1,0 +1,8 @@
+{
+  "doc_type": "quality_event",
+  "status": "已关闭",
+  "product_line": "晶圆测试设备",
+  "version": "1.0",
+  "department": "质量",
+  "classification": "内部"
+}

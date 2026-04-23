@@ -1,0 +1,8 @@
+{
+  "doc_type": "quality_event",
+  "status": "已发布",
+  "product_line": "晶圆测试设备",
+  "version": "V1.1",
+  "department": "质量",
+  "confidentiality": "内部"
+}

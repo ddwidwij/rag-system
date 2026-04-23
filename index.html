@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>知识库问答</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .message-content p  { margin-bottom: 0.5em; }
+    .message-content ul { list-style: disc;    padding-left: 1.5em; }
+    .message-content ol { list-style: decimal; padding-left: 1.5em; }
+    .message-content li { margin-bottom: 0.25em; }
+    .message-content code {
+      background: #f1f5f9; padding: 0.1em 0.35em;
+      border-radius: 4px; font-size: 0.875em; font-family: monospace;
+    }
+    .message-content pre {
+      background: #f1f5f9; padding: 0.75em 1em;
+      border-radius: 8px; overflow-x: auto; margin: 0.5em 0;
+    }
+    .message-content pre code { background: none; padding: 0; }
+    .dot { animation: bounce 1.2s infinite ease-in-out; }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40%           { transform: scale(1);   opacity: 1;   }
+    }
+    /* 问题级别徽章 */
+    .badge-error   { background:#fee2e2; color:#dc2626; }
+    .badge-warning { background:#fef9c3; color:#ca8a04; }
+    .badge-info    { background:#e0f2fe; color:#0369a1; }
+  </style>
+</head>
+<body class="bg-gray-50 h-screen flex flex-col overflow-hidden">
+
+  <!-- 顶部导航 -->
+  <header class="bg-white border-b border-gray-100 shadow-sm flex-shrink-0">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h1 class="font-semibold text-gray-800 leading-tight">知识库助手</h1>
+        <p class="text-xs text-gray-400">RAG · glm-4-flash</p>
+      </div>
+      <!-- Tab 切换 -->
+      <nav class="flex gap-1 bg-gray-100 rounded-lg p-1">
+        <button id="tab-qa" onclick="switchTab('qa')"
+          class="tab-btn px-4 py-1.5 rounded-md text-sm font-medium transition-colors bg-white text-gray-800 shadow-sm">
+          💬 知识问答
+        </button>
+        <button id="tab-ingest" onclick="switchTab('ingest')"
+          class="tab-btn px-4 py-1.5 rounded-md text-sm font-medium transition-colors text-gray-500 hover:text-gray-700">
+          📂 文档入库
+        </button>
+        <button id="tab-check" onclick="switchTab('check')"
+          class="tab-btn px-4 py-1.5 rounded-md text-sm font-medium transition-colors text-gray-500 hover:text-gray-700">
+          🔍 文档检查
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── 知识问答 面板 ── -->
+  <div id="panel-qa" class="flex-1 flex flex-col overflow-hidden">
+    <!-- 对话区域 -->
+    <div id="chat" class="flex-1 overflow-y-auto px-4 py-6">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <!-- 欢迎消息 -->
+        <div class="flex gap-3 items-start">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm mt-0.5">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+          </div>
+          <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm max-w-2xl">
+            <p class="text-sm text-gray-700">你好！我是知识库助手，请输入你的问题，我会根据知识库内容为你解答。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 筛选条件（可折叠） -->
+    <div class="bg-white border-t border-gray-100 flex-shrink-0 px-4 pt-2 pb-0">
+      <div class="max-w-3xl mx-auto">
+        <details id="filter-section">
+          <summary class="text-xs text-gray-400 hover:text-gray-600 cursor-pointer select-none py-1">▸ 元数据筛选（可选）</summary>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 py-2">
+            <input id="filter-product-line" type="text" placeholder="产品线"
+              class="border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-200" />
+            <input id="filter-version" type="text" placeholder="版本"
+              class="border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-200" />
+            <select id="filter-department"
+              class="border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <option value="">不限部门</option>
+              <option value="产品">产品</option>
+              <option value="人力资源">人力资源</option>
+              <option value="培训">培训</option>
+              <option value="服务">服务</option>
+              <option value="测试">测试</option>
+              <option value="研发">研发</option>
+              <option value="研究">研究</option>
+              <option value="质量">质量</option>
+              <option value="销售">销售</option>
+            </select>
+            <select id="filter-confidentiality"
+              class="border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <option value="">不限保密等级</option>
+              <option value="公开">公开</option>
+              <option value="内部">内部</option>
+              <option value="机密">机密</option>
+            </select>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 输入区域 -->
+    <div class="bg-white border-t border-gray-100 flex-shrink-0 px-4 py-4">
+      <div class="max-w-3xl mx-auto flex gap-3 items-end">
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="输入问题，按 Enter 发送 · Shift+Enter 换行"
+          class="flex-1 resize-none border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder-gray-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-shadow"
+          style="max-height:120px; overflow-y:auto;"
+        ></textarea>
+        <button
+          id="send-btn"
+          class="flex-shrink-0 bg-blue-500 hover:bg-blue-600 active:bg-blue-700
+                 disabled:bg-gray-200 disabled:cursor-not-allowed
+                 text-white text-sm font-medium rounded-xl px-5 py-3 transition-colors shadow-sm"
+        >发送</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 文档入库 面板 ── -->
+  <div id="panel-ingest" class="flex-1 flex flex-col overflow-hidden hidden">
+    <div class="flex-1 overflow-y-auto px-4 py-6">
+      <div class="max-w-2xl mx-auto space-y-5">
+
+        <!-- 元数据表单 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+          <h2 class="text-sm font-semibold text-gray-700 mb-4">文档元数据</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-gray-500 mb-1">产品线</label>
+              <input id="ingest-product-line" type="text" placeholder="如：云计算平台"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-500 mb-1">版本</label>
+              <input id="ingest-version" type="text" placeholder="如：v2.0"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-500 mb-1">部门</label>
+              <select id="ingest-department"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                <option value="">-- 请选择 --</option>
+                <option value="产品">产品</option>
+                <option value="人力资源">人力资源</option>
+                <option value="培训">培训</option>
+                <option value="服务">服务</option>
+                <option value="测试">测试</option>
+                <option value="研发">研发</option>
+                <option value="研究">研究</option>
+                <option value="质量">质量</option>
+                <option value="销售">销售</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-500 mb-1">保密等级</label>
+              <select id="ingest-confidentiality"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                <option value="公开">公开</option>
+                <option value="内部">内部</option>
+                <option value="机密">机密</option>
+              </select>
+            </div>
+            <div class="col-span-2">
+              <label class="block text-xs text-gray-500 mb-1">文档类型</label>
+              <select id="ingest-doc-type"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                <option value="">-- 请选择 --</option>
+                <option value="规格书">规格书</option>
+                <option value="需求文档">需求文档</option>
+                <option value="设计文档">设计文档</option>
+                <option value="测试方案">测试方案</option>
+                <option value="测试用例">测试用例</option>
+                <option value="测试报告">测试报告</option>
+                <option value="作业指导书">作业指导书</option>
+                <option value="故障案例">故障案例</option>
+                <option value="FAQ">FAQ</option>
+                <option value="培训资料">培训资料</option>
+                <option value="项目文档">项目文档</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 拖拽上传区 -->
+        <div id="ingest-drop-zone"
+          class="border-2 border-dashed border-gray-200 rounded-2xl
+                 flex flex-col items-center justify-center gap-3 py-10 text-center
+                 cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors"
+          onclick="document.getElementById('ingest-file-input').click()"
+          ondragover="event.preventDefault(); this.classList.add('border-indigo-400','bg-indigo-50/50')"
+          ondragleave="this.classList.remove('border-indigo-400','bg-indigo-50/50')"
+          ondrop="event.preventDefault(); this.classList.remove('border-indigo-400','bg-indigo-50/50'); onIngestFilesSelected(event.dataTransfer.files)">
+          <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+          </svg>
+          <p class="text-sm text-gray-400">点击或拖拽文档到此处<br><span class="text-xs text-gray-300">支持 .md .txt .docx .pdf .pptx，可多选</span></p>
+        </div>
+        <input id="ingest-file-input" type="file" multiple
+          accept=".md,.txt,.docx,.pdf,.pptx,.dita,.xml" class="hidden"
+          onchange="onIngestFilesSelected(this.files)" />
+
+        <!-- 已选文件徽章 -->
+        <div id="ingest-file-badges" class="flex flex-wrap gap-2"></div>
+
+        <!-- 提交按鈕 + 状态 -->
+        <div class="flex items-center gap-3">
+          <button id="ingest-btn" onclick="runIngest()" disabled
+            class="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700
+                   disabled:bg-gray-200 disabled:cursor-not-allowed
+                   text-white text-sm font-medium rounded-xl px-6 py-2.5 transition-colors shadow-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+            </svg>
+            上传入库
+          </button>
+          <div id="ingest-loading" class="hidden text-sm text-gray-400 flex items-center gap-2">
+            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+            </svg>
+            入库中…
+          </div>
+          <div id="ingest-result" class="hidden text-sm"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 文档检查 面板 ── -->
+  <div id="panel-check" class="flex-1 flex flex-col overflow-hidden hidden">
+    <!-- 操作栏 -->
+    <div class="bg-white border-b border-gray-100 px-4 py-3 flex-shrink-0">
+      <div class="max-w-4xl mx-auto flex flex-wrap items-center gap-3">
+        <!-- 文件选择 -->
+        <label for="check-file-input"
+          class="cursor-pointer bg-white border border-gray-200 hover:border-indigo-400
+                 text-gray-600 hover:text-indigo-600 text-sm font-medium rounded-xl px-4 py-2
+                 transition-colors flex items-center gap-2 select-none">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+          </svg>
+          选择文档
+        </label>
+        <input id="check-file-input" type="file" multiple accept=".md,.txt" class="hidden" onchange="onFilesSelected(this.files)" />
+
+        <!-- 已选文件徽章列表 -->
+        <div id="file-badges" class="flex flex-wrap gap-2 flex-1 min-w-0"></div>
+
+        <!-- 开始检查 -->
+        <button id="check-btn" onclick="runCheck()" disabled
+          class="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700
+                 disabled:bg-gray-200 disabled:cursor-not-allowed
+                 text-white text-sm font-medium rounded-xl px-5 py-2 transition-colors shadow-sm flex items-center gap-2 flex-shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          开始检查
+        </button>
+
+        <!-- 汇总 -->
+        <div id="check-summary" class="text-sm text-gray-500 hidden">
+          共 <span id="sum-files" class="font-semibold text-gray-700">0</span> 个文件 ·
+          <span id="sum-errors"   class="text-red-500 font-semibold">0</span> 错误 ·
+          <span id="sum-warnings" class="text-yellow-500 font-semibold">0</span> 警告 ·
+          <span id="sum-infos"    class="text-blue-500 font-semibold">0</span> 提示
+        </div>
+        <div id="check-loading" class="hidden text-sm text-gray-400 flex items-center gap-2">
+          <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+          </svg>
+          检查中…
+        </div>
+      </div>
+    </div>
+
+    <!-- 拖拽上传区（无文件时显示） -->
+    <div id="drop-zone"
+      class="m-4 flex-shrink-0 border-2 border-dashed border-gray-200 rounded-2xl
+             flex flex-col items-center justify-center gap-3 py-10 text-center
+             cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors"
+      onclick="document.getElementById('check-file-input').click()"
+      ondragover="event.preventDefault(); this.classList.add('border-indigo-400','bg-indigo-50/50')"
+      ondragleave="this.classList.remove('border-indigo-400','bg-indigo-50/50')"
+      ondrop="event.preventDefault(); this.classList.remove('border-indigo-400','bg-indigo-50/50'); onFilesSelected(event.dataTransfer.files)">
+      <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+      </svg>
+      <p class="text-sm text-gray-400">点击或拖拽文档到此处<br><span class="text-xs text-gray-300">支持 .md、.txt，可多选</span></p>
+    </div>
+
+    <!-- 结果区域 -->
+    <div id="check-results" class="flex-1 overflow-y-auto px-4 pb-6 hidden">
+      <div class="max-w-4xl mx-auto space-y-4"></div>
+    </div>
+  </div>
+
+<script>
+/* ══════════════════════════════════════════
+   Tab 切换
+══════════════════════════════════════════ */
+const ALL_TABS = ['qa', 'ingest', 'check'];
+function switchTab(tab) {
+  ALL_TABS.forEach(t => {
+    const active = t === tab;
+    document.getElementById('panel-' + t).classList.toggle('hidden', !active);
+    document.getElementById('tab-' + t).className = active
+      ? 'tab-btn px-4 py-1.5 rounded-md text-sm font-medium transition-colors bg-white text-gray-800 shadow-sm'
+      : 'tab-btn px-4 py-1.5 rounded-md text-sm font-medium transition-colors text-gray-500 hover:text-gray-700';
+  });
+}
+
+/* ══════════════════════════════════════════   文档入库
+════════════════════════════════════════════ */
+let ingestFiles = [];
+
+function onIngestFilesSelected(fileList) {
+  const existing = new Set(ingestFiles.map(f => f.name));
+  for (const f of fileList) {
+    if (!existing.has(f.name)) { ingestFiles.push(f); existing.add(f.name); }
+  }
+  renderIngestBadges();
+  document.getElementById('ingest-btn').disabled = ingestFiles.length === 0;
+  document.getElementById('ingest-drop-zone').classList.toggle('hidden', ingestFiles.length > 0);
+}
+
+function removeIngestFile(name) {
+  ingestFiles = ingestFiles.filter(f => f.name !== name);
+  renderIngestBadges();
+  document.getElementById('ingest-btn').disabled = ingestFiles.length === 0;
+  if (!ingestFiles.length) document.getElementById('ingest-drop-zone').classList.remove('hidden');
+}
+
+function renderIngestBadges() {
+  document.getElementById('ingest-file-badges').innerHTML = ingestFiles.map(f => `
+    <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-1 rounded-full border border-indigo-100">
+      ${esc(f.name)}
+      <button onclick="removeIngestFile('${esc(f.name)}')" class="ml-0.5 hover:text-indigo-900 leading-none">×</button>
+    </span>
+  `).join('');
+}
+
+async function runIngest() {
+  if (!ingestFiles.length) return;
+  const btn     = document.getElementById('ingest-btn');
+  const loading = document.getElementById('ingest-loading');
+  const result  = document.getElementById('ingest-result');
+
+  btn.disabled = true;
+  loading.classList.remove('hidden');
+  result.classList.add('hidden');
+
+  try {
+    const form = new FormData();
+    ingestFiles.forEach(f => form.append('files', f));
+    form.append('product_line',    document.getElementById('ingest-product-line').value.trim());
+    form.append('version',         document.getElementById('ingest-version').value.trim());
+    form.append('department',      document.getElementById('ingest-department').value.trim());
+    form.append('confidentiality', document.getElementById('ingest-confidentiality').value);
+    form.append('doc_type',        document.getElementById('ingest-doc-type').value.trim());
+
+    const res = await fetch('/api/ingest', { method: 'POST', body: form });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    const detail = data.ingested.map(r => `${esc(r.file)} (${r.chunks} 块)`).join('、');
+    result.innerHTML = `<span class="text-green-600">✓ 入库成功：${detail}，共 ${data.total_chunks} 个向量块</span>`;
+    result.classList.remove('hidden');
+  } catch (err) {
+    result.innerHTML = `<span class="text-red-500">入库失败：${esc(err.message)}</span>`;
+    result.classList.remove('hidden');
+  } finally {
+    btn.disabled = ingestFiles.length === 0;
+    loading.classList.add('hidden');
+  }
+}
+
+/* ════════════════════════════════════════════   文档检查
+══════════════════════════════════════════ */
+const LEVEL_LABEL = { error: '错误', warning: '警告', info: '提示' };
+const LEVEL_BADGE = { error: 'badge-error', warning: 'badge-warning', info: 'badge-info' };
+const LEVEL_ORDER = { error: 0, warning: 1, info: 2 };
+
+let selectedFiles = [];  // File 对象列表
+
+function onFilesSelected(fileList) {
+  // 合并，去重（按文件名）
+  const existing = new Set(selectedFiles.map(f => f.name));
+  for (const f of fileList) {
+    if (!existing.has(f.name)) { selectedFiles.push(f); existing.add(f.name); }
+  }
+  renderFileBadges();
+  document.getElementById('check-btn').disabled = selectedFiles.length === 0;
+  // 有文件时隐藏拖拽区
+  document.getElementById('drop-zone').classList.toggle('hidden', selectedFiles.length > 0);
+}
+
+function removeFile(name) {
+  selectedFiles = selectedFiles.filter(f => f.name !== name);
+  renderFileBadges();
+  document.getElementById('check-btn').disabled = selectedFiles.length === 0;
+  if (selectedFiles.length === 0) {
+    document.getElementById('drop-zone').classList.remove('hidden');
+    document.getElementById('check-results').classList.add('hidden');
+    document.getElementById('check-summary').classList.add('hidden');
+  }
+}
+
+function renderFileBadges() {
+  const container = document.getElementById('file-badges');
+  container.innerHTML = selectedFiles.map(f => `
+    <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs font-medium
+                 px-2.5 py-1 rounded-full border border-indigo-100">
+      ${esc(f.name)}
+      <button onclick="removeFile('${esc(f.name)}')" class="ml-0.5 hover:text-indigo-900 leading-none">×</button>
+    </span>
+  `).join('');
+}
+
+async function runCheck() {
+  if (!selectedFiles.length) return;
+
+  const btn     = document.getElementById('check-btn');
+  const loading = document.getElementById('check-loading');
+  const summary = document.getElementById('check-summary');
+  const resultsDiv = document.getElementById('check-results');
+  const resultsWrap = resultsDiv.querySelector('.max-w-4xl');
+
+  btn.disabled = true;
+  loading.classList.remove('hidden');
+  summary.classList.add('hidden');
+  resultsDiv.classList.remove('hidden');
+  resultsWrap.innerHTML = '<div class="text-center text-gray-400 text-sm mt-10">检查中，请稍候…</div>';
+
+  try {
+    const form = new FormData();
+    selectedFiles.forEach(f => form.append('files', f));
+
+    const res = await fetch('/api/check', { method: 'POST', body: form });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    document.getElementById('sum-files').textContent    = data.summary.total_files;
+    document.getElementById('sum-errors').textContent   = data.summary.total_errors;
+    document.getElementById('sum-warnings').textContent = data.summary.total_warnings;
+    document.getElementById('sum-infos').textContent    = data.summary.total_infos;
+    summary.classList.remove('hidden');
+
+    renderCheckResults(data.files, resultsWrap);
+  } catch (err) {
+    resultsWrap.innerHTML = `<div class="text-red-500 text-sm">检查失败：${esc(err.message)}</div>`;
+  } finally {
+    btn.disabled = selectedFiles.length === 0;
+    loading.classList.add('hidden');
+  }
+}
+
+function renderCheckResults(files, container) {
+  if (!files.length) {
+    container.innerHTML = '<div class="text-center text-gray-400 text-sm mt-20">未找到任何 Markdown 文件</div>';
+    return;
+  }
+
+  container.innerHTML = '';
+
+  files.forEach(fileResult => {
+    const { file_path, summary, issues } = fileResult;
+    const fileName = file_path.split('/').pop();
+    const hasIssues = issues.length > 0;
+
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden';
+
+    const header = document.createElement('div');
+    header.className = 'px-4 py-3 flex items-center gap-3 cursor-pointer select-none hover:bg-gray-50 transition-colors';
+    header.innerHTML = `
+      <svg class="w-4 h-4 text-gray-400 flex-shrink-0 chevron transition-transform"
+           fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+      <span class="text-sm font-medium text-gray-700 flex-1 truncate" title="${esc(file_path)}">${esc(fileName)}</span>
+      <span class="text-xs text-gray-400 mr-2">${esc(file_path)}</span>
+      ${summary.error   ? `<span class="text-xs px-2 py-0.5 rounded-full badge-error mr-1">${summary.error} 错误</span>` : ''}
+      ${summary.warning ? `<span class="text-xs px-2 py-0.5 rounded-full badge-warning mr-1">${summary.warning} 警告</span>` : ''}
+      ${summary.info    ? `<span class="text-xs px-2 py-0.5 rounded-full badge-info">${summary.info} 提示</span>` : ''}
+      ${!hasIssues      ? `<span class="text-xs text-green-600 font-medium">✓ 无问题</span>` : ''}
+    `;
+
+    const body = document.createElement('div');
+    body.className = `border-t border-gray-100 divide-y divide-gray-50 ${hasIssues ? '' : 'hidden'}`;
+
+    if (hasIssues) {
+      issues.forEach(issue => {
+        const row = document.createElement('div');
+        row.className = 'px-4 py-2.5 flex gap-3 items-start text-sm hover:bg-gray-50 transition-colors';
+        row.innerHTML = `
+          <span class="flex-shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full mt-0.5 ${LEVEL_BADGE[issue.level] || 'badge-info'}">
+            ${esc(LEVEL_LABEL[issue.level] || issue.level)}
+          </span>
+          <span class="text-gray-400 flex-shrink-0 font-mono text-xs mt-0.5 w-12 text-right">行${issue.line}</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-gray-700">${esc(issue.message)}</div>
+            ${issue.context    ? `<div class="text-gray-400 text-xs mt-0.5 truncate font-mono">${esc(issue.context)}</div>` : ''}
+            ${issue.suggestion ? `<div class="text-indigo-500 text-xs mt-0.5">💡 ${esc(issue.suggestion)}</div>` : ''}
+            <span class="text-xs text-gray-300">[${esc(issue.category)}]</span>
+          </div>
+        `;
+        body.appendChild(row);
+      });
+    }
+
+    let expanded = hasIssues;
+    header.querySelector('.chevron').style.transform = expanded ? 'rotate(90deg)' : '';
+    header.addEventListener('click', () => {
+      if (!hasIssues) return;
+      expanded = !expanded;
+      body.classList.toggle('hidden', !expanded);
+      header.querySelector('.chevron').style.transform = expanded ? 'rotate(90deg)' : '';
+    });
+
+    card.appendChild(header);
+    card.appendChild(body);
+    container.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════════════
+   知识问答 QA
+════════════════════════════════════════════ */
+const sendBtn = document.getElementById('send-btn');
+const input   = document.getElementById('input');
+const chat    = document.getElementById('chat');
+
+function scrollBottom() {
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function esc(str) {
+  return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function appendMessage(role, html) {
+  const wrap = document.getElementById('chat').querySelector('.max-w-3xl');
+  const isUser = role === 'user';
+  const div = document.createElement('div');
+  div.className = `flex gap-3 items-start ${isUser ? 'justify-end' : ''}`;
+  if (isUser) {
+    div.innerHTML = `
+      <div class="bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 shadow-sm max-w-xl text-sm leading-relaxed">
+        ${html}
+      </div>
+      <div class="w-8 h-8 bg-gray-200 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 text-xs text-gray-500 font-medium">你</div>`;
+  } else {
+    div.innerHTML = `
+      <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm mt-0.5">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+        </svg>
+      </div>
+      <div class="flex-1 max-w-2xl">
+        ${html}
+      </div>`;
+  }
+  wrap.appendChild(div);
+  scrollBottom();
+  return div;
+}
+
+async function sendMessage() {
+  const question = input.value.trim();
+  if (!question) return;
+  input.value = '';
+  input.style.height = 'auto';
+
+  // 用户消息
+  appendMessage('user', esc(question));
+
+  // 助手消息框
+  const assistantDiv = appendMessage('assistant', `
+    <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+      <!-- 来源折叠 -->
+      <div id="sources-wrap-${Date.now()}" class="sources-wrap hidden mb-3">
+        <details>
+          <summary class="text-xs text-gray-400 cursor-pointer select-none hover:text-gray-600 mb-2">📎 参考来源</summary>
+          <div class="sources-list space-y-2"></div>
+        </details>
+      </div>
+      <!-- 答案 -->
+      <div class="message-content answer-el text-sm text-gray-800 leading-relaxed"></div>
+      <!-- 打字中 -->
+      <div class="typing-el flex gap-1 mt-1">
+        <span class="dot w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+        <span class="dot w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+        <span class="dot w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+      </div>
+    </div>`);
+
+  const sourcesWrap = assistantDiv.querySelector('.sources-wrap');
+  const sourcesList = assistantDiv.querySelector('.sources-list');
+  const answerEl    = assistantDiv.querySelector('.answer-el');
+  const typingEl    = assistantDiv.querySelector('.typing-el');
+  let rawText = '';
+
+  setLoading(true);
+  try {
+    const res = await fetch('/api/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question,
+        product_line:    document.getElementById('filter-product-line').value.trim(),
+        version:         document.getElementById('filter-version').value.trim(),
+        department:      document.getElementById('filter-department').value.trim(),
+        confidentiality: document.getElementById('filter-confidentiality').value,
+      }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const reader  = res.body.getReader();
+    const decoder = new TextDecoder();
+    let   buf     = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let evt;
+        try { evt = JSON.parse(line.slice(6)); } catch { continue; }
+        if (evt.type === 'sources') {
+          renderSources(evt.sources, sourcesWrap, sourcesList);
+        } else if (evt.type === 'chunk') {
+          typingEl.classList.add('hidden');
+          rawText += evt.content;
+          answerEl.innerHTML = marked.parse(rawText);
+          scrollBottom();
+        } else if (evt.type === 'done') {
+          typingEl.classList.add('hidden');
+        }
+      }
+    }
+  } catch (err) {
+    typingEl.classList.add('hidden');
+    answerEl.innerHTML = `<span class="text-red-500">请求失败：${esc(err.message)}</span>`;
+  } finally {
+    setLoading(false);
+    input.focus();
+  }
+}
+
+const DOC_TYPE_LABELS = {
+  spec: '规格书',
+  project: '项目文档',
+  test_spec: '测试规范',
+  test_case: '测试用例',
+  release_note: '版本发布说明',
+  fault_code: '故障码',
+  fault_case: '故障案例',
+  work_order: '服务工单',
+  fmea: 'FMEA',
+  '8d': '8D',
+  quality_event: '质量事件',
+  bom: 'BOM',
+  training: '培训资料',
+  notice: '通知',
+  knowledge: '知识文档',
+  customer: '客户档案',
+  product_line: '产品线',
+  position: '岗位说明',
+  general: '通用文档',
+  solution: '方案文档',
+  process: '流程文档',
+};
+
+function getDocTypeLabel(docType) {
+  return DOC_TYPE_LABELS[docType] || docType || '';
+}
+
+function renderSources(sources, wrap, list) {
+  if (!sources?.length) return;
+  wrap.classList.remove('hidden');
+  sources.forEach((src, i) => {
+    const el = document.createElement('div');
+    el.className = 'bg-gray-50 border border-gray-100 rounded-lg px-3 py-2 text-xs text-gray-600 leading-relaxed';
+
+    // 兼容旧格式（纯字符串）和新格式（证据卡片对象）
+    if (typeof src === 'string') {
+      const preview = src.length > 180 ? src.slice(0, 180) + '…' : src;
+      el.innerHTML = `<span class="text-blue-400 font-semibold mr-1">[${i + 1}]</span>${esc(preview)}`;
+    } else {
+      // 证据卡片：展示来源元数据 + 内容预览
+      const tags = [
+        src.doc_type      ? `<span class="bg-blue-50 text-blue-600 rounded px-1">${esc(getDocTypeLabel(src.doc_type))}</span>` : '',
+        src.product_line  ? `<span class="bg-green-50 text-green-700 rounded px-1">${esc(src.product_line)}</span>` : '',
+        src.version       ? `<span class="bg-yellow-50 text-yellow-700 rounded px-1">v${esc(src.version)}</span>` : '',
+        src.department    ? `<span class="bg-purple-50 text-purple-700 rounded px-1">${esc(src.department)}</span>` : '',
+        src.confidentiality && src.confidentiality !== '公开'
+          ? `<span class="bg-red-50 text-red-600 rounded px-1">🔒${esc(src.confidentiality)}</span>` : '',
+      ].filter(Boolean).join(' ');
+
+      const metaLine = [
+        src.source        ? `📄 ${esc(src.source)}` : '',
+        src.doc_id        ? `编号: ${esc(src.doc_id)}` : '',
+        src.owner         ? `责任人: ${esc(src.owner)}` : '',
+        src.effective_date ? `生效: ${esc(src.effective_date)}` : '',
+        src.score != null  ? `相似度: ${(src.score * 100).toFixed(1)}%` : '',
+      ].filter(Boolean).join(' · ');
+
+      const preview = (src.content || '').length > 200
+        ? src.content.slice(0, 200) + '…' : (src.content || '');
+
+      el.innerHTML = `
+        <div class="flex items-start gap-2">
+          <span class="text-blue-400 font-semibold shrink-0">[${i + 1}]</span>
+          <div class="flex-1 min-w-0">
+            ${tags ? `<div class="flex flex-wrap gap-1 mb-1">${tags}</div>` : ''}
+            ${metaLine ? `<div class="text-gray-400 mb-1">${metaLine}</div>` : ''}
+            <div class="text-gray-600">${esc(preview)}</div>
+          </div>
+        </div>`;
+    }
+    list.appendChild(el);
+  });
+}
+
+function setLoading(loading) {
+  sendBtn.disabled = loading;
+  input.disabled   = loading;
+}
+
+/* 自动撑高文本框 */
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+});
+
+/* Enter 发送 / Shift+Enter 换行 */
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+sendBtn.addEventListener('click', sendMessage);
+</script>
+</body>
+</html>

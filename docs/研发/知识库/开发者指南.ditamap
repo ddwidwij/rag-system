@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="developer-guide">
+  <title>开发者接口文档导航图</title>
+  <topicmeta>
+    <shortdesc>本文档集涵盖接口开发、测试、认证与错误处理的完整知识体系，适合后端开发工程师和测试工程师参考。</shortdesc>
+  </topicmeta>
+  <topicref href="api_testing.dita" type="topic">
+    <topicmeta>
+      <navtitle>API 接口测试指南</navtitle>
+      <shortdesc>包含功能测试、性能测试、安全测试和常用工具介绍。</shortdesc>
+    </topicmeta>
+  </topicref>
+  <topicref href="接口测试基础知识.md" type="topic">
+    <topicmeta>
+      <navtitle>接口测试基础</navtitle>
+      <shortdesc>HTTP 接口测试的基础概念与实践方法。</shortdesc>
+    </topicmeta>
+  </topicref>
+  <topicgroup>
+    <topicmeta>
+      <navtitle>错误处理与状态码</navtitle>
+    </topicmeta>
+    <topicref href="http_basics.txt" type="topic">
+      <topicmeta>
+        <navtitle>HTTP 状态码参考</navtitle>
+        <shortdesc>HTTP 协议常用状态码的含义和使用场景。</shortdesc>
+      </topicmeta>
+    </topicref>
+    <topicref href="restful_api.xml" type="topic">
+      <topicmeta>
+        <navtitle>RESTful API 设计规范</navtitle>
+        <shortdesc>REST 架构风格、URL 命名、版本管理和响应格式规范。</shortdesc>
+      </topicmeta>
+    </topicref>
+  </topicgroup>
+  <topicref href="doc.md" type="reference">
+    <topicmeta>
+      <navtitle>补充参考文档</navtitle>
+      <shortdesc>其他参考资料和附录内容。</shortdesc>
+    </topicmeta>
+  </topicref>
+</map>

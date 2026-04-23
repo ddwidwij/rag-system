@@ -1,0 +1,45 @@
+{
+  "故障": {
+    "weight": 1.0,
+    "terms": [
+      {"text": "报警", "weight": 0.95},
+      {"text": "异常", "weight": 0.9},
+      {"text": "错误", "weight": 0.85},
+      {"text": "error", "weight": 0.8},
+      {"text": "问题", "weight": 0.2}
+    ]
+  },
+  "排障": {
+    "weight": 1.0,
+    "terms": [
+      {"text": "故障排查", "weight": 0.95},
+      {"text": "故障定位", "weight": 0.9},
+      {"text": "troubleshoot", "weight": 0.85},
+      {"text": "排查", "weight": 0.7}
+    ]
+  },
+  "接口": {
+    "weight": 1.0,
+    "terms": [
+      {"text": "接口定义", "weight": 0.95},
+      {"text": "API", "weight": 0.85},
+      {"text": "api", "weight": 0.8}
+    ]
+  },
+  "配置": {
+    "weight": 0.9,
+    "terms": [
+      {"text": "参数配置", "weight": 0.95},
+      {"text": "configuration", "weight": 0.8},
+      {"text": "设置", "weight": 0.2}
+    ]
+  },
+  "版本": {
+    "weight": 0.9,
+    "terms": [
+      {"text": "软件版本", "weight": 0.95},
+      {"text": "版号", "weight": 0.85},
+      {"text": "release", "weight": 0.8}
+    ]
+  }
+}

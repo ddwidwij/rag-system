@@ -1,0 +1,8 @@
+{
+  "doc_type": "work_order",
+  "status": "已发布",
+  "product_line": "晶圆测试设备",
+  "version": "V1.2",
+  "department": "服务",
+  "confidentiality": "内部"
+}

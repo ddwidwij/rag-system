@@ -1,0 +1,29 @@
+# 虚拟环境（1.8G，不上传）
+.venv/
+
+# 向量数据库（63M，需本地 build 生成）
+chroma_db/
+
+# 密钥 / 环境变量
+.env
+*.env
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 评测报告（本地生成，无需版本管理）
+reports/
+
+# jieba 缓存
+*.cache
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/

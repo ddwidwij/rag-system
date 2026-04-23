@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="api-testing-guide">
+  <title>API 接口测试指南</title>
+  <shortdesc>本文档介绍如何对 RESTful API 进行系统性测试，包括功能测试、性能测试和安全测试。</shortdesc>
+  <body>
+    <section id="functional-testing">
+      <title>功能测试</title>
+      <p>功能测试验证 API 是否按照规格说明正确运行，包括正常场景测试和边界条件测试。</p>
+      <p>正向测试（Happy Path）验证 API 在正常输入下是否返回预期的响应状态码和数据结构。例如，调用 GET /users/1 应返回 200 状态码和用户对象。</p>
+      <p>负向测试（Negative Testing）验证 API 在异常输入下是否正确返回错误信息。例如，传入非法参数应返回 400 状态码及详细错误说明。</p>
+    </section>
+    <section id="performance-testing">
+      <title>性能测试</title>
+      <p>性能测试评估 API 在高并发和大数据量场景下的响应时间和吞吐量。</p>
+      <p>负载测试（Load Testing）模拟预期的正常峰值并发量，验证 API 在设计容量内的性能表现，通常使用 JMeter 或 k6 工具。</p>
+      <p>压力测试（Stress Testing）超出系统设计容量施压，找出系统的性能瓶颈和临界点，评估系统在过载情况下的降级行为。</p>
+      <p>响应时间指标：P50、P95、P99 百分位延迟是衡量 API 性能的关键指标，P99 延迟应控制在用户可接受范围内。</p>
+    </section>
+    <section id="security-testing">
+      <title>安全测试</title>
+      <p>安全测试检查 API 是否存在身份认证绕过、越权访问、SQL 注入、XSS 等安全漏洞。</p>
+      <p>认证测试验证未携带有效令牌的请求是否被正确拒绝，返回 401 Unauthorized 状态码。</p>
+      <p>授权测试（IDOR 检测）验证用户是否只能访问自己有权限的资源，防止水平越权和垂直越权漏洞。</p>
+      <p>注入测试检查 API 对输入参数的过滤和转义处理，防止 SQL 注入和 NoSQL 注入攻击。</p>
+    </section>
+    <section id="tools">
+      <title>常用测试工具</title>
+      <p>Postman 是最流行的 API 测试工具，支持创建测试集合、编写测试脚本、环境变量管理和自动化运行。</p>
+      <p>curl 是命令行 HTTP 客户端，适合快速验证接口和编写测试脚本。</p>
+      <p>pytest + requests 组合适合编写自动化 API 测试，支持断言、参数化测试和测试报告生成。</p>
+      <p>Swagger UI 允许开发者直接在浏览器中测试 API，无需额外工具，适合快速功能验证。</p>
+    </section>
+  </body>
+</topic>

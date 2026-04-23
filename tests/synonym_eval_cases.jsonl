@@ -1,0 +1,100 @@
+{"id": "T001", "query": "-- 数字函数 ROUND(amount, 2) -- 保留2位小数 F", "expected_sources": ["研发/知识库/测试基础知识.md"], "where": null}
+{"id": "T002", "query": "* Bug 描述太模糊 * 没有复现步骤 * 没有原始请求报文 * 没有", "expected_sources": ["接口测试流程.md"], "where": null}
+{"id": "T003", "query": "1. 先登录 2. 拿 token 3. 创建订单 4. 支付订单 5.", "expected_sources": ["研发/知识库/接口测试基础知识.md"], "where": null}
+{"id": "T004", "query": "doc_type: \"knowledge\"", "expected_sources": ["研发/知识库/数据库设计.pptx.meta.json"], "where": null}
+{"id": "T005", "query": "doc_type: \"test_case\"", "expected_sources": ["测试/测试用例/探针卡切换流程测试用例.md.meta.json"], "where": null}
+{"id": "T006", "query": "**17:30** — 工单关闭，客户签字确认，并同步更新 PM 清针周", "expected_sources": ["服务/工单/服务工单WO-2025-0418.md"], "where": null}
+{"id": "T007", "query": "* 不带 token * token 过期 * token 篡改 * t", "expected_sources": ["接口测试流程.md"], "where": null}
+{"id": "T008", "query": "* 用户表是否新增记录 * 默认状态是否正确 * 密码是否加密存储", "expected_sources": ["研发/知识库/接口测试基础知识.md"], "where": null}
+{"id": "T009", "query": "检索、对比、推荐和审计才有稳定基础。error码文档应确保报警定义、等级、触发条件", "expected_sources": ["维护/故障码/运动控制器故障码处理手册.md"], "where": null}
+{"id": "T010", "query": "射。 2. 建立客户模板白名单并纳入release回归测试。 3. 在升级前检查单中增", "expected_sources": ["质量/8D/8D报告-2025-0098.md"], "where": null}
+{"id": "T011", "query": "490 5% 935 9% 2 000 20% 6 755 66% 50", "expected_sources": ["研究/报告/半导体晶圆代工行业现状2025.pdf"], "where": null}
+{"id": "T012", "query": "增加 bump 反光噪声抑制逻辑，降低凸点晶圆在高亮环境下的误判率。 #", "expected_sources": ["研发/版本/VisionAlign算法版本发布说明V1.8.md"], "where": null}
+{"id": "T013", "query": "Chuck 采用高导热铝合金或氮化铝基板，结合分区加热设计，针对 200", "expected_sources": ["研发/模块子系统/温控子系统稳定性设计说明.md"], "where": null}
+{"id": "T014", "query": "doc_type: \"quality_event\"", "expected_sources": ["质量/质量事件/质量事件报告QE-2025-0098.md.meta.json"], "where": null}
+{"id": "T015", "query": "-- LEFT JOIN（保留左表所有数据，右表没有则为 NULL） -", "expected_sources": ["研发/知识库/测试基础知识.md"], "where": null}
+{"id": "T016", "query": "等异常时，系统冻结当前动作序列并进行error分类。可恢复故障允许在工程模式下执行", "expected_sources": ["研发/模块子系统/运动控制子系统技术方案.md"], "where": null}
+{"id": "T017", "query": "本文档说明 WPS-3000 系列测试头内部供电板卡的料号体系、功能分区", "expected_sources": ["研发/料号BOM/测试头供电板卡料号说明.md"], "where": null}
+{"id": "T018", "query": "## 结论 综上，WPS-3200error码定义手册不仅是单篇材料，更是企业知", "expected_sources": ["维护/故障码/WPS-3200故障码定义手册.md"], "where": null}
+{"id": "T019", "query": "### REL-001：高温操作测试（HTOL Sampling） -", "expected_sources": ["测试/测试项/晶圆CP测试项定义与规范.md"], "where": null}
+{"id": "T020", "query": "与新评分逻辑不一致。 2. 质量评分接口定义为新增字段，上层软件未适配前应先关闭", "expected_sources": ["研发/版本/VisionAlign算法版本发布说明V1.8.md"], "where": null}
+{"id": "T021", "query": "doc_type: \"product_line\"", "expected_sources": ["研发/产品线/高精度探针台产品线演进路线.md.meta.json"], "where": null}
+{"id": "T022", "query": "对准时，连续报出 VIS-1002 error，无法完成 Fiducial Mar", "expected_sources": ["维护/故障案例/VIS-1002-Fiducial识别失败案例.md"], "where": null}
+{"id": "T023", "query": "# 质量事件报告QE-2025-0120", "expected_sources": ["质量/质量事件/质量事件报告QE-2025-0120.md"], "where": null}
+{"id": "T024", "query": "缺乏统一的入口，未与现有网站集成，查找文档困难 没有移动端阅读方式，现场", "expected_sources": ["产品/方案/文档中心方案.docx"], "where": null}
+{"id": "T025", "query": "| 属性 | 内容 | |------|------| | 培训主题编号", "expected_sources": ["培训/培训主题/WPS-3000现场工程师认证培训大纲.md"], "where": null}
+{"id": "T026", "query": "doc_type: \"软件版本_note\"", "expected_sources": ["研发/版本/WPS-3000软件版本发布说明V2.3.md.meta.json"], "where": null}
+{"id": "T027", "query": "期不复核，内容可能仍然保留旧流程、旧接口定义和旧指标，导致新员工或现场工程师按过", "expected_sources": ["维护/故障案例/探针卡接触不良排查案例.md"], "where": null}
+{"id": "T028", "query": "**响应时间 SLA**：产线停机error 2 小时内远程接入，12 小时内到", "expected_sources": ["项目管理/客户/华东先进封装客户档案.md"], "where": null}
+{"id": "T029", "query": "confidentiality: \"内部\"", "expected_sources": ["服务/工单/服务工单WO-2025-0511.md.meta.json"], "where": null}
+{"id": "T030", "query": "doc_type: \"product_line\"", "expected_sources": ["研发/产品线/WPS系列产品线规划说明.md.meta.json"], "where": null}
+{"id": "T031", "query": "12 Status of the Semiconductor Found", "expected_sources": ["研究/报告/半导体晶圆代工行业现状2025.pdf"], "where": null}
+{"id": "T032", "query": "验收标准，服务团队可将其作为客户现场error闭环的参考，项目团队则可利用其中的计", "expected_sources": ["质量/FMEA/视觉识别流程FMEA分析.md"], "where": null}
+{"id": "T033", "query": "这些内容是当前主项目真正依赖的，日常开发和运行不要删：", "expected_sources": ["研发/通用/项目说明.md"], "where": null}
+{"id": "T034", "query": "成功 - **输入**：系统触发自动configuration流程 - **预期输出**：针数、管", "expected_sources": ["测试/测试用例/探针卡切换流程测试用例.md"], "where": null}
+{"id": "T035", "query": "- 2025-06-15 完成算法与光源升级。 - 2025-06-18", "expected_sources": ["质量/8D/8D报告-2025-0104.md"], "where": null}
+{"id": "T036", "query": "1. 高压测试环境需客户提供符合 IEC 标准的测试间及接地系统 2.", "expected_sources": ["项目管理/项目/客户定制高压测试平台项目方案.md"], "where": null}
+{"id": "T037", "query": "附件： 1.助学贷款证明模板 2.毕业生一次性求职创业补贴申请佐证材料", "expected_sources": ["人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx"], "where": null}
+{"id": "T038", "query": "product_line: \"晶圆测试设备\"", "expected_sources": ["研发/产品线/温控附件产品线市场需求总结.md.meta.json"], "where": null}
+{"id": "T039", "query": "doc_type: \"knowledge\"", "expected_sources": ["研发/知识库/接口测试基础知识.md.meta.json"], "where": null}
+{"id": "T040", "query": "| 料号 | 名称 | 适用机型 | 输入电压 | 输出通道 | |--", "expected_sources": ["研发/料号BOM/测试头供电板卡料号说明.md"], "where": null}
+{"id": "T041", "query": "| 料号 | 名称 | 数量 | 费用 | |------|------", "expected_sources": ["服务/工单/服务工单WO-2025-0519.md"], "where": null}
+{"id": "T042", "query": "h 索引。门户前端通过API调用搜索接口定义。---Algolia DocSea", "expected_sources": ["产品/方案/文档中心方案.docx"], "where": null}
+{"id": "T043", "query": "### 工作经验 - P2：0~2 年，具备良好的技术文档写作基础，能在", "expected_sources": ["培训/岗位/资料开发工程师岗位说明书.md"], "where": null}
+{"id": "T044", "query": "confidentiality: \"内部\"", "expected_sources": ["测试/测试用例/温控模块验收测试用例集.md.meta.json"], "where": null}
+{"id": "T045", "query": "限约束，也应该在项目复盘、培训赋能和error闭环中持续复用。只要文档结构完整、字", "expected_sources": ["质量/质量事件/质量事件报告QE-2025-0120.md"], "where": null}
+{"id": "T046", "query": "confidentiality: \"内部\"", "expected_sources": ["测试/测试用例/接口联调异常场景测试用例.md.meta.json"], "where": null}
+{"id": "T047", "query": "有稳定基础。8D文档要体现团队组建、error描述、临时措施、根因分析、永久对策和", "expected_sources": ["质量/8D/8D报告-2025-0098.md"], "where": null}
+{"id": "T048", "query": "product_line: \"晶圆测试设备\"", "expected_sources": ["维护/故障案例/温控失稳导致测试漂移案例.md.meta.json"], "where": null}
+{"id": "T049", "query": "| 设备型号 | 序列号 | 采购日期 | 所在厂区 | 合同编号 |", "expected_sources": ["项目管理/客户/华东先进封装客户档案.md"], "where": null}
+{"id": "T050", "query": "confidentiality: \"内部\"", "expected_sources": ["质量/8D/8D报告-2025-0098.md.meta.json"], "where": null}
+{"id": "T051", "query": "**14:00** — 验证测试：连续测试 500 颗 Die，接触告警", "expected_sources": ["服务/工单/服务工单WO-2025-0418.md"], "where": null}
+{"id": "T052", "query": "**目标**：步进精度 ±0.1μm，对标进口竞品 Cascade/Su", "expected_sources": ["研发/产品线/高精度探针台产品线演进路线.md"], "where": null}
+{"id": "T053", "query": "库的检索对象，也是后续做元数据治理、release管理、权限控制和引用展示的基础。", "expected_sources": ["质量/FMEA/温控模块FMEA复盘报告.md"], "where": null}
+{"id": "T054", "query": "清理新增追溯字段缓存，避免旧版本读取error。 ## 版本兼容性矩阵 |运行环境", "expected_sources": ["研发/版本/WPS-3000软件版本发布说明V2.2.md"], "where": null}
+{"id": "T055", "query": "期不复核，内容可能仍然保留旧流程、旧接口定义和旧指标，导致新员工或现场工程师按过", "expected_sources": ["维护/故障案例/版本升级后接口中断处理案例.md"], "where": null}
+{"id": "T056", "query": "# WPS-3000 软件release发布说明 V2.3", "expected_sources": ["研发/版本/WPS-3000软件版本发布说明V2.3.md"], "where": null}
+{"id": "T057", "query": "当前现状与痛点 当前工作中最常见的error是资料分散、命名不统一、版本口径混乱", "expected_sources": ["维护/故障案例/探针卡接触不良排查案例.md"], "where": null}
+{"id": "T058", "query": "doc_type: \"product_line\"", "expected_sources": ["研发/产品线/温控附件产品线市场需求总结.md.meta.json"], "where": null}
+{"id": "T059", "query": "/apps/api/src/` 后端接口定义 3. `tdc-doc-cente", "expected_sources": ["研发/通用/项目说明.md"], "where": null}
+{"id": "T060", "query": "圆对准、探针接触、温控保温位置保持和error恢复等关键场景，运动控制的稳定性直接", "expected_sources": ["研发/模块子系统/运动控制子系统技术方案.md"], "where": null}
+{"id": "T061", "query": "| 设备型号 | 序列号 | 采购日期 | 所在厂区 | 合同编号 |", "expected_sources": ["项目管理/客户/高校联合实验室客户档案.md"], "where": null}
+{"id": "T062", "query": "product_line: \"晶圆测试设备\"", "expected_sources": ["维护/故障案例/客户现场真空吸附异常案例.md.meta.json"], "where": null}
+{"id": "T063", "query": "板卡、温控单元、运动控制器和外部工艺接口定义产生的原始采样数据统一接入、缓存、标", "expected_sources": ["研发/模块子系统/数据采集子系统架构说明.md"], "where": null}
+{"id": "T064", "query": "## BOM 明细（以 MOT-XY01-200 为例）", "expected_sources": ["研发/料号BOM/探针台运动平台BOM汇总.md"], "where": null}
+{"id": "T065", "query": "### TC-005：切换过程中急停恢复测试 - **前置条件**：探针", "expected_sources": ["测试/测试用例/探针卡切换流程测试用例.md"], "where": null}
+{"id": "T066", "query": "doc_type: \"test_spec\"", "expected_sources": ["测试/测试项/RF前端校准测试项标准.md.meta.json"], "where": null}
+{"id": "T067", "query": "### 学历与专业 - 本科及以上，微电子、集成电路、电子工程或相关专业", "expected_sources": ["培训/岗位/测试开发工程师岗位说明书.md"], "where": null}
+{"id": "T068", "query": "### 功耗测量 所有机型均支持动态电流测量（IDDQ），ST-1000", "expected_sources": ["研发/产品线/SoC测试设备产品线能力矩阵.md"], "where": null}
+{"id": "T069", "query": "confidentiality: \"内部\"", "expected_sources": ["维护/故障案例/客户现场真空吸附异常案例.md.meta.json"], "where": null}
+{"id": "T070", "query": "WPS（Wafer Probe Station）系列是公司晶圆级电性测试", "expected_sources": ["研发/产品线/WPS系列产品线规划说明.md"], "where": null}
+{"id": "T071", "query": "confidentiality: \"内部\"", "expected_sources": ["项目管理/项目/ATE-Link平台改造项目建议书.md.meta.json"], "where": null}
+{"id": "T072", "query": "classification: \"内部\"", "expected_sources": ["研发/知识库/数据库设计.pptx.meta.json"], "where": null}
+{"id": "T073", "query": "classification: \"内部\"", "expected_sources": ["研发/知识库/接口测试.dita.meta.json"], "where": null}
+{"id": "T074", "query": "| 属性 | 内容 | |------|------| | 文档编号 |", "expected_sources": ["项目管理/项目/视觉算法重构项目里程碑报告.md"], "where": null}
+{"id": "T075", "query": "doc_type: \"test_case\"", "expected_sources": ["测试/测试用例/开路短路测试用例集.md.meta.json"], "where": null}
+{"id": "T076", "query": "confidentiality: \"保密\"", "expected_sources": ["项目管理/客户/高校联合实验室客户档案.md.meta.json"], "where": null}
+{"id": "T077", "query": "限约束，也应该在项目复盘、培训赋能和error闭环中持续复用。只要文档结构完整、字", "expected_sources": ["质量/8D/8D报告-2025-0104.md"], "where": null}
+{"id": "T078", "query": ". 在客户现场 30 分钟内完成初步error定位 2. 正确区分软件、硬件、工艺", "expected_sources": ["培训/培训主题/售后快速排障培训手册.md"], "where": null}
+{"id": "T079", "query": "confidentiality: \"内部\"", "expected_sources": ["质量/8D/8D报告-2025-0104.md.meta.json"], "where": null}
+{"id": "T080", "query": "confidentiality: \"内部\"", "expected_sources": ["研发/料号BOM/温控模组料号与BOM清单.md.meta.json"], "where": null}
+{"id": "T081", "query": "温控模块冷却液初始温度为 25°C，configuration目标温度 −40°C - **输入*", "expected_sources": ["测试/测试用例/温控模块验收测试用例集.md"], "where": null}
+{"id": "T082", "query": "- 实操考核（独立处理 3 个模拟error场景）", "expected_sources": ["培训/培训主题/WPS-3000现场工程师认证培训大纲.md"], "where": null}
+{"id": "T083", "query": "confidentiality: \"保密\"", "expected_sources": ["项目管理/客户/海外代工厂客户合作档案.md.meta.json"], "where": null}
+{"id": "T084", "query": "| 能力维度 | ST-200 | ST-500 | ST-1000 |", "expected_sources": ["研发/产品线/SoC测试设备产品线能力矩阵.md"], "where": null}
+{"id": "T085", "query": "- 内存条：备货 2 条/机型，单条error可替换 - IO 板卡：每个型号备货", "expected_sources": ["研发/料号BOM/工控机与IO扩展BOM清单.md"], "where": null}
+{"id": "T086", "query": "验收标准，服务团队可将其作为客户现场error闭环的参考，项目团队则可利用其中的计", "expected_sources": ["维护/故障码/WPS-3200故障码定义手册.md"], "where": null}
+{"id": "T087", "query": "confidentiality: \"内部\"", "expected_sources": ["研发/机型/ThermoChuck-X机型性能评估报告.md.meta.json"], "where": null}
+{"id": "T088", "query": "confidentiality: \"内部\"", "expected_sources": ["研发/机型/WPS-3100机型规格说明.md.meta.json"], "where": null}
+{"id": "T089", "query": "集成联合标定向导，可同时刷新视觉坐标系和运动补偿参数，降低现场调机复杂度", "expected_sources": ["研发/版本/WPS-3200控制软件版本说明V1.5.md"], "where": null}
+{"id": "T090", "query": "本文档定义芯片封装后 FT（Final Test）阶段的标准测试项，包括", "expected_sources": ["测试/测试项/晶圆FT测试项定义与规范.md"], "where": null}
+{"id": "T091", "query": "验收标准，服务团队可将其作为客户现场error闭环的参考，项目团队则可利用其中的计", "expected_sources": ["质量/FMEA/探针卡换型工序FMEA分析.md"], "where": null}
+{"id": "T092", "query": "classification: \"公开\"", "expected_sources": ["人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx.meta.json"], "where": null}
+{"id": "T093", "query": "当前现状与痛点 当前工作中最常见的error是资料分散、命名不统一、版本口径混乱", "expected_sources": ["研发/机型/ATE-Link500机型接口能力说明.md"], "where": null}
+{"id": "T094", "query": "体系，支持审计追踪。 ### 3. 接口定义测试中心 新增外部系统联调中心，可集", "expected_sources": ["研发/版本/ATE-Link平台版本升级说明V3.0.md"], "where": null}
+{"id": "T095", "query": "综合得分 ≥ 80 分，颁发 8D 方法认证资质。", "expected_sources": ["培训/培训主题/质量闭环与8D方法培训讲义.md"], "where": null}
+{"id": "T096", "query": "期不复核，内容可能仍然保留旧流程、旧接口定义和旧指标，导致新员工或现场工程师按过", "expected_sources": ["维护/故障案例/客户现场真空吸附异常案例.md"], "where": null}
+{"id": "T097", "query": "product_line: \"晶圆测试设备\"", "expected_sources": ["质量/8D/8D报告-2025-0120.md.meta.json"], "where": null}
+{"id": "T098", "query": "**10:30** — 批量迁移：执行批量格式升级脚本，将客户所有 .t", "expected_sources": ["服务/工单/服务工单WO-2025-0426.md"], "where": null}
+{"id": "T099", "query": "| error码 | 故障描述 | 严重等级 |", "expected_sources": ["维护/故障码/WPS-3000故障码定义手册.md"], "where": null}
+{"id": "T100", "query": "通过客户中间件转发至 MES 系统；接口定义验收以客户自动化部发布的最新字段定义", "expected_sources": ["项目管理/客户/XX半导体苏州客户档案.md"], "where": null}

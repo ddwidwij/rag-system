@@ -1,0 +1,27 @@
+{
+  "_comment": "checker.py 配置文件。preferred_terms 中 key 为推荐写法，value 数组为需要标记的非推荐写法。",
+
+  "preferred_terms": {
+    "接口": ["API", "api", "Api"],
+    "请求参数": ["request param", "request parameter", "req param"],
+    "响应": ["response", "Response", "res"],
+    "测试用例": ["test case", "testcase", "TestCase", "test_case"],
+    "断言": ["assert", "assertion"],
+    "预期结果": ["expected result", "expect result"],
+    "前置条件": ["precondition", "pre-condition", "prerequisite"],
+    "状态码": ["status code", "statusCode", "status_code"],
+    "请求体": ["request body", "requestBody", "request_body"],
+    "响应体": ["response body", "responseBody", "response_body"],
+    "鉴权": ["authentication", "auth", "authorize"],
+    "超时": ["timeout", "time out", "time-out"],
+    "用例": ["case", "Case"],
+    "字段": ["field", "Field"],
+    "数据类型": ["data type", "datatype", "DataType"]
+  },
+
+  "max_paragraph_length": 400,
+
+  "max_blank_lines": 2,
+
+  "note_keywords": ["注意", "警告", "危险", "提示", "说明", "重要"]
+}
