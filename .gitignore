@@ -18,6 +18,15 @@ __pycache__/
 # 评测报告（本地生成，无需版本管理）
 reports/
 
+# 运行时日志
+audit.log
+
+# 规划/需求文档（不属于代码）
+Agentic-RAG功能清单.md
+代码架构.md
+优化方向.md
+信息使能AI平台需求.md
+
 # jieba 缓存
 *.cache
 
