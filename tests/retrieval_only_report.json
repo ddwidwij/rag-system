@@ -1,0 +1,286 @@
+{
+  "summary": {
+    "base_url": "http://127.0.0.1:8003",
+    "selected_cases": 25,
+    "passed_cases": 0,
+    "failed_cases": 25,
+    "pass_rate": 0.0
+  },
+  "results": [
+    {
+      "id": "R01",
+      "question": "WPS-3000 的主要技术指标是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R02",
+      "question": "WPS-3000 软件 V2.1 新增了哪些功能？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R03",
+      "question": "开路/短路检测的判定标准是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R04",
+      "question": "VIS-1002 是什么意思？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R05",
+      "question": "Fiducial 识别失败怎么处理？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R06",
+      "question": "WPS-3000Pro 项目的主要里程碑有哪些？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R07",
+      "question": "XX 半导体苏州客户有哪些特殊需求？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R08",
+      "question": "QE-2025-0087 的根本原因是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R09",
+      "question": "8D-2025-0087 采取了哪些永久纠正措施？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R10",
+      "question": "高压测试链路中 RPN 最高的风险是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R11",
+      "question": "WO-2025-0312 工单中 Chuck 超温故障的根本原因和处理步骤是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R12",
+      "question": "PCK-1002 探针卡接触不良告警如何解决？Over-Drive 参数怎么调整？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R13",
+      "question": "WPS-3000 V2.3 版本对高压测试安全做了哪些改进？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R14",
+      "question": "WPS-3200 控制软件 V1.5 新增了哪些功能？有哪些已修复的缺陷？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R15",
+      "question": "WPS-3100 机型的核心技术指标和温控范围是多少？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R16",
+      "question": "ATE-Link 平台 V3.0 的架构升级内容和升级注意事项是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R17",
+      "question": "QE-2025-0091 质量事件影响了多少批次和器件？根本原因是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R18",
+      "question": "8D-2025-0091 的根本原因分析和永久纠正措施是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R19",
+      "question": "华东先进封装客户对接口变更和换型效率有哪些特殊要求？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R20",
+      "question": "深圳车规芯片客户对异常批次 8D 回复时效和质量审计有什么要求？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R21",
+      "question": "BVdss 漏源击穿电压测试的测试方法和判定标准是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R22",
+      "question": "PRB-C01-200 探针卡的零件清单和备件寿命是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R23",
+      "question": "WPS-3200 双工位结构设计有哪些特点？热管理方案是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R24",
+      "question": "测试开发工程师的岗位职责和技能要求是什么？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    },
+    {
+      "id": "R25",
+      "question": "WO-2025-0503 工单中视觉定位精度不达标问题是如何解决的？",
+      "passed": false,
+      "top1_ok": false,
+      "top3_ok": false,
+      "forb_ok": true,
+      "chunk_ok": false,
+      "top1": "",
+      "top3": []
+    }
+  ]
+}

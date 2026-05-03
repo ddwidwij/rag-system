@@ -37,6 +37,15 @@ from core.store import (
     retrieve_with_metadata,
 )
 from core.rag_chain import dedupe_sources, rerank, rerank_with_scores, RERANK_LOW_CONFIDENCE_THRESHOLD
+from core.query_understanding import build_query_plan
+from core.router import build_execution_plan, execute_route_stub, route_query
+from core.self_reflection import (
+    critique_answer,
+    critique_evidence,
+    build_retry_query,
+    should_retry,
+    llm_judge_relevance,
+)
 from tools.checker import check_file, load_config
 
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -88,8 +97,8 @@ app = FastAPI(lifespan=lifespan)
 
 class QueryRequest(BaseModel):
     question: str
-    retrieve_top_k: int = 5
-    rerank_top_k: int = 3
+    retrieve_top_k: int = 15
+    rerank_top_k: int = 7
     # 过滤字段（与 _META_FIELDS 对齐）
     product_line: str = ""
     version: str = ""
@@ -130,29 +139,45 @@ def _build_where(req: "QueryRequest") -> dict | None:
     return {"$and": conditions}
 
 
-async def _rewrite_query_with_llm(llm_client: AsyncOpenAI, query: str) -> list[str]:
-    """生成检索友好的等价问法，失败时返回空列表。"""
-    prompt = (
-        "请将用户问题改写为 1-2 条用于检索的等价问法。"
-        "仅返回 JSON 数组字符串，不要解释。"
-        f"\n用户问题: {query}"
-    )
-    try:
-        resp = await asyncio.wait_for(
-            llm_client.chat.completions.create(
-                model=GENERATION_MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0,
-            ),
-            timeout=0.35,
-        )
-        text = (resp.choices[0].message.content or "").strip()
-        parsed = json.loads(text)
-        if not isinstance(parsed, list):
-            return []
-        return [str(x).strip() for x in parsed if str(x).strip()][:2]
-    except Exception:
-        return []
+def _extract_where_fields(where: dict | None) -> set[str]:
+    """从 ChromaDB where 子句中提取已使用的字段名集合。"""
+    if not where:
+        return set()
+    fields: set[str] = set()
+    if "$and" in where:
+        for cond in where["$and"]:
+            fields |= _extract_where_fields(cond)
+    else:
+        for k in where:
+            if not k.startswith("$"):
+                fields.add(k)
+    return fields
+
+
+def _merge_where(user_where: dict | None, auto_where: dict | None) -> dict | None:
+    """合并用户显式过滤（优先）与自动推断过滤，避免字段冲突。"""
+    if not auto_where:
+        return user_where
+    if not user_where:
+        return auto_where
+    # 展开两侧条件列表
+    def _flatten(where: dict) -> list[dict]:
+        if "$and" in where:
+            return list(where["$and"])
+        return [where]
+
+    user_conditions = _flatten(user_where)
+    auto_conditions = _flatten(auto_where)
+    user_fields = _extract_where_fields(user_where)
+    # 自动条件只补充用户未指定的字段
+    extra = [c for c in auto_conditions if not (_extract_where_fields(c) & user_fields)]
+    all_conditions = user_conditions + extra
+    if not all_conditions:
+        return None
+    if len(all_conditions) == 1:
+        return all_conditions[0]
+    return {"$and": all_conditions}
+
 
 
 async def _stream_rag(request: QueryRequest) -> AsyncIterator[str]:
@@ -162,11 +187,39 @@ async def _stream_rag(request: QueryRequest) -> AsyncIterator[str]:
         collection = _state["chroma_client"].get_or_create_collection(name=_state["collection_name"])
         llm_client: AsyncOpenAI = _state["llm_client"]
 
-        where = _build_where(request)
+        user_where = _build_where(request)
 
-        llm_rewrites_task = asyncio.create_task(_rewrite_query_with_llm(llm_client, request.question))
-        llm_rewrites = await llm_rewrites_task
-        expanded_queries = expand_query(request.question, llm_rewrites=llm_rewrites)
+        # ── 查询理解：实体/意图/改写/分解 ────────────────────────────────────
+        existing_fields = _extract_where_fields(user_where)
+        plan = await build_query_plan(llm_client, request.question, existing_fields)
+
+        # 发送查询计划事件（供前端展示改写结果和意图）
+        yield f"data: {json.dumps({'type': 'plan', 'plan': plan.to_dict()}, ensure_ascii=False)}\n\n"
+
+        # ── 路由与执行计划：决定走哪条工具链 + 重试策略 ─────────────────────
+        exec_plan = build_execution_plan(plan)
+        yield f"data: {json.dumps({'type': 'tool_plan', 'plan': exec_plan.to_dict()}, ensure_ascii=False)}\n\n"
+
+        if exec_plan.route != "kb":
+            _write_audit("query", {
+                "question": request.question,
+                "route": exec_plan.route,
+                "tools": exec_plan.tools,
+                "intent": plan.intent,
+                "low_confidence": False,
+                "max_rerank_score": 0.0,
+                "evidence_sources": [],
+            })
+            async for chunk in execute_route_stub(exec_plan.route):
+                yield chunk
+            return
+
+        # 合并用户显式过滤 + 自动推断过滤
+        where = _merge_where(user_where, plan.suggested_filters if plan.suggested_filters else None)
+
+        # P2 备选改写 + P3 子问题 → 全部作为 LLM 变体传入 expand_query
+        llm_extras = plan.rewrite_variants[1:] + plan.sub_queries
+        expanded_queries = expand_query(plan.rewritten_query, llm_rewrites=llm_extras)
 
         # ── 混合检索（多查询扩展 + 向量/BM25 + RRF 融合）──────────────────────
         evidence_list: list[dict] = await asyncio.to_thread(
@@ -198,6 +251,39 @@ async def _stream_rag(request: QueryRequest) -> AsyncIterator[str]:
         )
         reranked_evidence = dedupe_sources(reranked_candidates, request.rerank_top_k)
 
+        # ── 3.1 检索结果自检 ──────────────────────────────────────────────────
+        ev_critique = critique_evidence(plan, reranked_evidence, max_score)
+        retried = False
+        yield f"data: {json.dumps({'type': 'evidence_critique', 'critique': ev_critique.to_dict()}, ensure_ascii=False)}\n\n"
+
+        # ── 3.2 二次检索（最多 1 次）─────────────────────────────────────────
+        if should_retry(ev_critique, exec_plan.retry_policy, attempt=0):
+            retry_query, retry_filters = build_retry_query(
+                plan, ev_critique, exec_plan.retry_policy.strategy, where
+            )
+            # 用户显式指定的过滤条件（如 doc_type=project）必须在重试时保留，
+            # 防止 relax_filter / tighten_filter 策略意外丢弃用户意图
+            if user_where:
+                retry_filters = _merge_where(user_where, retry_filters)
+            yield f"data: {json.dumps({'type': 'retry', 'reason': ev_critique.issues, 'strategy': exec_plan.retry_policy.strategy, 'retry_query': retry_query}, ensure_ascii=False)}\n\n"
+
+            retry_expanded = expand_query(retry_query)
+            retry_evidence_list: list[dict] = await asyncio.to_thread(
+                retrieve_hybrid_multi,
+                collection,
+                embedding_model,
+                retry_expanded,
+                request.retrieve_top_k,
+                retry_filters,
+            )
+            if retry_evidence_list:
+                retry_candidates, max_score = await asyncio.to_thread(
+                    rerank_with_scores, cross_encoder, request.question,
+                    retry_evidence_list, rerank_pool_k
+                )
+                reranked_evidence = dedupe_sources(retry_candidates, request.rerank_top_k)
+                retried = True
+
         low_confidence = max_score < RERANK_LOW_CONFIDENCE_THRESHOLD
 
         # 发送证据卡片（含来源、版本、部门、责任人等）
@@ -206,7 +292,17 @@ async def _stream_rag(request: QueryRequest) -> AsyncIterator[str]:
         # 审计日志（记录置信度供缺口分析）
         _write_audit("query", {
             "question": request.question,
+            "rewritten_query": plan.rewritten_query,
+            "intent": plan.intent,
+            "is_complex": plan.is_complex,
+            "sub_queries": plan.sub_queries,
             "expanded_queries": expanded_queries,
+            "suggested_filters": plan.suggested_filters,
+            "route": exec_plan.route,
+            "tools": exec_plan.tools,
+            "retry_policy": exec_plan.retry_policy.strategy,
+            "retried": retried,
+            "evidence_critique": ev_critique.to_dict(),
             "filters": {k: v for k, v in request.model_dump().items() if k not in ("question", "retrieve_top_k", "rerank_top_k") and v},
             "evidence_sources": [e.get("source", "") for e in reranked_evidence],
             "max_rerank_score": max_score,
@@ -228,10 +324,109 @@ async def _stream_rag(request: QueryRequest) -> AsyncIterator[str]:
             messages=[{"role": "user", "content": prompt}],
             stream=True,
         )
+        # ── 3.3 回答质量自检：流式收集答案，生成后自检 ───────────────────────
+        answer_parts: list[str] = []
         async for chunk in stream:
             delta = chunk.choices[0].delta.content
             if delta:
+                answer_parts.append(delta)
                 yield f"data: {json.dumps({'type': 'chunk', 'content': delta}, ensure_ascii=False)}\n\n"
+
+        full_answer = "".join(answer_parts)
+        ans_critique = critique_answer(plan, reranked_evidence, full_answer)
+        yield f"data: {json.dumps({'type': 'critique', 'critique': ans_critique.to_dict()}, ensure_ascii=False)}\n\n"
+
+        already_retried = False  # 追踪是否已触发补充检索，避免重复
+
+        # ── 3.4 答案质量差时补充检索并重新生成 ───────────────────────────────
+        if not ans_critique.passed and ans_critique.missing_keywords:
+            # 用缺失关键词拼接补充查询
+            supplement_query = " ".join(ans_critique.missing_keywords) + " " + plan.raw_question
+            yield f"data: {json.dumps({'type': 'retry', 'reason': ['answer_keyword_missing'], 'strategy': 'supplement_retrieval', 'retry_query': supplement_query}, ensure_ascii=False)}\n\n"
+
+            supp_evidence_list: list[dict] = await asyncio.to_thread(
+                retrieve_hybrid_multi,
+                collection,
+                embedding_model,
+                [supplement_query],
+                request.retrieve_top_k,
+                None,  # 放宽过滤，尽量找到缺失内容
+            )
+            if supp_evidence_list:
+                supp_candidates, _ = await asyncio.to_thread(
+                    rerank_with_scores, cross_encoder, supplement_query,
+                    supp_evidence_list, rerank_pool_k
+                )
+                # 合并：新补充证据追加在已有证据后，再去重，总数仍限于 rerank_top_k
+                merged = reranked_evidence + supp_candidates
+                reranked_evidence = dedupe_sources(merged, request.rerank_top_k)
+
+                supp_prompt = f"""你是一位知识助手。下面是用户问题和补充的知识片段，请基于这些片段重新生成更完整的回答。
+
+用户问题: {request.question}
+
+知识片段:
+{chr(10).join(f"[来源: {e.get('source', '未知')} | 版本: {e.get('version', '-')} | 部门: {e.get('department', '-')}]" + chr(10) + e['content'] for e in reranked_evidence)}
+
+请基于上述内容作答，不要编造信息。如果引用了某个片段，请注明来源文档名。"""
+
+                supp_stream = await llm_client.chat.completions.create(
+                    model=GENERATION_MODEL_NAME,
+                    messages=[{"role": "user", "content": supp_prompt}],
+                    stream=True,
+                )
+                supp_parts: list[str] = []
+                async for supp_chunk in supp_stream:
+                    delta = supp_chunk.choices[0].delta.content
+                    if delta:
+                        supp_parts.append(delta)
+                        yield f"data: {json.dumps({'type': 'chunk', 'content': delta}, ensure_ascii=False)}\n\n"
+                already_retried = True
+
+        # ── 3.5 LLM 语义相关性判断：兜底检测（对通用问题尤为重要）─────────────
+        llm_rel = await llm_judge_relevance(
+            llm_client, GENERATION_MODEL_NAME, plan.raw_question, full_answer
+        )
+        yield f"data: {json.dumps({'type': 'llm_relevance', 'relevant': llm_rel.relevant, 'confidence': llm_rel.confidence, 'reason': llm_rel.reason}, ensure_ascii=False)}\n\n"
+
+        if not llm_rel.relevant and not already_retried:
+            # LLM 判定答案与问题无关 → 以原始问题重新补充检索
+            yield f"data: {json.dumps({'type': 'retry', 'reason': ['llm_relevance_failed'], 'strategy': 'llm_driven_supplement', 'retry_query': plan.raw_question}, ensure_ascii=False)}\n\n"
+
+            llm_supp_evidence: list[dict] = await asyncio.to_thread(
+                retrieve_hybrid_multi,
+                collection,
+                embedding_model,
+                [plan.raw_question],
+                request.retrieve_top_k,
+                None,   # 放宽过滤
+            )
+            if llm_supp_evidence:
+                llm_supp_candidates, _ = await asyncio.to_thread(
+                    rerank_with_scores, cross_encoder, plan.raw_question,
+                    llm_supp_evidence, rerank_pool_k
+                )
+                merged = reranked_evidence + llm_supp_candidates
+                reranked_evidence = dedupe_sources(merged, request.rerank_top_k)
+
+                llm_supp_prompt = f"""你是一位知识助手。下面是用户问题和相关知识片段，请基于这些片段给出准确且相关的回答。
+
+用户问题: {request.question}
+
+知识片段:
+{chr(10).join(f"[来源: {e.get('source', '未知')} | 版本: {e.get('version', '-')} | 部门: {e.get('department', '-')}]" + chr(10) + e['content'] for e in reranked_evidence)}
+
+请直接回答问题，不要编造信息。如果引用了某个片段，请注明来源文档名。"""
+
+                llm_supp_stream = await llm_client.chat.completions.create(
+                    model=GENERATION_MODEL_NAME,
+                    messages=[{"role": "user", "content": llm_supp_prompt}],
+                    stream=True,
+                )
+                async for llm_supp_chunk in llm_supp_stream:
+                    delta = llm_supp_chunk.choices[0].delta.content
+                    if delta:
+                        yield f"data: {json.dumps({'type': 'chunk', 'content': delta}, ensure_ascii=False)}\n\n"
 
         yield f"data: {json.dumps({'type': 'done'})}\n\n"
     except Exception as exc:

@@ -1,30 +1,32 @@
 {
   "summary": {
-    "base_url": "http://127.0.0.1:8000",
-    "selected_cases": 22,
-    "passed_cases": 5,
-    "failed_cases": 17,
-    "pass_rate": 22.73
+    "base_url": "http://127.0.0.1:8001",
+    "selected_cases": 45,
+    "passed_cases": 18,
+    "failed_cases": 27,
+    "pass_rate": 40.0
   },
   "results": [
     {
       "case_id": "R01",
       "category": "retrieval",
       "passed": false,
-      "score": 0,
-      "max_score": 4,
-      "top1_source": "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/机型/WPS-3000机型规格说明.md",
       "top3_sources": [
-        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
-        "项目管理/项目/WPS-3000Pro项目立项报告.md",
-        "维护/故障码/WPS-3000故障码定义手册.md"
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md"
       ],
-      "answer_preview": "WPS-3000的主要技术指标并未在提供的知识片段中直接列出。然而，我们可以从知识片段中推断出一些与WPS-3000相关的技术指标和特性：\n\n1. **产品定位与技术规格**：WPS-3000产品线定位与具体技术规格在模块一的产品认知部分有所提及，但具体的技术指标并未详细说明。[来源: 培训/培训主题/WPS-3000现场工程师认证培训大纲.md | 版本: V1.0 | 部门: 培训]\n\n2. ",
+      "answer_preview": "WPS-3000晶圆探针测试机的主要技术指标如下：\n\n- **测试通道数**：512路数字通道 + 64路模拟通道\n- **最高测试频率**：2 GHz\n- **测试精度（电压）**：±1 mV\n- **测试精度（电流）**：±10 nA\n- **温控范围**：-40°C ~ +175°C\n- **晶圆对准精度**：±0.5 µm\n- **标准换片时间**：< 8 秒\n\n主要子系统包括：\n\n1. ",
+      "chunks_preview": "| 属性 | 值 |\n|------|----|\n| 机型名称 | WPS-3000 晶圆探针测试机 |\n| 产品线 | 晶圆测试设备（WPS） |\n| 机型代码 | WPS-3000 |\n| 发布版本 | V2.1 |\n| 发布日期 | 2025-03 |\n| 适用晶圆尺寸 | 200 mm / 300 mm |\n\n## 核心技术指标\n\n- **测试通道数**：512 路数字通道 + 64 路模拟通道\n- **最高测试频率**：2 GHz\n- **测试精度（电压）**：±1 mV\n- **测试精度（电流）**：±10 nA\n- **温控范围**：-40°C ~ +175°C\n- **晶圆对准",
       "checks": {
-        "top1_matches_expected": false,
-        "top3_contains_expected": false,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -41,11 +43,15 @@
           "-40°C ~ +175°C"
         ],
         "missing_keywords": [
+          "512 路数字通道"
+        ],
+        "expected_chunk_keywords": [
           "512 路数字通道",
           "2 GHz",
           "±1 mV",
           "-40°C ~ +175°C"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "WPS-3000 的主要技术指标是什么？",
         "notes": "验证规格参数类问题是否优先命中机型规格书。"
@@ -55,20 +61,22 @@
       "case_id": "R02",
       "category": "retrieval",
       "passed": false,
-      "score": 1,
-      "max_score": 4,
-      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.2.md",
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.1.md",
       "top3_sources": [
-        "研发/版本/WPS-3000软件版本发布说明V2.2.md",
         "研发/版本/WPS-3000软件版本发布说明V2.1.md",
-        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md"
       ],
-      "answer_preview": "很抱歉，我无法直接访问您提供的具体文档内容，因此无法根据《WPS-3000软件版本发布说明V2.1.md》来提供WPS-3000软件V2.1新增的功能。为了得到准确的信息，请直接查阅该文档或相关官方发布渠道获取详细的版本更新说明。如果您需要其他方面的帮助，请告知我，我会尽力协助。",
+      "answer_preview": "WPS-3000软件V2.1版本新增了以下功能：\n\n1. **多Site并行测试支持**：新增最多4 Site并行测试能力，整机测试产能在标准逻辑器件场景下提升约3.2倍，需搭配OPT-MULTI扩展硬件模块使用。[来源: 研发/版本/WPS-3000软件版本发布说明V2.1.md | 版本: V2.1 | 部门: 研发]\n\n2. **智能温度补偿算法**：引入基于历史轨迹和实时温漂的补偿模型，在",
+      "chunks_preview": "新增最多 4 Site 并行测试能力，整机测试产能在标准逻辑器件场景下提升约 3.2 倍，需搭配 OPT-MULTI 扩展硬件模块使用。\n\n### 2. 智能温度补偿算法\n\n引入基于历史轨迹和实时温漂的补偿模型，在 -40°C 至 +175°C 全温区内将探针对准精度由 ±1.5 µm 提升至 ±0.5 µm。 ### 1. 多 Site 并行测试支持\n\n新增最多 4 Site 并行测试能力，整机测试产能在标准逻辑器件场景下提升约 3.2 倍，需搭配 OPT-MULTI 扩展硬件模块使用。 引入基于历史轨迹和实时温漂的补偿模型，在 -40°C 至 +175°C 全温区内将探针对准精度由 ±1.",
       "checks": {
-        "top1_matches_expected": false,
+        "top1_matches_expected": true,
         "top3_contains_expected": true,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -84,10 +92,14 @@
           "测试程序在线热更新"
         ],
         "missing_keywords": [
+          "多 Site 并行测试"
+        ],
+        "expected_chunk_keywords": [
           "多 Site 并行测试",
           "智能温度补偿",
           "测试程序在线热更新"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "WPS-3000 软件 V2.1 新增了哪些功能？",
         "notes": "验证版本说明类问题能否正确命中目标版本文档。"
@@ -98,19 +110,21 @@
       "category": "retrieval",
       "passed": false,
       "score": 3,
-      "max_score": 4,
-      "top1_source": "测试/测试项/晶圆CP测试项定义与规范.md",
+      "max_score": 5,
+      "top1_source": "测试/测试用例/开路短路测试用例集.md",
       "top3_sources": [
-        "测试/测试项/晶圆CP测试项定义与规范.md",
         "测试/测试用例/开路短路测试用例集.md",
-        "研发/知识库/接口测试基础知识.md"
+        "测试/测试用例/开路短路测试用例集.md",
+        "测试/测试项/晶圆CP测试项定义与规范.md"
       ],
-      "answer_preview": "开路/短路检测的判定标准如下：\n\n1. **开路检测**：施加 ±0.5 mA 电流，测量电压响应。如果电压在 -2V ~ -0.3V 范围内，判定为开路（Fail）。\n   - 来源：测试/测试项/晶圆CP测试项定义与规范.md | 版本: V2.1 | 部门: 测试\n\n2. **短路检测**：施加 ±0.5 mA 电流，测量电压响应。如果电压在 0.3V ~ 2V 范围内，判定为短路（Fail",
+      "answer_preview": "开路/短路检测的判定标准如下：\n\n### 开路检测判定标准\n- **TC-002：开路管脚异常检测** [来源: 测试/测试用例/开路短路测试用例集.md | 版本: V1.2 | 部门: 测试]\n  - **判定**：Fail（触发 Bin 2 — 开路）当电压值 > 2V 或测量溢出时。\n\n### 短路检测判定标准\n- **TC-003：相邻管脚短路检测** [来源: 测试/测试项/晶圆CP测",
+      "chunks_preview": "- **前置条件**：设备完成开机自检，晶圆装载完成，探针接触良好\n- **输入**：施加 +0.5 mA 电流至 IO 管脚\n- **预期输出**：电压值在 -0.3V ~ 0.3V 范围内\n- **判定**：Pass\n- **优先级**：P1\n\n### TC-002：开路管脚异常检测\n\n- **前置条件**：人工模拟探针与 PAD 脱离接触（抬针）\n- **输入**：施加 +0.5 mA 电流\n- **预期输出**：电压值 > 2V 或测量溢出\n- **判定**：Fail（触发 Bin 2 — 开路）\n- **优先级**：P1 - **前置条件**：人工模拟探针与 PAD 脱离接触（抬针）",
       "checks": {
-        "top1_matches_expected": true,
+        "top1_matches_expected": false,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -127,8 +141,15 @@
           "0.3V ~ 2V"
         ],
         "missing_keywords": [
-          "ELEC-001"
+          "±0.5 mA"
         ],
+        "expected_chunk_keywords": [
+          "ELEC-001",
+          "±0.5 mA",
+          "-2V ~ -0.3V",
+          "0.3V ~ 2V"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "开路/短路检测的判定标准是什么？",
         "notes": "验证测试项规范类问题的基础召回。"
@@ -137,21 +158,23 @@
     {
       "case_id": "R04",
       "category": "retrieval",
-      "passed": false,
-      "score": 2,
-      "max_score": 4,
-      "top1_source": "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "维护/故障码/WPS-3000故障码定义手册.md",
       "top3_sources": [
-        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
         "维护/故障码/WPS-3000故障码定义手册.md",
-        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md"
+        "维护/故障码/WPS-3000故障码定义手册.md",
+        "维护/故障码/WPS-3000故障码定义手册.md"
       ],
-      "answer_preview": "VIS-1002 是一个故障码，它表示视觉模块的第1002号故障。这个故障码的具体含义可以在故障码定义手册《WPS-3000故障码定义手册》中找到详细解释。故障码的格式通常为 `[模块缩写]-[四位数字]`，如《WPS-3000故障码定义手册》所述。同时，在《WPS-3000现场工程师认证培训大纲》中提到的故障案例分析中，VIS-1002也是被讨论的一个案例。",
+      "answer_preview": "VIS-1002 是 WPS-3000 系列设备软件平台（WPS-OS）的故障码之一，表示“Fiducial Mark 识别失败”。这个故障码属于视觉模块（VIS），严重等级为严重。处理方法包括检查照明、清洁镜头和调整阈值。故障码格式为 `[模块缩写]-[四位数字]`，例如 `VIS-1002` 表示视觉模块的第 1002 号故障。[来源: 维护/故障码/WPS-3000故障码定义手册.md | ",
+      "chunks_preview": "### 视觉模块（VIS）\n\n| 故障码 | 故障描述 | 严重等级 | 处理方法 |\n|-------|---------|---------|---------|\n| VIS-1001 | 上方相机图像获取超时 | 严重 | 检查 USB 连接，重启相机服务 |\n| VIS-1002 | Fiducial Mark 识别失败 | 严重 | 检查照明，清洁镜头，调整阈值 |\n| VIS-1003 | 针尖磨损超出阈值 | 警告 | 更换探针卡，重新标定 |\n| VIS-1004 | 视觉标定文件版本不匹配 | 警告 | 重新执行相机标定流程 | | 故障码 | 故障描述 | 严重等级 | 处",
       "checks": {
-        "top1_matches_expected": false,
+        "top1_matches_expected": true,
         "top3_contains_expected": true,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": true
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -164,6 +187,10 @@
           "VIS-1002"
         ],
         "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "VIS-1002"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "VIS-1002 是什么意思？",
         "notes": "验证故障码定义是否优先于故障案例命中。"
@@ -172,21 +199,23 @@
     {
       "case_id": "R05",
       "category": "retrieval",
-      "passed": false,
-      "score": 1,
-      "max_score": 4,
-      "top1_source": "维护/故障码/WPS-3000故障码定义手册.md",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
       "top3_sources": [
-        "维护/故障码/WPS-3000故障码定义手册.md",
         "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
-        "测试/测试项/晶圆CP测试项定义与规范.md"
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
       ],
-      "answer_preview": "Fiducial识别失败的处理方法如下：\n\n1. 检查照明情况，确保光源状态正常。如果使用的是环形光源，在低亮档位下晶圆表面反射不足可能导致Fiducial识别阈值不够（来源：维护/故障案例/VIS-1002-Fiducial识别失败案例.md）。\n\n2. 清洁镜头，确保镜头上没有灰尘或污渍，这可能会影响识别效果。\n\n3. 调整阈值，确保Fiducial标记的识别条件符合当前环境。\n\n4. 如果以",
+      "answer_preview": "当Fiducial识别失败时，可以按照以下步骤进行处理：\n\n1. **检查相机图像质量**：首先打开视觉调试界面，实时查看底部相机画面。如果发现图像整体偏暗，对比度低，但无明显噪点，这可能表明图像质量不佳。\n\n2. **检查光源状态**：调用光源控制面板，切换同轴光源与环形光源。如果发现环形光源在低亮档位下晶圆表面反射不足，导致Fiducial识别阈值不够，则需要调整光源亮度。\n\n3. **确认问",
+      "chunks_preview": "设备在换片后执行自动对准时，连续报出 VIS-1002 故障，无法完成 Fiducial Mark 识别，晶圆测试中断。故障发生频率：每 3~5 片换片后必现。\n\n## 排查过程\n\n**步骤一**：检查相机图像质量\n打开视觉调试界面，实时查看底部相机画面，发现图像整体偏暗，对比度低，但无明显噪点。\n\n**步骤二**：检查光源状态\n调用光源控制面板，切换同轴光源与环形光源。环形光源在低亮档位下晶圆表面反射不足，导致 Fiducial 识别阈值不够。\n\n**步骤三**：确认问题根因\n该批次晶圆表面为哑光氮化硅钝化层，反射率比标准晶圆低约 40%，原有光源亮度参数不适用。 **步骤二**：检查光源状",
       "checks": {
-        "top1_matches_expected": false,
+        "top1_matches_expected": true,
         "top3_contains_expected": true,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -200,9 +229,13 @@
           "阈值",
           "识别成功率"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "光源",
+          "阈值",
           "识别成功率"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "Fiducial 识别失败怎么处理？",
         "notes": "验证故障处理类问题应优先命中案例库。"
@@ -212,20 +245,22 @@
       "case_id": "R06",
       "category": "retrieval",
       "passed": false,
-      "score": 3,
-      "max_score": 4,
+      "score": 4,
+      "max_score": 5,
       "top1_source": "项目管理/项目/WPS-3000Pro项目立项报告.md",
       "top3_sources": [
         "项目管理/项目/WPS-3000Pro项目立项报告.md",
-        "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
-        "维护/故障码/WPS-3000故障码定义手册.md"
+        "项目管理/项目/WPS-3000Pro项目立项报告.md",
+        "项目管理/项目/WPS-3200开发项目立项报告.md"
       ],
-      "answer_preview": "WPS-3000Pro项目的主要里程碑包括：\n\n1. 立项与需求分析：由于先进封装和3D IC需求的增长，以及对晶圆测试机在测试通道、换片速度和支持Bumped Wafer等方面的更高要求，现有WPS-3000在通道密度和视觉对准能力上存在瓶颈。因此，为了维持市场竞争力，项目启动了Pro版本的研发工作（来源：项目管理/项目/WPS-3000Pro项目立项报告.md）。\n\n2. 产品认知与培训：在产",
+      "answer_preview": "WPS-3000Pro项目的主要里程碑如下：\n\n1. **需求冻结**：2025年2月28日，标志着项目正式进入开发阶段，完成了新旧算法性能差距分析报告，并确认了提升目标。\n\n2. **概念设计评审**：2025年4月30日，项目进行了概念设计评审。\n\n3. **详细设计完成**：2025年7月31日，完成了详细设计。\n\n4. **首台样机集成**：2025年10月15日，完成了首台样机的集成。\n",
+      "chunks_preview": "## 主要里程碑 | 目标维度 | 当前 WPS-3000 | 目标 WPS-3000Pro |\n|---------|-------------|----------------|\n| 测试通道数 | 512 | 1024 |\n| 换片时间 | 8 秒 | 5 秒 |\n| 对准精度 | ±0.5 µm | ±0.2 µm |\n| 支持晶圆类型 | 标准/背研晶圆 | 增加 Bumped Wafer |\n| 最高测试频率 | 2 GHz | 4 GHz |\n\n## 主要里程碑\n\n| 阶段 | 里程碑 | 计划完成时间 |\n|------|-------|-----------|\n| M1 | ",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -241,11 +276,15 @@
           "详细设计完成"
         ],
         "missing_keywords": [
+          "M1"
+        ],
+        "expected_chunk_keywords": [
           "M1",
           "需求冻结",
           "概念设计评审",
           "详细设计完成"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "WPS-3000Pro 项目的主要里程碑有哪些？",
         "notes": "验证项目类问题的主召回文档。"
@@ -254,21 +293,23 @@
     {
       "case_id": "R07",
       "category": "retrieval",
-      "passed": false,
-      "score": 3,
-      "max_score": 4,
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "项目管理/客户/XX半导体苏州客户档案.md",
       "top3_sources": [
         "项目管理/客户/XX半导体苏州客户档案.md",
-        "质量/质量事件/质量事件报告QE-2025-0087.md",
-        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        "项目管理/客户/XX半导体苏州客户档案.md",
+        "项目管理/客户/XX半导体苏州客户档案.md"
       ],
-      "answer_preview": "XX半导体（苏州）有限公司在合作过程中表现出以下特殊需求：\n\n1. 质量要求：根据质量事件报告QE-2025-0087，XX半导体（苏州）对WPS-3000（SN: WPS3K-2023-0031）的测试良率有严格要求。事件类型为客户投诉，严重等级为严重（S2），说明客户对产品质量有较高要求。（来源：质量/质量事件/质量事件报告QE-2025-0087.md）\n\n2. 故障处理：根据故障案例VIS",
+      "answer_preview": "XX半导体苏州客户有以下特殊需求：\n\n1. 设备需支持SEMI E10/E30状态上报，并通过客户中间件转发至MES系统；接口验收以客户自动化部发布的最新字段定义为准。[来源: 项目管理/客户/XX半导体苏州客户档案.md | 版本: 1.0 | 部门: 销售]\n\n2. 测试数据需在每批次结束后10分钟内同步至客户私有云数据湖，文件格式要求兼容STDF v4与客户自定义CSV模板。[来源: 项目管",
+      "chunks_preview": "- **保修期**：整机 12 个月，核心模块 24 个月\n- **响应时间 SLA**：严重故障 4 小时响应，24 小时到场\n- **驻场工程师**：每月驻场 2 天，由华东区李工负责\n- **年度维保合同**：CO-SVC-2025-0015，有效期至 2025-12-31\n\n## 客户特殊需求记录\n\n1. 设备需支持 SEMI E10/E30 状态上报，并通过客户中间件转发至 MES 系统；接口验收以客户自动化部发布的最新字段定义为准。\n2. 测试数据需在每批次结束后 10 分钟内同步至客户私有云数据湖，文件格式要求兼容 STDF v4 与客户自定义 CSV 模板。\n3. 高压探针卡需",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -282,11 +323,13 @@
           "私有云",
           "500V"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "SEMI E10",
           "私有云",
           "500V"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "XX 半导体苏州客户有哪些特殊需求？",
         "notes": "验证客户档案类问题。"
@@ -296,20 +339,22 @@
       "case_id": "R08",
       "category": "retrieval",
       "passed": false,
-      "score": 2,
-      "max_score": 4,
+      "score": 4,
+      "max_score": 5,
       "top1_source": "质量/质量事件/质量事件报告QE-2025-0087.md",
       "top3_sources": [
         "质量/质量事件/质量事件报告QE-2025-0087.md",
-        "质量/8D/8D报告-2025-0087.md",
-        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        "质量/质量事件/质量事件报告QE-2025-0087.md",
+        "质量/质量事件/质量事件报告QE-2025-0087.md"
       ],
-      "answer_preview": "QE-2025-0087的根本原因尚未在提供的信息中明确指出。为了找到根本原因，需要查阅相关的质量事件报告（QE-2025-0087.md）和8D报告（8D-2025-0087.md）。这两个文档可能包含了关于该事件深入分析的信息，包括根本原因的确定。由于这些具体文档的内容没有提供，无法直接回答根本原因是什么。建议查阅相关文档以获取详细信息。",
+      "answer_preview": "QE-2025-0087的根本原因是探针卡PRB-C01-200在该设备上累计接触次数已达130万次，远超额定寿命100万次。针尖磨损后接触电阻升高，导致OS测试阶段部分正常Die被误判为开路Fail。现场流程未建立寿命在线监控与强制更换机制，是问题持续扩大的主要原因。这一分析来源于“质量/质量事件/质量事件报告QE-2025-0087.md | 版本: V1.0 | 部门: 质量”。",
+      "chunks_preview": "- 异常批次数量：23 个 Lot。\n- 受影响晶圆数量：约 460 片。\n- 进入后道封装数量：约 120 片，需全检。\n- 客户经济损失评估：约 30 万元。\n\n## 根本原因分析\n\n经调查，探针卡 PRB-C01-200 在该设备上累计接触次数已达 130 万次，远超额定寿命 100 万次。针尖磨损后接触电阻升高，导致 OS 测试阶段部分正常 Die 被误判为开路 Fail。现场流程未建立寿命在线监控与强制更换机制，是问题持续扩大的主要原因。 ## 根本原因分析 客户反馈 2025-02-15 至 2025-02-17 三天内，WPS3K-2023-0031 的测试良率较同期基准设备低 ",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -324,10 +369,14 @@
           "接触电阻"
         ],
         "missing_keywords": [
+          "130 万次"
+        ],
+        "expected_chunk_keywords": [
           "探针卡",
           "130 万次",
           "接触电阻"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "QE-2025-0087 的根本原因是什么？",
         "notes": "验证质量事件类问题与 8D 文档的区分。"
@@ -336,21 +385,23 @@
     {
       "case_id": "R09",
       "category": "retrieval",
-      "passed": false,
-      "score": 2,
-      "max_score": 4,
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "质量/8D/8D报告-2025-0087.md",
       "top3_sources": [
         "质量/8D/8D报告-2025-0087.md",
-        "质量/质量事件/质量事件报告QE-2025-0087.md",
-        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
+        "质量/8D/8D报告-2025-0087.md",
+        "质量/8D/8D报告-2025-0087.md"
       ],
-      "answer_preview": "根据提供的信息，8D-2025-0087事件中采取的永久纠正措施没有直接列出。不过，我们可以从事件报告中推断出一些可能的纠正措施。以下是可能采取的纠正措施，但请注意，这些并非直接引用自文档，而是基于文档内容的推断：\n\n1. **问题根源分析**：根据[8D报告：8D-2025-0087](来源: 质量/8D/8D报告-2025-0087.md | 版本: 1.0 | 部门: 质量)，可能已经进行了",
+      "answer_preview": "8D-2025-0087采取了以下永久纠正措施：\n\n1. 在软件 V2.1 中新增探针卡使用次数实时统计与预警。[来源: 质量/8D/8D报告-2025-0087.md | 版本: V1.0 | 部门: 质量]\n\n2. 达到 80 万次自动提醒，100 万次触发锁机并提示更换。[来源: 质量/8D/8D报告-2025-0087.md | 版本: V1.0 | 部门: 质量]\n\n3. 修订《探针卡管",
+      "chunks_preview": "**根本原因（5Why）**：\n\n1. 良率异常，因为 OS 测试阶段误判开路。\n2. 误判开路，因为接触电阻异常升高。\n3. 接触电阻升高，因为探针针尖明显磨损。\n4. 针尖磨损，因为探针卡使用次数远超寿命上限。\n5. 超寿命仍继续使用，因为系统未建立强制预警与锁机机制。\n\n## D5：永久纠正措施\n\n1. 在软件 V2.1 中新增探针卡使用次数实时统计与预警。\n2. 达到 80 万次自动提醒，100 万次触发锁机并提示更换。\n3. 修订《探针卡管理规范》，纳入 PM 与现场审核清单。 ## D5：永久纠正措施 1. 在软件 V2.1 中新增探针卡使用次数实时统计与预警。\n2. 达到 80 ",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -360,15 +411,17 @@
           "质量/质量事件/质量事件报告QE-2025-0087.md"
         ],
         "expected_keywords": [
-          "使用次数实时监控",
+          "使用次数实时统计",
           "80 万次",
           "100 万次"
         ],
-        "missing_keywords": [
-          "使用次数实时监控",
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "使用次数实时统计",
           "80 万次",
           "100 万次"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "8D-2025-0087 采取了哪些永久纠正措施？",
         "notes": "验证 8D 问题的主召回文档。"
@@ -377,21 +430,23 @@
     {
       "case_id": "R10",
       "category": "retrieval",
-      "passed": false,
-      "score": 0,
-      "max_score": 4,
-      "top1_source": "质量/FMEA/WPS-3000视觉模块FMEA分析.md",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "质量/FMEA/高压测试链路FMEA分析.md",
       "top3_sources": [
-        "质量/FMEA/WPS-3000视觉模块FMEA分析.md",
-        "项目管理/项目/WPS-3000Pro项目立项报告.md",
-        "研发/机型/WPS-3000机型规格说明.md"
+        "质量/FMEA/高压测试链路FMEA分析.md",
+        "质量/FMEA/高压测试链路FMEA分析.md",
+        "质量/FMEA/高压测试链路FMEA分析.md"
       ],
-      "answer_preview": "高压测试链路中RPN最高的风险可能是1024路高密度板卡热设计风险，因为根据项目管理/项目/WPS-3000Pro项目立项报告.md（版本: 1.0 | 部门: 研发）中的信息，这一风险被标记为“高”。RPN（风险优先数）是评估风险严重性的一个指标，当RPN值达到或超过100时，通常被视为高风险，需要制定改善计划。在高压测试链路中，热设计问题可能导致设备性能下降或损坏，因此这是一个需要重点关注的风",
+      "answer_preview": "在高压测试链路中，RPN（风险优先数）最高的风险是F02“治具映射”，其RPN为252，随后采取了措施后降至72。这个风险主要涉及高压测点接错通道，可能导致测试误判Fail。其严重度为9，发生度为4，探测度为7。针对这个风险，建议的措施是增加黄金样品逐点通道校验（来源：质量/FMEA/高压测试链路FMEA分析.md | 版本: V1.3 | 部门: 质量）。",
+      "chunks_preview": "|编号|RPN|状态|责任人|完成日期|\n|------|------|------|------|------|\n|F02|252 → 72（措施后）|已关闭|冯工|2025-09-05|\n|F01|120|进行中|何工|2025-09-15|\n|F03|100|计划中|蒋工|2025-10-01|\n\n## 备注\n\nRPN（风险优先数）= 严重度(S) × 发生度(O) × 探测度(D)。原则上 RPN ≥ 100 的项目需纳入专项改善计划，RPN ≥ 150 的项目应优先安排验证与关闭动作。 ## 风险与控制建议\n风险控制部分需要重点关注三个方向。其一是版本漂移，如果历史文档没有清晰标记生",
       "checks": {
-        "top1_matches_expected": false,
-        "top3_contains_expected": false,
-        "top3_excludes_forbidden": false,
-        "answer_contains_keywords": false
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -405,11 +460,13 @@
           "252",
           "黄金样品"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "高压测点接错通道",
           "252",
           "黄金样品"
         ],
+        "missing_chunk_keywords": [],
         "filters": {},
         "question": "高压测试链路中 RPN 最高的风险是什么？",
         "notes": "验证 FMEA 高风险项问题的召回准确性。"
@@ -418,21 +475,23 @@
     {
       "case_id": "M01",
       "category": "metadata_filter",
-      "passed": false,
-      "score": 2,
-      "max_score": 4,
-      "top1_source": "研发/机型/WPS-3100机型规格说明.md",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "研发/机型/WPS-3000机型规格说明.md",
       "top3_sources": [
-        "研发/机型/WPS-3100机型规格说明.md",
         "研发/机型/WPS-3000机型规格说明.md",
-        "研发/机型/WPS-3200机型结构设计说明.md"
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md"
       ],
-      "answer_preview": "WPS-3000的主要技术指标如下：\n\n- 测试通道数：768路数字通道 + 96路模拟通道\n- 最高测试频率：2.5 GHz\n- 换片时间：< 6.5 秒\n- 重复定位精度：±0.4 µm\n- 温控范围：-50°C ~ +180°C\n- 并行 Site 数：最多 4 Site\n- 平均可用率目标：≥ 98%\n\n这些信息来源于文档《WPS-3000机型规格说明.md》版本V2.1。",
+      "answer_preview": "WPS-3000 晶圆探针测试机的主要技术指标如下：\n\n- **测试通道数**：512 路数字通道 + 64 路模拟通道\n- **最高测试频率**：2 GHz\n- **测试精度（电压）**：±1 mV\n- **测试精度（电流）**：±10 nA\n- **温控范围**：-40°C ~ +175°C\n- **晶圆对准精度**：±0.5 µm\n- **标准换片时间**：< 8 秒\n\n这些信息来源于《研发",
+      "chunks_preview": "| 属性 | 值 |\n|------|----|\n| 机型名称 | WPS-3000 晶圆探针测试机 |\n| 产品线 | 晶圆测试设备（WPS） |\n| 机型代码 | WPS-3000 |\n| 发布版本 | V2.1 |\n| 发布日期 | 2025-03 |\n| 适用晶圆尺寸 | 200 mm / 300 mm |\n\n## 核心技术指标\n\n- **测试通道数**：512 路数字通道 + 64 路模拟通道\n- **最高测试频率**：2 GHz\n- **测试精度（电压）**：±1 mV\n- **测试精度（电流）**：±10 nA\n- **温控范围**：-40°C ~ +175°C\n- **晶圆对准",
       "checks": {
-        "top1_matches_expected": false,
+        "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -446,10 +505,12 @@
           "512 路数字通道",
           "2 GHz"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "512 路数字通道",
           "2 GHz"
         ],
+        "missing_chunk_keywords": [],
         "filters": {
           "doc_type": "spec"
         },
@@ -461,20 +522,22 @@
       "case_id": "M02",
       "category": "metadata_filter",
       "passed": false,
-      "score": 2,
-      "max_score": 4,
+      "score": 3,
+      "max_score": 5,
       "top1_source": "项目管理/项目/WPS-3200开发项目立项报告.md",
       "top3_sources": [
         "项目管理/项目/WPS-3200开发项目立项报告.md",
         "项目管理/项目/WPS-3000Pro项目立项报告.md",
-        "项目管理/项目/ATE-Link平台改造项目建议书.md"
+        "项目管理/项目/WPS-3200开发项目立项报告.md"
       ],
-      "answer_preview": "WPS-3000的主要技术指标并没有在提供的信息中直接给出。根据文档“项目管理/项目/WPS-3200开发项目立项报告.md | 版本: V1.1 | 部门: 研发”，WPS-3000Pro虽满足了主流需求，但在超高密度引脚、混合信号并行测试以及液冷散热等技术领域仍存在差距，需要以全新平台加以解决。而根据“项目管理/项目/WPS-3000Pro项目立项报告.md | 版本: 1.0 | 部门: 研",
+      "answer_preview": "WPS-3000的主要技术指标如下：\n\n- 测试通道数：512路（根据WPS-3000Pro项目立项报告，版本V1.0，部门：研发）\n- 换片时间：8秒（根据WPS-3000Pro项目立项报告，版本V1.0，部门：研发）\n- 对准精度：±0.5 µm（根据WPS-3000Pro项目立项报告，版本V1.0，部门：研发）\n- 支持晶圆类型：标准/背研晶圆（根据WPS-3000Pro项目立项报告，版本V",
+      "chunks_preview": "WPS-3200 定位于旗舰级晶圆测试机，目标客户为顶级晶圆代工厂及封测龙头企业。随着 HBM、3D-IC 等先进封装工艺快速普及，市场对测试机的测试通道密度、混合信号能力和整机可靠性提出了全新挑战。WPS-3000Pro 虽满足了主流需求，但在超高密度引脚、混合信号并行测试以及液冷散热等技术领域仍存在差距，需要以全新平台加以解决。\n\n## 项目目标\n\n| 目标维度 | WPS-3000Pro | 目标 WPS-3200 |\n|---------|------------|--------------|\n| 测试通道数 | 1024 | 2048 |\n| 混合信号通道 | 不支持 | 支持 6",
       "checks": {
         "top1_matches_expected": false,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -491,6 +554,11 @@
           "1024",
           "5 秒"
         ],
+        "expected_chunk_keywords": [
+          "1024",
+          "5 秒"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {
           "doc_type": "project"
         },
@@ -501,21 +569,23 @@
     {
       "case_id": "M03",
       "category": "metadata_filter",
-      "passed": true,
+      "passed": false,
       "score": 4,
-      "max_score": 4,
+      "max_score": 5,
       "top1_source": "测试/测试项/晶圆CP测试项定义与规范.md",
       "top3_sources": [
         "测试/测试项/晶圆CP测试项定义与规范.md",
         "测试/测试项/晶圆FT测试项定义与规范.md",
-        "测试/测试项/老化筛选测试项执行规范.md"
+        "测试/测试项/晶圆FT测试项定义与规范.md"
       ],
-      "answer_preview": "开路/短路检测的判定标准如下：\n\n1. 对于晶圆CP测试项定义与规范（V2.1）中的ELEC-001：开路/短路检测（OS Test），目的是确认所有IO管脚连通性。判定标准为：施加±0.5 mA电流，测量电压响应。如果电压在-2V ~ -0.3V（开路）或0.3V ~ 2V（短路）范围内，判定为Fail。\n\n2. 对于晶圆FT测试项定义与规范（V1.1）中的PKG-001：引脚开路/短路检测（P",
+      "answer_preview": "开路/短路检测的判定标准如下：\n\n1. **晶圆CP测试项定义与规范 (V2.1)**：\n   - **开路检测**：施加 ±0.5 mA 电流，测量电压响应。电压在 -2V ~ -0.3V 为开路（Fail）。\n   - **短路检测**：施加 ±0.5 mA 电流，测量电压响应。电压在 0.3V ~ 2V 为短路（Fail）。\n   - **执行时机**：每片晶圆测试前强制执行。\n\n2. **",
+      "chunks_preview": "### ELEC-001：开路/短路检测（OS Test）\n\n- **目的**：确认所有 IO 管脚连通性\n- **方法**：施加 ±0.5 mA 电流，测量电压响应\n- **判定**：电压在 -2V ~ -0.3V（开路）或 0.3V ~ 2V（短路）为 Fail\n- **执行时机**：每片晶圆测试前强制执行 ### PKG-001：引脚开路/短路检测（Pin OS Test）\n\n- **目的**：验证封装后所有引脚与芯片内部连接正常，无键合断线或引脚短路\n- **方法**：通过 PMU 对每个引脚施加 ±0.1 mA，测量钳位二极管电压响应\n- **判定**：响应电压超出 −1.5V ~ ",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": true
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -528,7 +598,14 @@
           "ELEC-001",
           "±0.5 mA"
         ],
-        "missing_keywords": [],
+        "missing_keywords": [
+          "ELEC-001"
+        ],
+        "expected_chunk_keywords": [
+          "ELEC-001",
+          "±0.5 mA"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {
           "department": "测试",
           "doc_type": "test_spec"
@@ -541,20 +618,22 @@
       "case_id": "M04",
       "category": "metadata_filter",
       "passed": true,
-      "score": 4,
-      "max_score": 4,
-      "top1_source": "研发/知识库/接口测试基础知识.md",
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "研发/模块子系统/测试头板卡子系统维护指南.md",
       "top3_sources": [
-        "研发/知识库/接口测试基础知识.md",
-        "研发/知识库/测试基础知识.md",
-        "维护/故障码/WPS-3000故障码定义手册.md"
+        "研发/模块子系统/测试头板卡子系统维护指南.md",
+        "研发/模块子系统/测试头板卡子系统维护指南.md",
+        "研发/产品线/产品线概览.md"
       ],
-      "answer_preview": "开路/短路检测的判定标准通常涉及对电气系统或电路的状态进行评估。根据提供的知识片段，以下是对开路/短路检测判定标准的分析：\n\n1. **状态码分析**：在进行接口测试时，不能仅仅依赖于200这个状态码。需要结合更多的信息，如`status`、`upstream_status`和`latency`等参数进行综合判断。例如，如果`status=500`且`upstream_status=500`，并且",
+      "answer_preview": "开路/短路检测的判定标准通常涉及以下几个方面：\n\n1. **通道开短路自检**：每次预防性维护（PM）应执行通道开短路自检，以确保每个通道都能正常工作，没有开路或短路现象。若量测漂移超出规格，应记录板卡序列号、环境温度和最近一次软件升级信息，便于交叉分析漂移原因（来源：研发/模块子系统/测试头板卡子系统维护指南.md | 版本: V1.4 | 部门: 研发）。\n\n2. **参考负载回环测试**：通",
+      "chunks_preview": "每次 PM 应执行通道开短路自检、参考负载回环测试和基准校准。量测漂移超出规格的通道，应记录板卡序列号、环境温度和最近一次软件升级信息，便于交叉分析漂移原因；不允许仅做复位处理后继续投入量产，未查明原因前需隔离该通道。 通过维护界面读取各板卡温度、供电电压、电流纹波和风扇状态。若某单板温升持续高于同型号均值 10°C 以上，应优先排查散热路径、功放负载和局部器件老化，而不是简单更换风扇。电源纹波超出规格时，应同步复核 DUT 负载和滤波器件状态。\n\n### 3. 通道健康自检与校准\n\n每次 PM 应执行通道开短路自检、参考负载回环测试和基准校准。量测漂移超出规格的通道，应记录板卡序列号、环境温",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": true
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [],
@@ -563,6 +642,8 @@
         ],
         "expected_keywords": [],
         "missing_keywords": [],
+        "expected_chunk_keywords": [],
+        "missing_chunk_keywords": [],
         "filters": {
           "department": "研发"
         },
@@ -573,19 +654,23 @@
     {
       "case_id": "M05",
       "category": "metadata_filter",
-      "passed": false,
-      "score": 3,
-      "max_score": 4,
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.1.md",
       "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.1.md",
         "研发/版本/WPS-3000软件版本发布说明V2.1.md"
       ],
-      "answer_preview": "WPS-3000 当前发布版本 V2.1 的重要功能信息如下（引用来源：WPS-3000 软件版本发布说明V2.1.md）：\n\n- 请根据文档内容，具体列出 V2.1 版本的 WPS-3000 软件的重要功能。由于知识片段中并未提供具体的功能信息，因此无法直接回答此问题。请您提供更详细的功能信息或相关文档，以便我为您准确解答。",
+      "answer_preview": "WPS-3000当前发布版本V2.1的重要功能包括：\n\n1. **多 Site 并行测试支持**：新增最多4 Site并行测试能力，整机测试产能在标准逻辑器件场景下提升约3.2倍，需搭配OPT-MULTI扩展硬件模块使用（来源：研发/版本/WPS-3000软件版本发布说明V2.1.md | 版本: V2.1 | 部门: 研发）。\n\n2. **智能温度补偿算法**：引入基于历史轨迹和实时温漂的补偿模",
+      "chunks_preview": "### 1. 多 Site 并行测试支持\n\n新增最多 4 Site 并行测试能力，整机测试产能在标准逻辑器件场景下提升约 3.2 倍，需搭配 OPT-MULTI 扩展硬件模块使用。 # WPS-3000 软件版本发布说明 V2.1\n\n## 版本基本信息\n\n|项目|内容|\n|------|------|\n|版本号|V2.1.0|\n|发布日期|2025-03-15|\n|适用机型|WPS-3000、WPS-3000Pro|\n|前置版本|V2.0.3|\n|发布类型|功能迭代版本| 支持在不停机状态下替换 Pattern 与限值文件，减少换程序停机时间约 80%，适合多 Lot 快速切换场景。\n\n## ",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -598,10 +683,12 @@
           "多 Site 并行测试",
           "智能温度补偿"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "多 Site 并行测试",
           "智能温度补偿"
         ],
+        "missing_chunk_keywords": [],
         "filters": {
           "version": "V2.1",
           "doc_type": "release_note"
@@ -613,19 +700,23 @@
     {
       "case_id": "M06",
       "category": "metadata_filter",
-      "passed": false,
-      "score": 3,
-      "max_score": 4,
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.3.md",
       "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md",
         "研发/版本/WPS-3000软件版本发布说明V2.3.md"
       ],
-      "answer_preview": "根据您提供的信息，以下是WPS-3000软件V2.3版本的一些重要功能：\n\n由于提供的知识片段仅包含版本发布说明的标题，并未列出具体的功能点，因此无法提供具体的V2.3版本的功能列表。如果您需要详细的版本功能说明，请查阅文档《WPS-3000软件版本发布说明V2.3.md》。",
+      "answer_preview": "WPS-3000当前发布的V2.3版本具备以下重要功能：\n\n1. 高压测试安全联锁优化：重构高压通道上电前检查逻辑，增加绝缘自检、治具校验和安全门状态联动，降低误上电风险。（来源：研发/版本/WPS-3000软件版本发布说明V2.3.md | 版本: V2.3 | 部门: 研发）\n\n2. 并行报表导出：支持测试结束后并行生成STDF、CSV和客户自定义报表，缩短大批量批次出报表等待时间。（来源：研",
+      "chunks_preview": "重构高压通道上电前检查逻辑，增加绝缘自检、治具校验和安全门状态联动，降低误上电风险。\n\n### 2. 并行报表导出\n\n支持测试结束后并行生成 STDF、CSV 和客户自定义报表，缩短大批量批次出报表等待时间。 ### 1. 高压测试安全联锁优化\n\n重构高压通道上电前检查逻辑，增加绝缘自检、治具校验和安全门状态联动，降低误上电风险。 支持测试结束后并行生成 STDF、CSV 和客户自定义报表，缩短大批量批次出报表等待时间。\n\n### 3. 异常批次快速复测\n\n新增异常批次一键复测向导，可自动复用原配方和治具信息，减少人工重复配置。 # WPS-3000 软件版本发布说明 V2.3\n\n## 版本基",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -639,11 +730,13 @@
           "并行报表导出",
           "异常批次快速复测"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "高压测试安全联锁优化",
           "并行报表导出",
           "异常批次快速复测"
         ],
+        "missing_chunk_keywords": [],
         "filters": {
           "version": "V2.3",
           "doc_type": "release_note"
@@ -656,20 +749,22 @@
       "case_id": "M07",
       "category": "metadata_filter",
       "passed": true,
-      "score": 4,
-      "max_score": 4,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "维护/故障码/WPS-3000故障码定义手册.md",
       "top3_sources": [
         "维护/故障码/WPS-3000故障码定义手册.md",
-        "维护/故障码/运动控制器故障码处理手册.md",
-        "维护/故障码/测试头板卡故障码映射表.md"
+        "维护/故障码/WPS-3000故障码定义手册.md",
+        "维护/故障码/WPS-3000故障码定义手册.md"
       ],
-      "answer_preview": "VIS-1002 是一个故障码，其描述为“Fiducial Mark 识别失败”，属于严重等级。处理方法包括检查照明，清洁镜头，调整阈值。这一信息来源于《维护/故障码/WPS-3000故障码定义手册.md》（版本：V2.1，部门：研发）。",
+      "answer_preview": "VIS-1002 是 WPS-3000 系列设备软件平台（WPS-OS）的视觉模块（VIS）中的一个故障码。该故障码表示“Fiducial Mark 识别失败”，属于严重等级。处理方法包括检查照明、清洁镜头以及调整阈值。这一信息来源于《维护/故障码/WPS-3000故障码定义手册.md》版本 V2.1，部门：研发。",
+      "chunks_preview": "### 视觉模块（VIS）\n\n| 故障码 | 故障描述 | 严重等级 | 处理方法 |\n|-------|---------|---------|---------|\n| VIS-1001 | 上方相机图像获取超时 | 严重 | 检查 USB 连接，重启相机服务 |\n| VIS-1002 | Fiducial Mark 识别失败 | 严重 | 检查照明，清洁镜头，调整阈值 |\n| VIS-1003 | 针尖磨损超出阈值 | 警告 | 更换探针卡，重新标定 |\n| VIS-1004 | 视觉标定文件版本不匹配 | 警告 | 重新执行相机标定流程 | | 故障码 | 故障描述 | 严重等级 | 处",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": true
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -682,6 +777,10 @@
           "VIS-1002"
         ],
         "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "VIS-1002"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {
           "doc_type": "fault_code"
         },
@@ -694,19 +793,21 @@
       "category": "metadata_filter",
       "passed": false,
       "score": 3,
-      "max_score": 4,
+      "max_score": 5,
       "top1_source": "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
       "top3_sources": [
         "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
-        "维护/故障案例/客户现场真空吸附异常案例.md",
-        "维护/故障案例/探针卡接触不良排查案例.md"
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+        "维护/故障案例/VIS-1002-Fiducial识别失败案例.md"
       ],
-      "answer_preview": "VIS-1002 是一个故障案例编号，具体指代的是“Fiducial 识别失败”的问题。这个编号在文档《维护/故障案例/VIS-1002-Fiducial识别失败案例.md》中提到，该文档的版本为 V2.1，由服务部门编写。文档旨在为业务、研发、测试和服务团队提供统一的事实依据，并详细说明了故障的背景、关键对象、流程边界、输入输出以及风险控制要求，以确保信息的一致性和准确性，避免不同部门在口头沟通",
+      "answer_preview": "VIS-1002 是一种故障码，它指的是 Fiducial 识别失败的情况。以下是关于 VIS-1002 的相关信息：\n\n- **案例编号**：CASE-2025-VIS-001\n- **故障码**：VIS-1002\n- **机型**：WPS-3000（SN: WPS3K-2024-0087）\n- **发生日期**：2025-01-12\n- **客户**：XX 半导体（苏州）有限公司\n- **严重",
+      "chunks_preview": "# 故障案例：VIS-1002 Fiducial 识别失败\n\n## 案例基本信息\n\n| 属性 | 内容 |\n|------|------|\n| 案例编号 | CASE-2025-VIS-001 |\n| 故障码 | VIS-1002 |\n| 机型 | WPS-3000（SN: WPS3K-2024-0087） |\n| 发生日期 | 2025-01-12 |\n| 客户 | XX 半导体（苏州）有限公司 |\n| 严重等级 | 严重 |\n| 处理工程师 | 李工 | | 属性 | 内容 |\n|------|------|\n| 案例编号 | CASE-2025-VIS-001 |\n| 故障码 | VIS",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": false
       },
       "details": {
         "expected_sources": [
@@ -720,7 +821,13 @@
           "阈值"
         ],
         "missing_keywords": [
+          "阈值"
+        ],
+        "expected_chunk_keywords": [
           "光源",
+          "阈值"
+        ],
+        "missing_chunk_keywords": [
           "阈值"
         ],
         "filters": {
@@ -735,19 +842,21 @@
       "category": "metadata_filter",
       "passed": false,
       "score": 3,
-      "max_score": 4,
-      "top1_source": "项目管理/客户/XX半导体苏州客户档案.md",
+      "max_score": 5,
+      "top1_source": "项目管理/客户/海外代工厂客户合作档案.md",
       "top3_sources": [
-        "项目管理/客户/XX半导体苏州客户档案.md",
-        "项目管理/客户/华东先进封装客户档案.md",
-        "项目管理/客户/海外代工厂客户合作档案.md"
+        "项目管理/客户/海外代工厂客户合作档案.md",
+        "项目管理/客户/高校联合实验室客户档案.md",
+        "项目管理/客户/苏州功率器件客户需求档案.md"
       ],
-      "answer_preview": "客户的具体特殊需求并未在提供的信息中详细列出。根据知识片段来源，我们得知有以下客户档案中记录了特殊需求：\n\n1. XX半导体苏州客户档案（版本：1.0，部门：销售）\n2. 华东先进封装客户档案（版本：V1.1，部门：销售）\n3. 海外代工厂客户合作档案（版本：V1.4，部门：销售）\n\n若要了解客户的特殊需求，建议查阅上述文档中的详细记录。",
+      "answer_preview": "客户的特殊需求可能包括以下几个方面：\n\n1. 保修期：不同客户对保修期的要求不同，例如整机保修期可能为12个月，而某些关键模块的保修期可能更长，如24个月（来源：苏州功率器件客户需求档案.md | 版本: V1.3 | 部门: 销售）。\n\n2. 响应时间SLA：客户对响应时间的要求也很严格，如异常停机4小时内响应，24小时内到场（来源：苏州功率器件客户需求档案.md | 版本: V1.3 | 部门",
+      "chunks_preview": "## 客户特殊需求记录 ## 客户特殊需求记录 - **保修期**：整机 12 个月，温控及高压模块 24 个月\n- **响应时间 SLA**：异常停机 4 小时响应，24 小时到场\n- **项目机制**：试产阶段每周召开一次设备与工艺联合问题会\n- **备件支持**：高压相关关键件常备一套安全库存\n\n## 客户特殊需求记录\n\n1. 客户对高压、耐温和重复性指标极为敏感，要求在交机时同步提供完整的量测不确定度与校准记录。\n2. 试产期间的 recipe 需要按照封装类型和电压等级建立分层管理，防止不同器件族误用测试参数。\n3. 客户现场要求 Chuck 温控范围覆盖 -55°C 至 +200°",
       "checks": {
-        "top1_matches_expected": true,
-        "top3_contains_expected": true,
+        "top1_matches_expected": false,
+        "top3_contains_expected": false,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -760,10 +869,12 @@
           "SEMI E10",
           "私有云"
         ],
-        "missing_keywords": [
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
           "SEMI E10",
           "私有云"
         ],
+        "missing_chunk_keywords": [],
         "filters": {
           "doc_type": "customer"
         },
@@ -775,20 +886,22 @@
       "case_id": "M10",
       "category": "metadata_filter",
       "passed": true,
-      "score": 4,
-      "max_score": 4,
+      "score": 5,
+      "max_score": 5,
       "top1_source": "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx",
       "top3_sources": [
         "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx",
-        "服务/工单/服务工单WO-2025-0312.md.meta.json",
-        "产品/方案/文档中心方案.docx.meta.json"
+        "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx",
+        "人力资源/通知/关于做好2026届毕业生一次性求职补贴申报工作的通知.docx"
       ],
-      "answer_preview": "2026届毕业生一次性求职补贴的申报对象和标准如下：\n\n申报对象：\n1. 低保家庭毕业生：来自城乡居民最低生活保障家庭，其家庭成员与毕业生有法定赡养、扶养、抚养关系（民政部门认定）。\n2. 残疾毕业生：毕业生本人持有《中华人民共和国残疾人证》（残联认定）。\n3. 已获得国家助学贷款毕业生：毕业生本人在校期间获得过国家助学贷款资助（教育部门认定）。\n4. 脱贫人口及防止返贫监测对象家庭毕业生：毕业生",
+      "answer_preview": "2026届毕业生一次性求职补贴的申报对象和标准如下：\n\n申报对象：\n- 低保家庭毕业生：来自城乡居民最低生活保障家庭，其家庭成员与毕业生有法定赡养、扶养、抚养关系。\n- 残疾毕业生：毕业生本人持有《中华人民共和国残疾人证》。\n- 已获得国家助学贷款毕业生：毕业生本人在校期间获得过国家助学贷款资助。\n- 脱贫人口及防止返贫监测对象家庭毕业生：毕业生为脱贫人口或未消除风险的防止返贫监测对象。\n- 零就",
+      "chunks_preview": "各学院： 为认真落实党中央、国务院及省委、省政府稳就业保就业决策部署，着力促进困难毕业生群体顺利就业，按照《财政部人力资源社会保障部关于印发〈就业补助资金管理办法〉的通知》（财社〔2023〕181号）要求，现就做好我校2026届毕业生一次性求职补贴申报工作有关事项通知如下。 一、补贴对象与范围 毕业学年内符合下列条件之一，有就业创业意愿并积极求职创业的全日制2026届毕业生（非定向培养毕业生），可自愿申领一次性求职补贴。 （一）低保家庭毕业生：来自城乡居民最低生活保障家庭，其家庭成员与毕业生有法定赡养、扶养、抚养关系（民政部门认定）； （二）残疾毕业生：毕业生本人持有《中华人民共和国残疾人证》",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": true
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -802,6 +915,10 @@
           "求职补贴"
         ],
         "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "求职补贴"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {
           "confidentiality": "公开"
         },
@@ -813,18 +930,22 @@
       "case_id": "M11",
       "category": "metadata_filter",
       "passed": false,
-      "score": 3,
-      "max_score": 4,
+      "score": 4,
+      "max_score": 5,
       "top1_source": "研发/机型/WPS-3000机型规格说明.md",
       "top3_sources": [
+        "研发/机型/WPS-3000机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md",
         "研发/机型/WPS-3000机型规格说明.md"
       ],
-      "answer_preview": "WPS-3000 晶圆探针测试机的主要技术指标包括：机型名称为WPS-3000，属于晶圆测试设备（WPS）产品线，适用于200mm / 300mm的晶圆尺寸。以上信息来源于《研发/机型/WPS-3000机型规格说明.md | 版本: V2.1 | 部门: 研发》。",
+      "answer_preview": "WPS-3000 晶圆探针测试机的主要技术指标如下：\n\n- 测试通道数：512 路数字通道 + 64 路模拟通道\n- 最高测试频率：2 GHz\n- 测试精度（电压）：±1 mV\n- 测试精度（电流）：±10 nA\n- 温控范围：-40°C ~ +175°C\n- 晶圆对准精度：±0.5 µm\n- 标准换片时间：< 8 秒\n\n主要子系统包括：\n\n1. 测试头（Test Head）：搭载 512 路 P",
+      "chunks_preview": "| 属性 | 值 |\n|------|----|\n| 机型名称 | WPS-3000 晶圆探针测试机 |\n| 产品线 | 晶圆测试设备（WPS） |\n| 机型代码 | WPS-3000 |\n| 发布版本 | V2.1 |\n| 发布日期 | 2025-03 |\n| 适用晶圆尺寸 | 200 mm / 300 mm |\n\n## 核心技术指标\n\n- **测试通道数**：512 路数字通道 + 64 路模拟通道\n- **最高测试频率**：2 GHz\n- **测试精度（电压）**：±1 mV\n- **测试精度（电流）**：±10 nA\n- **温控范围**：-40°C ~ +175°C\n- **晶圆对准",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": false
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [
@@ -841,6 +962,11 @@
         "missing_keywords": [
           "200 mm / 300 mm"
         ],
+        "expected_chunk_keywords": [
+          "WPS-3000",
+          "200 mm / 300 mm"
+        ],
+        "missing_chunk_keywords": [],
         "filters": {
           "product_line": "晶圆测试设备",
           "version": "V2.1",
@@ -855,20 +981,18 @@
       "case_id": "M12",
       "category": "metadata_filter",
       "passed": true,
-      "score": 4,
-      "max_score": 4,
-      "top1_source": "培训/岗位/测试开发工程师岗位说明书.md",
-      "top3_sources": [
-        "培训/岗位/测试开发工程师岗位说明书.md",
-        "培训/岗位/售后服务工程师岗位说明书.md",
-        "培训/岗位/资料开发工程师岗位说明书.md"
-      ],
-      "answer_preview": "WPS-3000 的主要技术指标并未直接在提供的知识片段中列出。然而，根据片段中提到的相关信息，我们可以推断WPS-3000的一些技术特点：\n\n1. **测试能力**：WPS-3000 是一种基于 ATE 平台（自动测试设备）的 SoC 测试机，用于开发芯片 CP/FT（芯片级/封装级）测试程序（来源：培训/岗位/测试开发工程师岗位说明书.md）。\n\n2. **测试策略与优化**：WPS-3000",
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "",
+      "top3_sources": [],
+      "answer_preview": "知识库中未找到与该问题相关的内容，请尝试换一种问法或检查筛选条件。",
+      "chunks_preview": "",
       "checks": {
         "top1_matches_expected": true,
         "top3_contains_expected": true,
         "top3_excludes_forbidden": true,
-        "answer_contains_keywords": true
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
       },
       "details": {
         "expected_sources": [],
@@ -877,11 +1001,1135 @@
         ],
         "expected_keywords": [],
         "missing_keywords": [],
+        "expected_chunk_keywords": [],
+        "missing_chunk_keywords": [],
         "filters": {
           "department": "人力资源"
         },
         "question": "WPS-3000 的主要技术指标是什么？",
         "notes": "验证明显错误筛选条件时不应无视过滤逻辑。允许空结果。"
+      }
+    },
+    {
+      "case_id": "R11",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "服务/工单/服务工单WO-2025-0312.md",
+      "top3_sources": [
+        "服务/工单/服务工单WO-2025-0312.md",
+        "服务/工单/服务工单WO-2025-0312.md",
+        "服务/工单/服务工单WO-2025-0312.md"
+      ],
+      "answer_preview": "Chuck 超温故障的根本原因是冷却水循环泵的电源模块烧毁，导致 Chuck 散热失效，温度失控上升。处理步骤如下：\n\n1. **09:45** 电话远程指导：确认故障码为 TCU-3001（Chuck 超温），要求立即切断 Chuck 电源，自然冷却至室温。[来源: 服务/工单/服务工单WO-2025-0312.md | 版本: V1.0 | 部门: 服务]\n\n2. **10:30** 到达现场",
+      "chunks_preview": "客户报告设备在测试过程中突然停机，屏幕显示 TCU-3001 故障码，Chuck 温控失控，设备当前 Chuck 温度持续升高，已达到 180°C 超温保护上限，测试产线中断约 2 小时。\n\n## 处理过程记录\n\n**09:45** — 电话远程指导：确认故障码为 TCU-3001（Chuck 超温），要求立即切断 Chuck 电源，自然冷却至室温。\n\n**10:30** — 到达现场：检查冷却水管路，发现供水泵电源指示灯熄灭。\n\n**10:45** — 确认根因：冷却水循环泵因电源模块烧毁停止工作，导致 Chuck 散热失效，温度失控上升。\n\n**11:20** — 更换备件：更换冷却水泵电",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "服务/工单/服务工单WO-2025-0312.md"
+        ],
+        "forbidden_sources": [
+          "服务/工单/服务工单WO-2025-0418.md",
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "expected_keywords": [
+          "TCU-3001",
+          "冷却水泵",
+          "TCU-PWR-MOD-01",
+          "180°C"
+        ],
+        "missing_keywords": [
+          "180°C"
+        ],
+        "expected_chunk_keywords": [
+          "TCU-3001",
+          "冷却水泵",
+          "TCU-PWR-MOD-01",
+          "180°C"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WO-2025-0312 工单中 Chuck 超温故障的根本原因和处理步骤是什么？",
+        "notes": "验证服务工单类文档的精确编号命中。"
+      }
+    },
+    {
+      "case_id": "R12",
+      "category": "retrieval",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "服务/工单/服务工单WO-2025-0418.md",
+      "top3_sources": [
+        "服务/工单/服务工单WO-2025-0418.md",
+        "服务/工单/服务工单WO-2025-0418.md",
+        "服务/工单/服务工单WO-2025-0418.md"
+      ],
+      "answer_preview": "针对PCK-1002探针卡接触不良告警的解决，以及Over-Drive参数的调整，以下是根据提供的知识片段的建议：\n\n1. 解决探针卡接触不良告警：\n   - **检查探针针尖状态**：如果探针针尖存在明显氧化物积累，探针弹性下降，需要执行清针流程。具体操作为使用配套清针纸对探针卡进行3次往复的标准清针，以清除针尖氧化层（来源：服务/工单/服务工单WO-2025-0418.md）。\n   - **",
+      "chunks_preview": "客户报告设备在批量测试过程中频繁出现探针卡接触异常，系统反复弹出 PCK-1002 告警（探针卡接触不良），每隔约 200 颗 Die 触发一次，导致测试中断，需人工复位后继续，严重影响产线效率。\n\n## 处理过程记录\n\n**10:30** — 电话远程诊断：指导客户查看探针卡历史压点记录，确认最近一次清针时间为两周前。\n\n**11:00** — 到达现场：对探针卡进行显微镜检查，发现约 15% 的探针针尖存在明显氧化物积累，探针弹性下降。\n\n**11:45** — 执行清针：使用配套清针纸对探针卡执行标准清针流程（3 次往复），清除针尖氧化层。\n\n**12:30** — 检查接触高度：发现 ",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "服务/工单/服务工单WO-2025-0418.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md",
+          "服务/工单/服务工单WO-2025-0312.md"
+        ],
+        "expected_keywords": [
+          "PCK-1002",
+          "Over-Drive",
+          "55 µm",
+          "清针"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "PCK-1002",
+          "Over-Drive",
+          "55 µm",
+          "清针"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "PCK-1002 探针卡接触不良告警如何解决？Over-Drive 参数怎么调整？",
+        "notes": "验证工单中具体操作参数的检索，区分故障码文档。"
+      }
+    },
+    {
+      "case_id": "R13",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+      "top3_sources": [
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+        "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+      ],
+      "answer_preview": "WPS-3000 V2.3 版本对高压测试安全做了以下改进：\n\n1. **高压测试安全联锁优化**：重构了高压通道上电前检查逻辑，增加了绝缘自检、治具校验和安全门状态联动，从而降低了误上电的风险。[来源: 研发/版本/WPS-3000软件版本发布说明V2.3.md]\n\n2. **缺陷修复**：针对高压场景切换治具后偶发安全状态未刷新的问题（缺陷编号BUG-1180）进行了修复，确保了高压测试的安全",
+      "chunks_preview": "### 1. 高压测试安全联锁优化\n\n重构高压通道上电前检查逻辑，增加绝缘自检、治具校验和安全门状态联动，降低误上电风险。 重构高压通道上电前检查逻辑，增加绝缘自检、治具校验和安全门状态联动，降低误上电风险。\n\n### 2. 并行报表导出\n\n支持测试结束后并行生成 STDF、CSV 和客户自定义报表，缩短大批量批次出报表等待时间。 新增异常批次一键复测向导，可自动复用原配方和治具信息，减少人工重复配置。\n\n## 缺陷修复\n\n|缺陷编号|描述|严重等级|\n|------|------|------|\n|BUG-1180|高压场景切换治具后偶发安全状态未刷新|严重|\n|BUG-1197|CSV 导",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.1.md",
+          "研发/版本/WPS-3000软件版本发布说明V2.2.md"
+        ],
+        "expected_keywords": [
+          "高压测试安全联锁优化",
+          "BUG-1180",
+          "并行报表导出"
+        ],
+        "missing_keywords": [
+          "并行报表导出"
+        ],
+        "expected_chunk_keywords": [
+          "高压测试安全联锁优化",
+          "BUG-1180",
+          "并行报表导出"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WPS-3000 V2.3 版本对高压测试安全做了哪些改进？",
+        "notes": "验证版本精确区分，V2.3 与 V2.1/V2.2 应区分命中。"
+      }
+    },
+    {
+      "case_id": "R14",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+      "top3_sources": [
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md"
+      ],
+      "answer_preview": "WPS-3200控制软件V1.5版本新增了以下功能：\n\n1. **新增板卡温度、轴状态、真空吸附和温控趋势统一看板**：这一功能便于工程师快速判断机台的健康度。[来源: 研发/版本/WPS-3200控制软件版本说明V1.5.md | 版本: V1.5 | 部门: 研发]\n\n2. **新增双工位任务调度策略**：在保证安全互锁的前提下，减少等待空转时间，典型场景节拍缩短12%。[来源: 研发/版本/",
+      "chunks_preview": "新增板卡温度、轴状态、真空吸附和温控趋势统一看板，便于工程师快速判断机台健康度。\n\n## 缺陷修复\n\n|缺陷编号|描述|严重等级|\n|------|------|------|\n|BUG-3205|双工位切换时偶发任务队列阻塞|严重|\n|BUG-3211|联合标定完成后未自动保存日志|一般|\n|BUG-3220|健康看板在长时间运行后刷新延迟|一般| 新增双工位任务调度策略，在保证安全互锁的前提下减少等待空转时间，典型场景节拍缩短 12%。\n\n### 2. 视觉与运动联合标定\n\n集成联合标定向导，可同时刷新视觉坐标系和运动补偿参数，降低现场调机复杂度。 集成联合标定向导，可同时刷新视觉坐标系和",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3200控制软件版本说明V1.5.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md",
+          "研发/机型/WPS-3200机型结构设计说明.md"
+        ],
+        "expected_keywords": [
+          "双工位调度优化",
+          "视觉与运动联合标定",
+          "12%",
+          "BUG-3205"
+        ],
+        "missing_keywords": [
+          "双工位调度优化",
+          "视觉与运动联合标定"
+        ],
+        "expected_chunk_keywords": [
+          "双工位调度优化",
+          "视觉与运动联合标定",
+          "12%",
+          "BUG-3205"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WPS-3200 控制软件 V1.5 新增了哪些功能？有哪些已修复的缺陷？",
+        "notes": "验证 WPS-3200 版本说明与 WPS-3000 版本的区分。"
+      }
+    },
+    {
+      "case_id": "R15",
+      "category": "retrieval",
+      "passed": false,
+      "score": 3,
+      "max_score": 5,
+      "top1_source": "研发/机型/WPS-3100机型规格说明.md",
+      "top3_sources": [
+        "研发/机型/WPS-3100机型规格说明.md",
+        "研发/机型/WPS-3100机型规格说明.md",
+        "研发/机型/WPS-3000机型规格说明.md"
+      ],
+      "answer_preview": "WPS-3100机型的核心技术指标包括测试通道数、最高测试频率、换片时间、重复定位精度、温控范围、并行Site数和平均可用率目标。具体如下：\n\n- 测试通道数：768路数字通道 + 96路模拟通道\n- 最高测试频率：2.5 GHz\n- 换片时间：< 6.5 秒\n- 重复定位精度：±0.4 µm\n- 温控范围：-50°C ~ +180°C\n- 并行Site数：最多4 Site\n- 平均可用率目标：≥",
+      "chunks_preview": "| 属性 | 值 |\n|------|----|\n| 机型名称 | WPS-3100 高效率晶圆探针测试机 |\n| 产品线 | 晶圆测试设备（WPS） |\n| 机型代码 | WPS-3100 |\n| 发布版本 | V1.3 |\n| 发布日期 | 2025-05 |\n| 适用晶圆尺寸 | 200 mm / 300 mm |\n\n## 核心技术指标\n\n- **测试通道数**：768 路数字通道 + 96 路模拟通道\n- **最高测试频率**：2.5 GHz\n- **换片时间**：< 6.5 秒\n- **重复定位精度**：±0.4 µm\n- **温控范围**：-50°C ~ +180°C\n- **并行",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": false,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3100机型规格说明.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md",
+          "研发/机型/WPS-3200机型结构设计说明.md"
+        ],
+        "expected_keywords": [
+          "768 路数字通道",
+          "2.5 GHz",
+          "-50°C ~ +180°C",
+          "±0.4 µm"
+        ],
+        "missing_keywords": [
+          "768 路数字通道"
+        ],
+        "expected_chunk_keywords": [
+          "768 路数字通道",
+          "2.5 GHz",
+          "-50°C ~ +180°C",
+          "±0.4 µm"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WPS-3100 机型的核心技术指标和温控范围是多少？",
+        "notes": "验证 WPS-3100 规格书与 WPS-3000/3200 的区分。"
+      }
+    },
+    {
+      "case_id": "R16",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/版本/ATE-Link平台版本升级说明V3.0.md",
+      "top3_sources": [
+        "研发/版本/ATE-Link平台版本升级说明V3.0.md",
+        "研发/版本/ATE-Link平台版本升级说明V3.0.md",
+        "研发/版本/ATE-Link平台版本升级说明V3.0.md"
+      ],
+      "answer_preview": "ATE-Link 平台 V3.0 的架构升级内容和升级注意事项如下：\n\n### 架构升级内容：\n1. **插件化驱动框架**：底层驱动改为插件化装载方式，可按客户接口卡类型按需加载，减少主程序耦合。[来源: 研发/版本/ATE-Link平台版本升级说明V3.0.md | 版本: V3.0 | 部门: 研发]\n2. **统一权限模型**：工程模式、维护模式和操作模式权限统一接入平台账号体系，支持审计",
+      "chunks_preview": "1. V3.0 属于架构升级版本，升级前必须完整备份驱动目录、权限配置和接口映射。\n2. 所有第三方接口卡需要先验证对应插件包版本，不允许直接复用 V2.x 驱动。\n3. 权限模型切换后需重新导入岗位与角色映射表。\n4. 若客户现场为隔离网络环境，接口测试中心需使用离线模式部署。\n\n## 版本兼容性矩阵\n\n|运行环境|兼容性|\n|------|------|\n|ATE-Core 3.0|完全兼容|\n|ATE-Core 2.9|兼容（需关闭插件热加载）|\n|ATE-Core 2.8及以下|不兼容| |缺陷编号|描述|严重等级|\n|------|------|------|\n|BUG-5002|旧",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/ATE-Link平台版本升级说明V3.0.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/ATE-Link500机型接口能力说明.md",
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        ],
+        "expected_keywords": [
+          "插件化驱动框架",
+          "统一权限模型",
+          "BUG-5002",
+          "接口测试中心"
+        ],
+        "missing_keywords": [
+          "BUG-5002"
+        ],
+        "expected_chunk_keywords": [
+          "插件化驱动框架",
+          "统一权限模型",
+          "BUG-5002",
+          "接口测试中心"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "ATE-Link 平台 V3.0 的架构升级内容和升级注意事项是什么？",
+        "notes": "验证 ATE-Link 版本说明与机型接口说明的区分。"
+      }
+    },
+    {
+      "case_id": "R17",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "质量/质量事件/质量事件报告QE-2025-0091.md",
+      "top3_sources": [
+        "质量/质量事件/质量事件报告QE-2025-0091.md",
+        "质量/质量事件/质量事件报告QE-2025-0091.md",
+        "质量/质量事件/质量事件报告QE-2025-0120.md"
+      ],
+      "answer_preview": "QE-2025-0091 质量事件影响了11个批次和约18,000颗器件。根本原因是Chuck在高温稳态阶段存在小幅周期性振荡，温度传感器老化迟滞，而控制参数仍沿用旧版整定值，导致闭环补偿不匹配。冷却流量波动放大了这一问题，使重复性偏差在高温段集中暴露。客户在150°C参数测试阶段发现同批次器件重复测量值分散度明显扩大，高温测试结果无法稳定复现，问题连续影响三个工作日，造成11个Lot暂停放行，并",
+      "chunks_preview": "- 受影响批次：11 个 Lot。\n- 受影响器件数量：约 18,000 颗。\n- 客户试验计划延迟：5 个工作日。\n- 车规验证资料需补充稳定性说明。\n\n## 根本原因分析\n\n现场数据表明，Chuck 在高温稳态阶段存在小幅周期性振荡。进一步分析发现，温度传感器存在老化迟滞，而控制参数仍沿用旧版整定值，导致在高温负载条件下闭环补偿不匹配。冷却流量波动放大了这一问题，使重复性偏差在高温段集中暴露。 客户在 150°C 参数测试阶段发现同批次器件重复测量值分散度明显扩大，高温测试结果无法稳定复现。问题连续影响三个工作日，造成 11 个 Lot 暂停放行，并触发客户质量例会升级。由于客户为车规项目",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0091.md"
+        ],
+        "forbidden_sources": [
+          "质量/8D/8D报告-2025-0091.md",
+          "质量/质量事件/质量事件报告QE-2025-0087.md"
+        ],
+        "expected_keywords": [
+          "11 个 Lot",
+          "18,000 颗",
+          "深圳安程",
+          "温度传感器"
+        ],
+        "missing_keywords": [
+          "11 个 Lot",
+          "18,000 颗",
+          "深圳安程"
+        ],
+        "expected_chunk_keywords": [
+          "11 个 Lot",
+          "18,000 颗",
+          "深圳安程",
+          "温度传感器"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "QE-2025-0091 质量事件影响了多少批次和器件？根本原因是什么？",
+        "notes": "验证质量事件编号精确命中，区分 8D 报告。"
+      }
+    },
+    {
+      "case_id": "R18",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "质量/8D/8D报告-2025-0091.md",
+      "top3_sources": [
+        "质量/8D/8D报告-2025-0091.md",
+        "质量/8D/8D报告-2025-0091.md",
+        "质量/8D/8D报告-2025-0091.md"
+      ],
+      "answer_preview": "8D-2025-0091的根本原因分析和永久纠正措施如下：\n\n**根本原因分析（5Why）**：\n1. 重复性下降，因为高温阶段实际温度波动超出控制范围。\n2. 温度波动超限，因为控制回路在稳态区存在振荡。\n3. 回路振荡，因为传感器反馈迟滞与旧参数不匹配。\n4. 参数不匹配，因为高温负载变化后未重新做整定。\n5. 未整定，因为高温段稳定性验证未纳入版本升级强制项。\n\n**永久纠正措施**：\n1.",
+      "chunks_preview": "**根本原因（5Why）**：\n\n1. 重复性下降，因为高温阶段实际温度波动超出控制范围。\n2. 温度波动超限，因为控制回路在稳态区存在振荡。\n3. 回路振荡，因为传感器反馈迟滞与旧参数不匹配。\n4. 参数不匹配，因为高温负载变化后未重新做整定。\n5. 未整定，因为高温段稳定性验证未纳入版本升级强制项。\n\n## D5：永久纠正措施\n\n1. 更换老化传感器并重新整定高温稳态 PID 参数。\n2. 在高温段增加冷却流量下限监控与告警。\n3. 升级温控验证规范，将 150°C 稳态漂移列为必测项。 **根本原因（5Why）**：\n1. 重复性下降，因为高温阶段实际温度波动超出控制范围。\n2. 温度波",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "质量/8D/8D报告-2025-0091.md"
+        ],
+        "forbidden_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0091.md",
+          "质量/8D/8D报告-2025-0087.md"
+        ],
+        "expected_keywords": [
+          "PID 参数",
+          "传感器老化",
+          "高温稳态",
+          "冷却流量"
+        ],
+        "missing_keywords": [
+          "传感器老化"
+        ],
+        "expected_chunk_keywords": [
+          "PID 参数",
+          "传感器老化",
+          "高温稳态",
+          "冷却流量"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "8D-2025-0091 的根本原因分析和永久纠正措施是什么？",
+        "notes": "验证 8D 报告编号精确命中，区分质量事件报告。"
+      }
+    },
+    {
+      "case_id": "R19",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "项目管理/客户/华东先进封装客户档案.md",
+      "top3_sources": [
+        "项目管理/客户/华东先进封装客户档案.md",
+        "项目管理/客户/华东先进封装客户档案.md",
+        "项目管理/客户/华东先进封装客户档案.md"
+      ],
+      "answer_preview": "华东先进封装客户对接口变更和换型效率的特殊要求包括以下几点：\n\n1. 试产阶段更关注换型效率和设备OEE，要求在批量导入前给出不同封装形态的标准切换时间基线（来源：项目管理/客户/华东先进封装客户档案.md | 版本: V1.1 | 部门: 销售）。\n\n2. 现场使用的MES与条码系统由客户IT团队维护，所有接口变更需提前两周在集成测试环境完成联调（来源：项目管理/客户/华东先进封装客户档案.md",
+      "chunks_preview": "1. 客户试产阶段更关注换型效率和设备 OEE，要求在批量导入前给出不同封装形态的标准切换时间基线。\n2. 现场使用的 MES 与条码系统由客户 IT 团队维护，所有接口变更需提前两周在集成测试环境完成联调。\n3. 客户希望设备支持快速导出工位级良率报表，便于对比不同班次和不同夹具配置下的生产表现。\n4. 由于厂区洁净规范严格，所有到场工程师必须提前完成 EHS 培训并取得临时施工授权。\n\n## 合作观察与后续建议\n\n该客户项目处于从试产向量产切换的关键阶段，对交付时效与数据联通要求较高。合作重点不是单纯交付设备，而是帮助客户建立稳定的换型、追溯和报表机制。后续应把封装工艺差异、MES 接口变",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/客户/华东先进封装客户档案.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/客户/XX半导体苏州客户档案.md",
+          "项目管理/客户/深圳车规芯片客户服务档案.md"
+        ],
+        "expected_keywords": [
+          "OSAT",
+          "昆山厂区",
+          "换型效率",
+          "EHS 培训"
+        ],
+        "missing_keywords": [
+          "OSAT",
+          "昆山厂区",
+          "EHS 培训"
+        ],
+        "expected_chunk_keywords": [
+          "OSAT",
+          "昆山厂区",
+          "换型效率",
+          "EHS 培训"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "华东先进封装客户对接口变更和换型效率有哪些特殊要求？",
+        "notes": "验证多客户档案中，客户名称关键词的精确区分。"
+      }
+    },
+    {
+      "case_id": "R20",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "项目管理/客户/深圳车规芯片客户服务档案.md",
+      "top3_sources": [
+        "项目管理/客户/深圳车规芯片客户服务档案.md",
+        "项目管理/客户/深圳车规芯片客户服务档案.md",
+        "项目管理/客户/深圳车规芯片客户服务档案.md"
+      ],
+      "answer_preview": "深圳车规芯片客户对异常批次8D回复时效和质量审计有以下要求：\n\n1. 异常批次必须在24小时内形成初步8D回复。\n2. 在五个工作日内提交详细原因分析。\n3. 所有服务记录需纳入客户IATF16949审计资料包，以确保质量体系的完整性。\n4. 软件版本、维保记录和异常分析报告均使用英文模板，并在最终版本中附客户可审计的签核页（来源：项目管理/客户/深圳车规芯片客户服务档案.md | 版本: V1.",
+      "chunks_preview": "- **保修期**：整机 12 个月，高压模块 24 个月\n- **响应时间 SLA**：生产问题 2 小时内响应，8 小时内给出明确处理路径\n- **专项支持**：车规验证阶段提供周度驻场与可靠性回顾\n- **质保要求**：所有服务记录需纳入客户 IATF16949 审计资料包\n\n## 客户特殊需求记录\n\n1. 客户执行车规项目节奏，所有参数更改都需要经过变更评审并保留版本记录，不接受口头确认。\n2. 高压模块在导入期间必须提供额外的绝缘耐压、温升和重复性验证数据，用于客户功能安全评审。\n3. 客户要求异常批次必须在 24 小时内形成初步 8D 回复，并在五个工作日内提交详细原因分析。\n4.",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/客户/深圳车规芯片客户服务档案.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/客户/华东先进封装客户档案.md",
+          "项目管理/客户/XX半导体苏州客户档案.md"
+        ],
+        "expected_keywords": [
+          "IATF16949",
+          "24 小时",
+          "高压模块 24 个月"
+        ],
+        "missing_keywords": [
+          "24 小时",
+          "高压模块 24 个月"
+        ],
+        "expected_chunk_keywords": [
+          "IATF16949",
+          "24 小时",
+          "高压模块 24 个月"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "深圳车规芯片客户对异常批次 8D 回复时效和质量审计有什么要求？",
+        "notes": "验证车规芯片客户档案中特殊质量要求的检索。"
+      }
+    },
+    {
+      "case_id": "R21",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "测试/测试项/高压参数测试项定义说明.md",
+      "top3_sources": [
+        "测试/测试项/高压参数测试项定义说明.md",
+        "测试/测试项/高压参数测试项定义说明.md",
+        "测试/测试项/高压参数测试项定义说明.md"
+      ],
+      "answer_preview": "漏源击穿电压（BVdss）测试的方法和判定标准如下：\n\n**测试方法**：\n1. 设置栅极电压（VGS）为0V。\n2. 当漏极电流（IDS）达到250 µA时，测量对应的漏源电压（VDS）。\n\n**判定标准**：\n1. 如果测量得到的BVdss值小于规格值的95%，则判定为Fail。\n\n**仪器条件**：\n- 使用具有最大1000V输出能力的高压SMU。\n- 施加强制限流1 mA。\n\n以上信息来源",
+      "chunks_preview": "### BV-001：漏源击穿电压（BVdss）\n\n- **目的**：验证 MOSFET 器件在栅极接地状态下的漏源耐压能力\n- **方法**：VGS = 0V，漏极电流 IDS = 250 µA 时测量对应 VDS\n- **判定**：BVdss < 规格值 ×0.95 为 Fail\n- **仪器条件**：高压 SMU（最大 1000V 输出能力），强制限流 1 mA - **目的**：验证 MOSFET 器件在栅极接地状态下的漏源耐压能力\n- **方法**：VGS = 0V，漏极电流 IDS = 250 µA 时测量对应 VDS\n- **判定**：BVdss < 规格值 ×0.95 为 Fa",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "测试/测试项/高压参数测试项定义说明.md"
+        ],
+        "forbidden_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md",
+          "质量/FMEA/高压测试链路FMEA分析.md"
+        ],
+        "expected_keywords": [
+          "BV-001",
+          "BVdss",
+          "250 µA",
+          "1000V"
+        ],
+        "missing_keywords": [
+          "BV-001"
+        ],
+        "expected_chunk_keywords": [
+          "BV-001",
+          "BVdss",
+          "250 µA",
+          "1000V"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "BVdss 漏源击穿电压测试的测试方法和判定标准是什么？",
+        "notes": "验证高压参数测试项说明与 CP 测试规范的意图区分。"
+      }
+    },
+    {
+      "case_id": "R22",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/料号BOM/探针卡料号与BOM清单.md",
+      "top3_sources": [
+        "研发/料号BOM/探针卡料号与BOM清单.md",
+        "质量/质量事件/质量事件报告QE-2025-0087.md",
+        "研发/料号BOM/探针卡料号与BOM清单.md"
+      ],
+      "answer_preview": "PRB-C01-200探针卡的零件清单包括以下内容：\n\n1. 探针针尖（钨针）：256根，消耗品，寿命约100万次。\n2. 探针固定座：1个，不锈钢材质，可重复使用。\n3. PCB载板：1块，4层Rogers材料。\n4. 空间变换器：1个，陶瓷基板。\n5. 弹簧压力销：512根，Pogo Pin，消耗品。\n6. 接地环：2个，铜镀金。\n\n备件寿命方面，探针针尖的寿命约为100万次，弹簧压力销的备货",
+      "chunks_preview": "| 料号 | 名称 | 适用机型 | 针数 | 间距（µm） |\n|------|------|---------|------|----------|\n| PRB-C01-200 | 标准探针卡 200mm | WPS-3000 | 256 | 100 |\n| PRB-C02-300 | 标准探针卡 300mm | WPS-3000Pro | 512 | 80 |\n| PRB-C03-RF | 射频探针卡 | WPS-3000+OPT-RF | 128 | 150 |\n| PRB-C04-HV | 高压探针卡 | WPS-3000+OPT-HV | 64 | 200 |\n\n## BOM 明细",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/料号BOM/探针卡料号与BOM清单.md"
+        ],
+        "forbidden_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md",
+          "培训/培训主题/探针卡维护培训主题资料.md"
+        ],
+        "expected_keywords": [
+          "PRB-C01-200",
+          "256",
+          "100 万次",
+          "Pogo Pin"
+        ],
+        "missing_keywords": [
+          "100 万次"
+        ],
+        "expected_chunk_keywords": [
+          "PRB-C01-200",
+          "256",
+          "100 万次",
+          "Pogo Pin"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "PRB-C01-200 探针卡的零件清单和备件寿命是什么？",
+        "notes": "验证 BOM 类文档与测试规范、培训资料的区分。"
+      }
+    },
+    {
+      "case_id": "R23",
+      "category": "retrieval",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "研发/机型/WPS-3200机型结构设计说明.md",
+      "top3_sources": [
+        "研发/机型/WPS-3200机型结构设计说明.md",
+        "研发/机型/WPS-3200机型结构设计说明.md",
+        "研发/机型/WPS-3200机型结构设计说明.md"
+      ],
+      "answer_preview": "WPS-3200双工位结构设计的特点主要包括以下几点：\n\n1. **双工位隔离布局**：双工位共享主平台控制逻辑，但在结构上进行物理隔离，以降低工位切换时的振动耦合。关键部位增加了防撞限位和独立维护窗口，便于现场快速排查。（来源：项目管理/项目/WPS-3200开发项目立项报告.md）\n\n2. **机架底座**：采用一体化焊接底座，提升整机刚性并降低高速运动振动。（来源：研发/机型/WPS-320",
+      "chunks_preview": "双工位共享主平台控制逻辑，但在结构上进行物理隔离，降低工位切换时的振动耦合。关键部位增加防撞限位和独立维护窗口，便于现场快速排查。\n\n### 2. 热管理优化\n\n结构设计预留板卡风道、温控回路和高压模块散热空间。风道采用前进后出的统一流向，减少局部热点；高热区与线缆区分层布置，降低长期热老化风险。 WPS-3200 面向高节拍、高稳定性和双工位扩展场景，在结构设计上重点优化整机刚性、模块拆装便利性、热管理路径和维护可达性。该机型不是对 WPS-3000 的简单放大，而是在平台承载、双工位布局和模块独立维护方面做了重新设计。\n\n## 整机结构组成\n\n| 模块 | 结构说明 |\n|------|-",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3200机型结构设计说明.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md",
+          "研发/版本/WPS-3200控制软件版本说明V1.5.md"
+        ],
+        "expected_keywords": [
+          "双工位隔离",
+          "封闭式结构",
+          "前进后出",
+          "热管理"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "双工位隔离",
+          "封闭式结构",
+          "前进后出",
+          "热管理"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WPS-3200 双工位结构设计有哪些特点？热管理方案是什么？",
+        "notes": "验证机型结构设计说明与规格书、版本说明的区分。"
+      }
+    },
+    {
+      "case_id": "R24",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "培训/岗位/测试开发工程师岗位说明书.md",
+      "top3_sources": [
+        "培训/岗位/测试开发工程师岗位说明书.md",
+        "培训/岗位/测试开发工程师岗位说明书.md",
+        "培训/岗位/测试开发工程师岗位说明书.md"
+      ],
+      "answer_preview": "测试开发工程师的岗位职责和技能要求如下：\n\n### 岗位职责\n1. **测试程序开发**：基于 ATE 平台（如 WPS-3000 / SoC 测试机）开发芯片 CP/FT 测试程序。[来源: 培训/岗位/测试开发工程师岗位说明书.md | 版本: V1.1 | 部门: 人力资源]\n2. **测试方案设计**：根据芯片规格书制定测试策略，定义测试项、判定门限和 Bin 分配。[来源: 培训/岗位/",
+      "chunks_preview": "### 技能要求\n- 熟练掌握 C/Python 编程，具备 ATE 测试程序开发经验\n- 熟悉半导体测试原理（DC 参数、功能测试、RF 测试）\n- 能阅读芯片规格书（Datasheet）并从中提取测试需求\n- 了解 ATPG、Scan 测试、DFT 基础知识 - P3：1~3 年，具备独立开发单模块测试程序的能力\n- P4：3~6 年，能独立完成复杂 SoC 芯片全套测试程序开发\n- P5：6 年以上，具备测试平台架构设计能力，可带领团队攻关\n\n### 技能要求\n\n- 熟练掌握 C/Python 编程，具备 ATE 测试程序开发经验\n- 熟悉半导体测试原理（DC 参数、功能测试、RF 测试",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "培训/岗位/测试开发工程师岗位说明书.md"
+        ],
+        "forbidden_sources": [
+          "培训/培训主题/WPS-3000现场工程师认证培训大纲.md",
+          "测试/测试项/晶圆CP测试项定义与规范.md"
+        ],
+        "expected_keywords": [
+          "POS-RD-TDE-001",
+          "ATT",
+          "CP/FT",
+          "DIB 板"
+        ],
+        "missing_keywords": [
+          "POS-RD-TDE-001"
+        ],
+        "expected_chunk_keywords": [
+          "POS-RD-TDE-001",
+          "ATT",
+          "CP/FT",
+          "DIB 板"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "测试开发工程师的岗位职责和技能要求是什么？",
+        "notes": "验证岗位说明书类文档与培训大纲和测试规范的区分。"
+      }
+    },
+    {
+      "case_id": "R25",
+      "category": "retrieval",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "服务/工单/服务工单WO-2025-0503.md",
+      "top3_sources": [
+        "服务/工单/服务工单WO-2025-0503.md",
+        "服务/工单/服务工单WO-2025-0503.md",
+        "服务/工单/服务工单WO-2025-0503.md"
+      ],
+      "answer_preview": "WO-2025-0503 工单中视觉定位精度不达标问题通过以下步骤得到解决：\n\n1. **确认视觉系统硬件安装正常**：首先确认了相机、镜头、光源等硬件安装符合规程。\n2. **排查振动干扰**：发现厂房地面存在低频振动，并确定为相邻压缩机组引起的。\n3. **临时隔振处理**：在设备底座加装隔振垫，降低基台振动幅值。\n4. **相机参数优化**：调整曝光时间，降低运动模糊对识别精度的影响。\n5.",
+      "chunks_preview": "新设备安装调试阶段，客户反馈视觉定位精度不达标：对 Die 进行 Fiducial 识别时，重复定位精度（3σ）实测为 5.8 µm，超出技术规格要求的 3 µm，导致部分 Die 出现探针偏位，无法通过站点验收。\n\n## 处理过程记录\n\n**13:30** — 到达现场：确认视觉系统硬件安装正常，相机、镜头、光源均已按规程安装。\n\n**14:00** — 排查振动干扰：测量设备基台振动频谱，发现厂房地面存在 12 Hz 低频振动，来自相邻压缩机组。\n\n**14:30** — 临时隔振处理：在设备底座加装隔振垫（4 点支撑），重测基台振动幅值从 0.8 µm 降至 0.2 µm。\n\n**15:",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "服务/工单/服务工单WO-2025-0503.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障案例/VIS-1002-Fiducial识别失败案例.md",
+          "服务/工单/服务工单WO-2025-0418.md"
+        ],
+        "expected_keywords": [
+          "3σ",
+          "2.4 µm",
+          "隔振垫",
+          "12 Hz"
+        ],
+        "missing_keywords": [
+          "12 Hz"
+        ],
+        "expected_chunk_keywords": [
+          "3σ",
+          "2.4 µm",
+          "隔振垫",
+          "12 Hz"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {},
+        "question": "WO-2025-0503 工单中视觉定位精度不达标问题是如何解决的？",
+        "notes": "验证视觉精度类工单与 Fiducial 故障案例的区分。"
+      }
+    },
+    {
+      "case_id": "M13",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "服务/工单/服务工单WO-2025-0312.md",
+      "top3_sources": [
+        "服务/工单/服务工单WO-2025-0312.md",
+        "服务/工单/服务工单WO-2025-0312.md",
+        "服务/工单/服务工单WO-2025-0519.md"
+      ],
+      "answer_preview": "Chuck超温故障码（TCU-3001）的处理方法如下：\n\n1. **立即切断Chuck电源**：首先，应立即切断Chuck的电源，以防止设备继续过热并造成进一步的损害。（来源：服务/工单/服务工单WO-2025-0312.md | 版本: V1.0 | 部门: 服务）\n\n2. **自然冷却至室温**：然后，让Chuck自然冷却至室温，以降低温度并避免因快速冷却造成的应力损坏。（来源：服务/工单/",
+      "chunks_preview": "客户报告设备在测试过程中突然停机，屏幕显示 TCU-3001 故障码，Chuck 温控失控，设备当前 Chuck 温度持续升高，已达到 180°C 超温保护上限，测试产线中断约 2 小时。\n\n## 处理过程记录\n\n**09:45** — 电话远程指导：确认故障码为 TCU-3001（Chuck 超温），要求立即切断 Chuck 电源，自然冷却至室温。\n\n**10:30** — 到达现场：检查冷却水管路，发现供水泵电源指示灯熄灭。\n\n**10:45** — 确认根因：冷却水循环泵因电源模块烧毁停止工作，导致 Chuck 散热失效，温度失控上升。\n\n**11:20** — 更换备件：更换冷却水泵电",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "服务/工单/服务工单WO-2025-0312.md"
+        ],
+        "forbidden_sources": [
+          "维护/故障码/WPS-3000故障码定义手册.md"
+        ],
+        "expected_keywords": [
+          "TCU-3001",
+          "冷却水泵"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "TCU-3001",
+          "冷却水泵"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "work_order"
+        },
+        "question": "Chuck 超温故障码的处理方法是什么？",
+        "notes": "验证 doc_type=work_order 筛选优先命中工单，不命中故障码手册。"
+      }
+    },
+    {
+      "case_id": "M14",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+      "top3_sources": [
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md",
+        "研发/版本/WPS-3200控制软件版本说明V1.5.md"
+      ],
+      "answer_preview": "WPS-3200最新版本V1.5.0的新增功能包括：\n\n1. **双工位调度优化**：新增双工位任务调度策略，在保证安全互锁的前提下减少等待空转时间，典型场景节拍缩短12%。（来源：研发/版本/WPS-3200控制软件版本说明V1.5.md）\n\n2. **视觉与运动联合标定**：集成联合标定向导，可同时刷新视觉坐标系和运动补偿参数，降低现场调机复杂度。（来源：研发/版本/WPS-3200控制软件版",
+      "chunks_preview": "|项目|内容|\n|------|------|\n|版本号|V1.5.0|\n|发布日期|2025-08-12|\n|适用机型|WPS-3200|\n|前置版本|V1.4.2|\n|发布类型|平台升级版本|\n\n## 新增功能 新增双工位任务调度策略，在保证安全互锁的前提下减少等待空转时间，典型场景节拍缩短 12%。\n\n### 2. 视觉与运动联合标定\n\n集成联合标定向导，可同时刷新视觉坐标系和运动补偿参数，降低现场调机复杂度。 ### 1. 双工位调度优化\n\n新增双工位任务调度策略，在保证安全互锁的前提下减少等待空转时间，典型场景节拍缩短 12%。 集成联合标定向导，可同时刷新视觉坐标系和运动补偿参数，",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/版本/WPS-3200控制软件版本说明V1.5.md"
+        ],
+        "forbidden_sources": [
+          "研发/版本/WPS-3000软件版本发布说明V2.3.md"
+        ],
+        "expected_keywords": [
+          "双工位调度优化",
+          "视觉与运动联合标定"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "双工位调度优化",
+          "视觉与运动联合标定"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "release_note",
+          "version": "V1.5"
+        },
+        "question": "WPS-3200 最新版本的新增功能有哪些？",
+        "notes": "验证 doc_type=release_note + version=V1.5 精确定位 WPS-3200 版本说明。"
+      }
+    },
+    {
+      "case_id": "M15",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "研发/料号BOM/探针卡料号与BOM清单.md",
+      "top3_sources": [
+        "研发/料号BOM/探针卡料号与BOM清单.md",
+        "研发/料号BOM/探针卡料号与BOM清单.md",
+        "研发/料号BOM/探针台运动平台BOM汇总.md"
+      ],
+      "answer_preview": "探针卡的主要零件包括：探针针尖（钨针）、探针固定座、PCB载板、空间变换器、弹簧压力销和接地环。探针针尖（钨针）的寿命约为100万次，弹簧压力销也是消耗品，其寿命取决于使用频率和条件，但通常建议备货量较高以备更换。具体信息来源于文档《研发/料号BOM/探针卡料号与BOM清单.md | 版本: V2.1 | 部门: 研发》。",
+      "chunks_preview": "| 序号 | 子料号 | 零件名称 | 数量 | 单位 | 备注 |\n|-----|-------|---------|------|------|------|\n| 1 | PRB-N01 | 探针针尖（钨针） | 256 | 根 | 消耗品，寿命约 100 万次 |\n| 2 | PRB-F01 | 探针固定座 | 1 | 个 | 不锈钢，可重复使用 |\n| 3 | PRB-P01 | PCB 载板 | 1 | 块 | 4 层 Rogers 材料 |\n| 4 | PRB-S01 | 空间变换器 | 1 | 个 | 陶瓷基板 |\n| 5 | PRB-E01 | 弹簧压力销 | 512 | 根 ",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/料号BOM/探针卡料号与BOM清单.md"
+        ],
+        "forbidden_sources": [
+          "测试/测试项/晶圆CP测试项定义与规范.md"
+        ],
+        "expected_keywords": [
+          "PRB-C01-200",
+          "100 万次"
+        ],
+        "missing_keywords": [
+          "PRB-C01-200",
+          "100 万次"
+        ],
+        "expected_chunk_keywords": [
+          "PRB-C01-200",
+          "100 万次"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "bom"
+        },
+        "question": "探针卡主要零件有哪些？寿命是多少？",
+        "notes": "验证 doc_type=bom 筛选能精确返回 BOM 文档。"
+      }
+    },
+    {
+      "case_id": "M16",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "项目管理/客户/华东先进封装客户档案.md",
+      "top3_sources": [
+        "项目管理/客户/华东先进封装客户档案.md",
+        "项目管理/客户/华东先进封装客户档案.md",
+        "项目管理/客户/华东先进封装客户档案.md"
+      ],
+      "answer_preview": "封装测试代工客户对MES接口的主要要求如下：\n\n1. **试产阶段关注点**：在批量导入前，客户要求提供不同封装形态的标准切换时间基线，关注换型效率和设备OEE（来源：项目管理/客户/华东先进封装客户档案.md | 版本: V1.1 | 部门: 销售）。\n\n2. **接口变更**：客户使用的MES与条码系统由IT团队维护，所有接口变更需提前两周在集成测试环境完成联调（来源：项目管理/客户/华东先进",
+      "chunks_preview": "1. 客户试产阶段更关注换型效率和设备 OEE，要求在批量导入前给出不同封装形态的标准切换时间基线。\n2. 现场使用的 MES 与条码系统由客户 IT 团队维护，所有接口变更需提前两周在集成测试环境完成联调。\n3. 客户希望设备支持快速导出工位级良率报表，便于对比不同班次和不同夹具配置下的生产表现。\n4. 由于厂区洁净规范严格，所有到场工程师必须提前完成 EHS 培训并取得临时施工授权。\n\n## 合作观察与后续建议\n\n该客户项目处于从试产向量产切换的关键阶段，对交付时效与数据联通要求较高。合作重点不是单纯交付设备，而是帮助客户建立稳定的换型、追溯和报表机制。后续应把封装工艺差异、MES 接口变",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "项目管理/客户/华东先进封装客户档案.md"
+        ],
+        "forbidden_sources": [
+          "项目管理/项目/WPS-3000Pro项目立项报告.md"
+        ],
+        "expected_keywords": [
+          "OSAT",
+          "昆山厂区"
+        ],
+        "missing_keywords": [
+          "OSAT",
+          "昆山厂区"
+        ],
+        "expected_chunk_keywords": [
+          "OSAT",
+          "昆山厂区"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "customer"
+        },
+        "question": "封装测试代工客户对 MES 接口有哪些要求？",
+        "notes": "验证 doc_type=customer 筛选时能区分客户档案与项目文档。"
+      }
+    },
+    {
+      "case_id": "M17",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "质量/质量事件/质量事件报告QE-2025-0091.md",
+      "top3_sources": [
+        "质量/质量事件/质量事件报告QE-2025-0091.md",
+        "质量/质量事件/质量事件报告QE-2025-0091.md",
+        "质量/质量事件/质量事件报告QE-2025-0091.md"
+      ],
+      "answer_preview": "WPS-3200 高温测试重复性偏差问题的影响范围包括：\n\n- 受影响批次：11 个 Lot。\n- 受影响器件数量：约 18,000 颗。\n- 客户试验计划延迟：5 个工作日。\n- 车规验证资料需补充稳定性说明。\n\n这些问题不仅影响了生产进度，还可能影响到后续的验证结论，对客户的项目产生了重大影响。\n\n以上信息来源于《质量/质量事件/质量事件报告QE-2025-0091.md | 版本: V1.1",
+      "chunks_preview": "|属性|内容|\n|------|------|\n|事件编号|QE-2025-0091|\n|事件类型|现场异常 — 高温重复性偏差|\n|发现日期|2025-04-06|\n|关闭日期|2025-04-28|\n|涉及产品|WPS-3200 高温测试平台|\n|客户|深圳安程车规芯片有限公司|\n|严重等级|重大（S2）|\n|质量负责人|质量部刘工|\n\n## 问题描述\n\n客户在 150°C 参数测试阶段发现同批次器件重复测量值分散度明显扩大，高温测试结果无法稳定复现。问题连续影响三个工作日，造成 11 个 Lot 暂停放行，并触发客户质量例会升级。由于客户为车规项目，质量团队需同步评估是否影响后续验证结论",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0091.md"
+        ],
+        "forbidden_sources": [
+          "质量/8D/8D报告-2025-0091.md"
+        ],
+        "expected_keywords": [
+          "11 个 Lot",
+          "18,000 颗"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "11 个 Lot",
+          "18,000 颗"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "quality_event"
+        },
+        "question": "WPS-3200 高温测试重复性偏差问题的影响范围是什么？",
+        "notes": "验证 doc_type=quality_event 筛选不会命中同一事件的 8D 报告。"
+      }
+    },
+    {
+      "case_id": "M18",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "质量/8D/8D报告-2025-0091.md",
+      "top3_sources": [
+        "质量/8D/8D报告-2025-0091.md",
+        "质量/8D/8D报告-2025-0091.md",
+        "质量/8D/8D报告-2025-0091.md"
+      ],
+      "answer_preview": "WPS-3200 高温测试重复性偏差的根因分析和纠正措施如下：\n\n**根因分析**：\n1. 重复性下降是因为高温阶段实际温度波动超出控制范围。\n2. 温度波动超限是因为控制回路在稳态区存在振荡。\n3. 回路振荡是因为传感器反馈迟滞与旧参数不匹配。\n4. 参数不匹配是因为高温负载变化后未重新做整定。\n5. 未整定是因为高温段稳定性验证未纳入版本升级强制项。\n\n**纠正措施**：\n1. 更换老化传感器",
+      "chunks_preview": "|属性|内容|\n|------|------|\n|8D 编号|8D-2025-0091|\n|关联质量事件|QE-2025-0091|\n|开单日期|2025-04-06|\n|关闭日期|2025-04-28|\n|问题标题|WPS-3200 高温段温控漂移导致参数测试重复性下降|\n\n## D1：建立团队\n\n|姓名|角色|职责|\n|------|------|------|\n|刘工（质量）|团队长|推进 8D 节点和客户沟通|\n|周工（研发）|成员|分析控制算法与硬件状态|\n|孙工（测试）|成员|执行高温重复性验证|\n|赵工（服务）|成员|客户现场实施与数据采集| **根本原因（5Why）**：\n\n1",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "质量/8D/8D报告-2025-0091.md"
+        ],
+        "forbidden_sources": [
+          "质量/质量事件/质量事件报告QE-2025-0091.md"
+        ],
+        "expected_keywords": [
+          "PID 参数",
+          "传感器老化"
+        ],
+        "missing_keywords": [
+          "传感器老化"
+        ],
+        "expected_chunk_keywords": [
+          "PID 参数",
+          "传感器老化"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "8d"
+        },
+        "question": "WPS-3200 高温测试重复性偏差的根因分析和纠正措施是什么？",
+        "notes": "同一事件同一问题，用 doc_type=8d 筛选应命中 8D 报告而非质量事件报告。"
+      }
+    },
+    {
+      "case_id": "M19",
+      "category": "metadata_filter",
+      "passed": true,
+      "score": 5,
+      "max_score": 5,
+      "top1_source": "研发/机型/WPS-3100机型规格说明.md",
+      "top3_sources": [
+        "研发/机型/WPS-3100机型规格说明.md",
+        "研发/机型/WPS-3100机型规格说明.md",
+        "研发/机型/WPS-3100机型规格说明.md"
+      ],
+      "answer_preview": "WPS-3100 高效率晶圆探针测试机的核心技术指标如下：\n\n- **测试通道数**：768 路数字通道 + 96 路模拟通道\n- **最高测试频率**：2.5 GHz\n- **换片时间**：< 6.5 秒\n- **重复定位精度**：±0.4 µm\n- **温控范围**：-50°C ~ +180°C\n- **并行 Site 数**：最多 4 Site\n- **平均可用率目标**：≥ 98%\n\n以上",
+      "chunks_preview": "| 属性 | 值 |\n|------|----|\n| 机型名称 | WPS-3100 高效率晶圆探针测试机 |\n| 产品线 | 晶圆测试设备（WPS） |\n| 机型代码 | WPS-3100 |\n| 发布版本 | V1.3 |\n| 发布日期 | 2025-05 |\n| 适用晶圆尺寸 | 200 mm / 300 mm |\n\n## 核心技术指标\n\n- **测试通道数**：768 路数字通道 + 96 路模拟通道\n- **最高测试频率**：2.5 GHz\n- **换片时间**：< 6.5 秒\n- **重复定位精度**：±0.4 µm\n- **温控范围**：-50°C ~ +180°C\n- **并行",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": true,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "研发/机型/WPS-3100机型规格说明.md"
+        ],
+        "forbidden_sources": [
+          "研发/机型/WPS-3000机型规格说明.md"
+        ],
+        "expected_keywords": [
+          "768 路数字通道",
+          "2.5 GHz"
+        ],
+        "missing_keywords": [],
+        "expected_chunk_keywords": [
+          "768 路数字通道",
+          "2.5 GHz"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "spec",
+          "version": "V1.3"
+        },
+        "question": "WPS-3100 的核心技术指标是什么？",
+        "notes": "验证 doc_type=spec + version=V1.3 精确锁定 WPS-3100 规格书。"
+      }
+    },
+    {
+      "case_id": "M20",
+      "category": "metadata_filter",
+      "passed": false,
+      "score": 4,
+      "max_score": 5,
+      "top1_source": "测试/测试项/高压参数测试项定义说明.md",
+      "top3_sources": [
+        "测试/测试项/高压参数测试项定义说明.md",
+        "测试/测试项/高压参数测试项定义说明.md",
+        "测试/测试项/高压参数测试项定义说明.md"
+      ],
+      "answer_preview": "高压器件BVdss测试的判定方法如下：\n\n- 目的：验证MOSFET器件在栅极接地状态下的漏源耐压能力。\n- 方法：在VGS = 0V，漏极电流IDS = 250 µA的条件下测量对应的VDS。\n- 判定：如果BVdss < 规格值 ×0.95，则判定为Fail。\n- 仪器条件：使用高压SMU（最大1000V输出能力），并设置强制限流为1 mA。\n\n以上信息来源于文档《测试/测试项/高压参数测试项",
+      "chunks_preview": "### BV-001：漏源击穿电压（BVdss）\n\n- **目的**：验证 MOSFET 器件在栅极接地状态下的漏源耐压能力\n- **方法**：VGS = 0V，漏极电流 IDS = 250 µA 时测量对应 VDS\n- **判定**：BVdss < 规格值 ×0.95 为 Fail\n- **仪器条件**：高压 SMU（最大 1000V 输出能力），强制限流 1 mA - **目的**：验证 MOSFET 器件在栅极接地状态下的漏源耐压能力\n- **方法**：VGS = 0V，漏极电流 IDS = 250 µA 时测量对应 VDS\n- **判定**：BVdss < 规格值 ×0.95 为 Fa",
+      "checks": {
+        "top1_matches_expected": true,
+        "top3_contains_expected": true,
+        "top3_excludes_forbidden": true,
+        "answer_contains_keywords": false,
+        "chunks_contain_keywords": true
+      },
+      "details": {
+        "expected_sources": [
+          "测试/测试项/高压参数测试项定义说明.md"
+        ],
+        "forbidden_sources": [
+          "质量/FMEA/高压测试链路FMEA分析.md"
+        ],
+        "expected_keywords": [
+          "BV-001",
+          "BVdss",
+          "1000V"
+        ],
+        "missing_keywords": [
+          "BV-001"
+        ],
+        "expected_chunk_keywords": [
+          "BV-001",
+          "BVdss",
+          "1000V"
+        ],
+        "missing_chunk_keywords": [],
+        "filters": {
+          "doc_type": "test_spec"
+        },
+        "question": "高压器件 BVdss 测试的判定方法是什么？",
+        "notes": "验证 doc_type=test_spec 筛选高压测试项定义，区分 FMEA 分析文档。"
       }
     }
   ]

@@ -56,6 +56,10 @@ _EXACT_TERM_PATTERNS = (
     re.compile(r"\bV\d+(?:\.\d+){1,2}\b", re.IGNORECASE),
     re.compile(r"\b[A-Z]{2,}(?:-[A-Z0-9]+)+\b", re.IGNORECASE),
 )
+_RE_MODEL_IDENTIFIER = re.compile(r"\b[A-Z]{2,6}-\d{3,5}\b", re.IGNORECASE)
+
+# 提取中文技术词组（用于源路径加权，区分同类文档如不同模块 FMEA）
+_RE_CHINESE_TECH_PHRASE = re.compile(r'[\u4e00-\u9fff]{3,8}')
 
 
 def _load_synonyms(path: Path = _SYNONYMS_PATH) -> Dict[str, List[str]]:
@@ -162,6 +166,27 @@ def _extract_exact_terms(query: str) -> List[str]:
                 continue
             seen.add(norm)
             found.append(term)
+    # 中文技术词组：提取查询中连续中文字符的 4-6 字滑窗，
+    # 用于源路径加权（区分如"高压测试链路"vs"视觉模块"等同类文档）
+    idx = 0
+    while idx < len(query):
+        ch = query[idx]
+        if '\u4e00' <= ch <= '\u9fff':
+            # 找到连续中文段落终点
+            end = idx
+            while end < len(query) and '\u4e00' <= query[end] <= '\u9fff':
+                end += 1
+            run = query[idx:end]
+            # 提取 4-6 字滑窗
+            for length in range(4, min(7, len(run) + 1)):
+                for start in range(len(run) - length + 1):
+                    phrase = run[start:start + length]
+                    if phrase not in seen:
+                        seen.add(phrase)
+                        found.append(phrase)
+            idx = end
+        else:
+            idx += 1
     return found
 
 
@@ -170,6 +195,53 @@ def _contains_exact_term(text: str, term: str) -> bool:
         return False
     pattern = re.compile(rf"(?<![A-Z0-9]){re.escape(term)}(?![A-Z0-9])", re.IGNORECASE)
     return bool(pattern.search(text))
+
+
+def _extract_model_terms(text: str) -> List[str]:
+    return [m.group(0).upper() for m in _RE_MODEL_IDENTIFIER.finditer(text or "")]
+
+
+def _model_match_adjustment(query: str, evidence: Dict[str, Any]) -> float:
+    query_models = _extract_model_terms(query)
+    if not query_models:
+        return 0.0
+
+    evidence_text = " ".join(
+        str(evidence.get(field, "")) for field in ("source", "model_type", "content")
+    )
+    evidence_models = _extract_model_terms(evidence_text)
+    if not evidence_models:
+        return 0.0
+
+    query_set = set(query_models)
+    evidence_set = set(evidence_models)
+    if query_set & evidence_set:
+        return 1.0
+
+    query_prefixes = {item.split("-")[0] for item in query_set}
+    evidence_prefixes = {item.split("-")[0] for item in evidence_set}
+    if query_prefixes & evidence_prefixes:
+        return -1.6
+    return 0.0
+
+
+def _doc_type_query_adjustment(query: str, evidence: Dict[str, Any]) -> float:
+    doc_type = str(evidence.get("doc_type", "")).lower()
+    if not doc_type:
+        return 0.0
+
+    bonus = 0.0
+    if any(sig in query for sig in ("判定标准", "测试规范", "定义与规范", "测试项")):
+        if doc_type == "test_spec":
+            bonus += 1.2
+        elif doc_type == "test_case":
+            bonus -= 0.6
+    if any(sig in query for sig in ("测试用例", "前置条件", "预期输出", "回归测试")):
+        if doc_type == "test_case":
+            bonus += 1.2
+        elif doc_type == "test_spec":
+            bonus -= 0.4
+    return bonus
 
 
 def _exact_match_boost(evidence: Dict[str, Any], exact_terms: List[str]) -> float:
@@ -185,18 +257,52 @@ def _exact_match_boost(evidence: Dict[str, Any], exact_terms: List[str]) -> floa
 
     boost = 0.0
     for term in exact_terms:
-        if _contains_exact_term(source, term):
-            boost += 1.2
-        if _contains_exact_term(doc_id, term):
-            boost += 1.0
-        if _contains_exact_term(version, term):
-            boost += 1.0
-        if _contains_exact_term(model_type, term):
-            boost += 1.0
-        if _contains_exact_term(content, term):
-            boost += 0.6
+        is_chinese = any('\u4e00' <= c <= '\u9fff' for c in term)
+        if is_chinese:
+            # 中文词组：仅模块在源路径中的命中情况进行轻度加权（避免拟人化 content 匹配）
+            if term in source:
+                boost += 0.8
+        else:
+            if _contains_exact_term(source, term):
+                boost += 1.2
+            if _contains_exact_term(doc_id, term):
+                boost += 1.0
+            if _contains_exact_term(version, term):
+                boost += 1.0
+            if _contains_exact_term(model_type, term):
+                boost += 1.0
+            if _contains_exact_term(content, term):
+                boost += 0.6
+            # 对 doc_id 格式 PREFIX-YEAR-NUM，额外尝试匹配文件名中的 YEAR-NUM 后缀
+            # 解决如 “8D报告-2025-0091.md” vs 查询中 “8D-2025-0091” 此类命名不一致的问题
+            parts = term.split("-")
+            if len(parts) == 3 and parts[1].isdigit() and parts[2].isdigit():
+                year_num = f"{parts[1]}-{parts[2]}"
+                if _contains_exact_term(source, year_num):
+                    boost += 0.9
 
     return min(boost, 3.0)
+
+
+def _source_overlap_boost(query: str, evidence: Dict[str, Any]) -> float:
+    """根据 query 与 source 路径的词面重合度做轻量加权。"""
+    source = evidence.get("source", "")
+    if not query or not source:
+        return 0.0
+    tokens = []
+    seen: set[str] = set()
+    for token in _tokenize(query):
+        token = token.strip()
+        if len(token) < 2 or token in _WEAK_TERMS:
+            continue
+        key = token.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        tokens.append(token)
+    source_lower = source.lower()
+    hits = sum(1 for token in tokens if token.lower() in source_lower)
+    return min(hits * 0.12, 0.84)
 
 
 def _norm_query(text: str) -> str:
@@ -708,6 +814,10 @@ def retrieve_hybrid(
     if exact_terms:
         for key in keys:
             rrf_scores[key] += _exact_match_boost(evidence_map[key], exact_terms)
+    for key in keys:
+        rrf_scores[key] += _model_match_adjustment(query, evidence_map[key])
+        rrf_scores[key] += _doc_type_query_adjustment(query, evidence_map[key])
+        rrf_scores[key] += _source_overlap_boost(query, evidence_map[key])
 
     ranked_keys = sorted(rrf_scores.keys(), key=lambda k: rrf_scores[k], reverse=True)
 

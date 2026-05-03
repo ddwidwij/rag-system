@@ -31,6 +31,14 @@
     .badge-error   { background:#fee2e2; color:#dc2626; }
     .badge-warning { background:#fef9c3; color:#ca8a04; }
     .badge-info    { background:#e0f2fe; color:#0369a1; }
+    /* Agent 决策面板 */
+    .agent-tag-blue   { background:#eff6ff; color:#2563eb; }
+    .agent-tag-green  { background:#f0fdf4; color:#16a34a; }
+    .agent-tag-yellow { background:#fefce8; color:#ca8a04; }
+    .agent-tag-red    { background:#fef2f2; color:#dc2626; }
+    .agent-tag-purple { background:#faf5ff; color:#7c3aed; }
+    .agent-tag-orange { background:#fff7ed; color:#c2410c; }
+    .agent-tag-gray   { background:#f3f4f6; color:#4b5563; }
   </style>
 </head>
 <body class="bg-gray-50 h-screen flex flex-col overflow-hidden">
@@ -643,8 +651,25 @@ async function sendMessage() {
   // 助手消息框
   const assistantDiv = appendMessage('assistant', `
     <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+      <!-- Agent 决策面板 -->
+      <div class="agent-wrap hidden mb-3 text-xs rounded-lg overflow-hidden border border-gray-100">
+        <div class="agent-wrap-header flex items-center justify-between px-3 py-1.5 bg-gray-50 cursor-pointer select-none">
+          <span class="text-gray-500 font-medium flex items-center gap-1">🤖 Agent 决策过程</span>
+          <svg class="w-3 h-3 text-gray-400 agent-chevron transition-transform" style="transform:rotate(180deg)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="agent-body px-3 py-2 space-y-1.5 border-t border-gray-100">
+          <div class="plan-el"></div>
+          <div class="route-el"></div>
+          <div class="ev-critique-el"></div>
+          <div class="retry-el"></div>
+          <div class="critique-el"></div>
+          <div class="llm-relevance-el"></div>
+        </div>
+      </div>
       <!-- 来源折叠 -->
-      <div id="sources-wrap-${Date.now()}" class="sources-wrap hidden mb-3">
+      <div class="sources-wrap hidden mb-3">
         <details>
           <summary class="text-xs text-gray-400 cursor-pointer select-none hover:text-gray-600 mb-2">📎 参考来源</summary>
           <div class="sources-list space-y-2"></div>
@@ -660,11 +685,26 @@ async function sendMessage() {
       </div>
     </div>`);
 
-  const sourcesWrap = assistantDiv.querySelector('.sources-wrap');
+  const agentWrap     = assistantDiv.querySelector('.agent-wrap');
+  const agentHeader   = assistantDiv.querySelector('.agent-wrap-header');
+  const agentBody     = assistantDiv.querySelector('.agent-body');
+  const planEl        = assistantDiv.querySelector('.plan-el');
+  const routeEl       = assistantDiv.querySelector('.route-el');
+  const evCritiqueEl  = assistantDiv.querySelector('.ev-critique-el');
+  const retryEl       = assistantDiv.querySelector('.retry-el');
+  const critiqueEl    = assistantDiv.querySelector('.critique-el');
+  const llmRelEl      = assistantDiv.querySelector('.llm-relevance-el');
+  const sourcesWrap   = assistantDiv.querySelector('.sources-wrap');
   const sourcesList = assistantDiv.querySelector('.sources-list');
   const answerEl    = assistantDiv.querySelector('.answer-el');
   const typingEl    = assistantDiv.querySelector('.typing-el');
   let rawText = '';
+
+  agentHeader.addEventListener('click', () => {
+    agentBody.classList.toggle('hidden');
+    agentWrap.querySelector('.agent-chevron').style.transform =
+      agentBody.classList.contains('hidden') ? '' : 'rotate(180deg)';
+  });
 
   setLoading(true);
   try {
@@ -694,13 +734,25 @@ async function sendMessage() {
         if (!line.startsWith('data: ')) continue;
         let evt;
         try { evt = JSON.parse(line.slice(6)); } catch { continue; }
-        if (evt.type === 'sources') {
+        if (evt.type === 'plan') {
+          renderAgentPlan(evt.plan, agentWrap, planEl);
+        } else if (evt.type === 'tool_plan') {
+          renderAgentRoute(evt.plan, agentWrap, routeEl);
+        } else if (evt.type === 'evidence_critique') {
+          renderAgentEvidenceCritique(evt.critique, agentWrap, evCritiqueEl);
+        } else if (evt.type === 'retry') {
+          renderAgentRetry(evt, agentWrap, agentBody, retryEl);
+        } else if (evt.type === 'sources') {
           renderSources(evt.sources, sourcesWrap, sourcesList);
         } else if (evt.type === 'chunk') {
           typingEl.classList.add('hidden');
           rawText += evt.content;
           answerEl.innerHTML = marked.parse(rawText);
           scrollBottom();
+        } else if (evt.type === 'critique') {
+          renderAgentCritique(evt.critique, agentWrap, critiqueEl);
+        } else if (evt.type === 'llm_relevance') {
+          renderAgentLLMRelevance(evt, agentWrap, agentBody, llmRelEl);
         } else if (evt.type === 'done') {
           typingEl.classList.add('hidden');
         }
@@ -788,6 +840,150 @@ function renderSources(sources, wrap, list) {
     }
     list.appendChild(el);
   });
+}
+
+/* ════════════════════════════════════════════
+   Agent 决策面板渲染
+════════════════════════════════════════════ */
+const INTENT_LABELS = {
+  spec: '规格书', release_note: '版本说明', fault_code: '故障码',
+  fault_case: '故障案例', project: '项目文档', customer: '客户档案',
+  quality_event: '质量事件', '8d': '8D报告', fmea: 'FMEA',
+  general: '通用查询', web_search: '联网搜索', sql_query: '数据库查询',
+};
+const ROUTE_LABELS   = { kb: '本地知识库', web: '联网搜索', sql: '数据库查询', manual: '人工处理' };
+const ROUTE_COLORS   = { kb: 'blue', web: 'green', sql: 'purple', manual: 'orange' };
+const STRATEGY_LABELS = {
+  exact_match_boost: '精确匹配增强', tighten_filter: '收紧过滤',
+  expand_query: '扩展查询', relax_filter: '放宽过滤', none: '无',
+};
+
+function _atag(text, color) {
+  return `<span class="inline-block text-xs px-1.5 py-0.5 rounded font-medium agent-tag-${color || 'blue'}">${esc(text)}</span>`;
+}
+
+function _showAgent(wrapEl) {
+  wrapEl.classList.remove('hidden');
+}
+
+function renderAgentPlan(plan, wrapEl, planEl) {
+  if (!plan) return;
+  _showAgent(wrapEl);
+  const ents = plan.entities || {};
+  const allEnts = [
+    ...(ents.fault_codes || []),
+    ...(ents.model_types || []),
+    ...(ents.doc_ids     || []),
+    ...(ents.versions    || []),
+  ];
+  const intentLabel = INTENT_LABELS[plan.intent] || plan.intent || '';
+  const rows = [];
+  if (intentLabel) {
+    rows.push(`<div class="flex items-center gap-1.5"><span class="text-gray-400 w-14 shrink-0">意图</span>${_atag(intentLabel, 'blue')}</div>`);
+  }
+  if (allEnts.length) {
+    rows.push(`<div class="flex items-start gap-1.5"><span class="text-gray-400 w-14 shrink-0 mt-0.5">实体</span><div class="flex flex-wrap gap-1">${allEnts.map(e => _atag(e, 'gray')).join('')}</div></div>`);
+  }
+  if (plan.rewritten_query && plan.rewritten_query !== plan.raw_question) {
+    rows.push(`<div class="flex items-start gap-1.5"><span class="text-gray-400 w-14 shrink-0 mt-0.5">改写</span><span class="text-gray-600 leading-relaxed">${esc(plan.rewritten_query)}</span></div>`);
+  }
+  if (plan.is_complex && plan.sub_queries && plan.sub_queries.length) {
+    const qList = plan.sub_queries.map((q, i) => `<span class="text-gray-500">${i + 1}. ${esc(q)}</span>`).join('');
+    rows.push(`<div class="flex items-start gap-1.5"><span class="text-gray-400 w-14 shrink-0 mt-0.5">子问题</span><div class="flex flex-col gap-0.5">${qList}</div></div>`);
+  }
+  if (rows.length) {
+    planEl.innerHTML = `<div class="text-xs space-y-1">${rows.join('')}</div>`;
+  }
+}
+
+function renderAgentEvidenceCritique(ec, wrapEl, evCritiqueEl) {
+  if (!ec) return;
+  _showAgent(wrapEl);
+  const icon  = ec.passed ? '✓' : '✗';
+  const color = ec.passed ? 'green' : 'yellow';
+  const score = `${icon} 置信度 ${((ec.max_score || 0) * 100).toFixed(0)}%`;
+  const issues  = (ec.issues  || []).join('、');
+  const missing = (ec.missing_entities || []);
+  evCritiqueEl.innerHTML = `<div class="text-xs pt-1.5 mt-1 border-t border-gray-100">
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-gray-400 w-14 shrink-0">检索自检</span>
+      ${_atag(score, color)}
+      ${issues  ? `<span class="text-gray-400">${esc(issues)}</span>` : ''}
+      ${missing.length ? `<span class="text-gray-400">实体未命中：${missing.map(k => esc(k)).join('、')}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderAgentRoute(execPlan, wrapEl, routeEl) {
+  if (!execPlan) return;
+  _showAgent(wrapEl);
+  const color = ROUTE_COLORS[execPlan.route] || 'blue';
+  const label = ROUTE_LABELS[execPlan.route]  || execPlan.route || '';
+  const toolsHtml = (execPlan.tools || []).map(t => _atag(t, 'gray')).join(' ');
+  routeEl.innerHTML = `<div class="text-xs flex items-center gap-1.5 pt-1.5 mt-1 border-t border-gray-100">
+    <span class="text-gray-400 w-14 shrink-0">路由</span>
+    ${_atag(label, color)}
+    ${toolsHtml ? `<span class="text-gray-300 mx-0.5">|</span><span class="text-gray-400">工具</span>${toolsHtml}` : ''}
+  </div>`;
+}
+
+function renderAgentRetry(evt, wrapEl, bodyEl, retryEl) {
+  _showAgent(wrapEl);
+  // 触发重试时自动展开面板
+  bodyEl.classList.remove('hidden');
+  wrapEl.querySelector('.agent-chevron').style.transform = 'rotate(180deg)';
+  const reasons  = (evt.reason  || []).join('、') || '-';
+  const strategy = STRATEGY_LABELS[evt.strategy] || evt.strategy || '-';
+  retryEl.innerHTML = `<div class="text-xs pt-1.5 mt-1 border-t border-gray-100 space-y-1">
+    <div class="flex items-center gap-1.5">
+      <span class="agent-tag-yellow text-xs px-1.5 py-0.5 rounded font-semibold">⚡ 触发二次检索</span>
+      <span class="text-gray-400">${esc(reasons)}</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="text-gray-400 w-14 shrink-0">策略</span>${_atag(strategy, 'yellow')}
+    </div>
+    ${evt.retry_query ? `<div class="flex items-start gap-1.5"><span class="text-gray-400 w-14 shrink-0 mt-0.5">新查询</span><span class="text-gray-600">${esc(evt.retry_query)}</span></div>` : ''}
+  </div>`;
+}
+
+function renderAgentCritique(critique, wrapEl, critiqueEl) {
+  if (!critique) return;
+  _showAgent(wrapEl);
+  const pct     = ((critique.coverage_rate || 0) * 100).toFixed(0);
+  const color   = critique.passed ? 'green' : 'red';
+  const icon    = critique.passed ? '✓' : '✗';
+  const missing = (critique.missing_keywords || []);
+  critiqueEl.innerHTML = `<div class="text-xs pt-1.5 mt-1 border-t border-gray-100">
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-gray-400 w-14 shrink-0">回答质检</span>
+      ${_atag(`${icon} 关键词覆盖 ${pct}%`, color)}
+      ${missing.length ? `<span class="text-gray-400">缺失：${missing.map(k => esc(k)).join('、')}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+const CONFIDENCE_LABELS = { high: '高', medium: '中', low: '低' };
+
+function renderAgentLLMRelevance(evt, wrapEl, bodyEl, relEl) {
+  if (!evt) return;
+  _showAgent(wrapEl);
+  // llm_relevance 是最后一步，始终展开面板确保结果可见
+  bodyEl.classList.remove('hidden');
+  wrapEl.querySelector('.agent-chevron').style.transform = 'rotate(180deg)';
+  const relevant   = evt.relevant !== false;
+  const confidence = CONFIDENCE_LABELS[evt.confidence] || evt.confidence || '-';
+  const reason     = evt.reason || '';
+  const color      = relevant ? 'green' : 'red';
+  const icon       = relevant ? '✓' : '✗';
+  const label      = relevant ? '语义相关' : '语义不相关';
+  relEl.innerHTML = `<div class="text-xs pt-1.5 mt-1 border-t border-gray-100 space-y-1">
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-gray-400 w-14 shrink-0">LLM 判断</span>
+      ${_atag(`${icon} ${label}`, color)}
+      <span class="agent-tag-gray text-xs px-1.5 py-0.5 rounded">置信度·${esc(confidence)}</span>
+    </div>
+    ${reason ? `<div class="flex items-start gap-1.5"><span class="text-gray-400 w-14 shrink-0 mt-0.5">理由</span><span class="text-gray-500 leading-relaxed">${esc(reason)}</span></div>` : ''}
+  </div>`;
 }
 
 function setLoading(loading) {

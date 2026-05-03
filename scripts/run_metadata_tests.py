@@ -25,6 +25,7 @@ class CaseResult:
     top1_source: str
     top3_sources: list[str]
     answer_preview: str
+    chunks_preview: str
     checks: dict[str, bool]
     details: dict[str, Any]
 
@@ -114,20 +115,26 @@ def evaluate_case(case: dict[str, Any], sources: list[dict[str, Any]], answer: s
     top1 = top_sources[0] if top_sources else ""
     top3 = top_sources[:3]
 
+    # 拼接所有检索到的 chunk 文本，用于验证答案是否可从检索结果中得出
+    chunks_text = " ".join((src or {}).get("content", "") for src in sources)
+
     expected_sources = case.get("expected_sources", [])
     forbidden_sources = case.get("forbidden_sources", [])
     expected_keywords = case.get("expected_keywords", [])
+    expected_chunk_keywords = case.get("expected_chunk_keywords", [])
 
     top1_ok = True if not expected_sources else normalize_source(top1) in {normalize_source(s) for s in expected_sources}
     top3_ok = True if not expected_sources else contains_any_source(top3, expected_sources)
     forbidden_ok = not contains_forbidden_source(top3, forbidden_sources)
     keywords_ok, missing_keywords = keywords_hit(answer, expected_keywords)
+    chunk_kw_ok, missing_chunk_keywords = keywords_hit(chunks_text, expected_chunk_keywords)
 
     checks = {
         "top1_matches_expected": top1_ok,
         "top3_contains_expected": top3_ok,
         "top3_excludes_forbidden": forbidden_ok,
         "answer_contains_keywords": keywords_ok,
+        "chunks_contain_keywords": chunk_kw_ok,
     }
 
     score = sum(1 for ok in checks.values() if ok)
@@ -142,12 +149,15 @@ def evaluate_case(case: dict[str, Any], sources: list[dict[str, Any]], answer: s
         top1_source=top1,
         top3_sources=top3,
         answer_preview=answer[:200],
+        chunks_preview=chunks_text[:300],
         checks=checks,
         details={
             "expected_sources": expected_sources,
             "forbidden_sources": forbidden_sources,
             "expected_keywords": expected_keywords,
             "missing_keywords": missing_keywords,
+            "expected_chunk_keywords": expected_chunk_keywords,
+            "missing_chunk_keywords": missing_chunk_keywords,
             "filters": case.get("filters", {}),
             "question": case["question"],
             "notes": case.get("notes", ""),
@@ -168,6 +178,7 @@ def write_report(path: Path, results: list[CaseResult], summary: dict[str, Any])
                 "top1_source": r.top1_source,
                 "top3_sources": r.top3_sources,
                 "answer_preview": r.answer_preview,
+                "chunks_preview": r.chunks_preview,
                 "checks": r.checks,
                 "details": r.details,
             }
@@ -188,7 +199,9 @@ def print_result(result: CaseResult) -> None:
         if not ok:
             print(f"  failed_check: {name}")
     if result.details.get("missing_keywords"):
-        print(f"  missing_keywords: {', '.join(result.details['missing_keywords'])}")
+        print(f"  missing_keywords(answer): {', '.join(result.details['missing_keywords'])}")
+    if result.details.get("missing_chunk_keywords"):
+        print(f"  missing_keywords(chunks): {', '.join(result.details['missing_chunk_keywords'])}")
 
 
 def main() -> int:
@@ -202,8 +215,8 @@ def main() -> int:
     for case in cases:
         payload = {
             "question": case["question"],
-            "retrieve_top_k": 5,
-            "rerank_top_k": 3,
+            "retrieve_top_k": 20,
+            "rerank_top_k": 12,
             **case.get("filters", {}),
         }
         try:
